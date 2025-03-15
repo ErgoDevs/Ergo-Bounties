@@ -1,0 +1,8 @@
+.DS_Store
+*.pyc
+.github/workflows/scripts/.env
+.github/workflows/scripts/bounty_modules/__pycache__/
+.github/workflows/scripts/bounty_modules/__pycache__/*
+.github/workflows/scripts/bounty_modules/__pycache__/*.*
+.github/workflows/scripts/bounty_modules/__pycache__/*/*
+.github/workflows/scripts/bounty_modules/__pycache__/*/*.*

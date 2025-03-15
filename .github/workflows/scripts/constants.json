@@ -1,0 +1,35 @@
+{
+  "language_colors": {
+    "Scala": "DC322F",
+    "Rust": "DEA584",
+    "JavaScript": "F7DF1E",
+    "TypeScript": "3178C6",
+    "Python": "3776AB",
+    "Java": "007396"
+  },
+  "fixed_bounties": {
+    "fleet_sdk": {
+      "count": 7,
+      "currency": "SigUSD",
+      "amount": 775
+    },
+    "keystone": {
+      "count": 1,
+      "currency": "ERG",
+      "amount": 3000
+    }
+  },
+  "currency_notes": {
+    "SigUSD": "Stablecoin pegged to USD",
+    "BENE": "No market value",
+    "gGOLD": "Price per gram of gold"
+  },
+  "currency_display_names": {
+    "gGOLD": "g GOLD"
+  },
+  "currency_file_names": {
+    "Not specified": "not_specified",
+    "g GOLD": "gold"
+  },
+  "no_rate_inversion": ["gGOLD"]
+}

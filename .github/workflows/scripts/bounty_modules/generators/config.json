@@ -1,0 +1,40 @@
+{
+  "readme": {
+    "section_order": [
+      "header",
+      "stats_badges",
+      "get_started",
+      "categories",
+      "for_developers",
+      "automation"
+    ],
+    "display_beginner_friendly": true,
+    "display_high_value": true,
+    "high_value_threshold_erg": 1000,
+    "beginner_friendly_labels": ["beginner", "beginner-friendly", "good first issue"]
+  },
+  "badges": {
+    "colors": {
+      "open_bounties": "4CAF50",
+      "total_value": "2196F3",
+      "high_value": "FFC107",
+      "featured": "9C27B0",
+      "browse": "3F51B5",
+      "reserve": "4CAF50",
+      "payment": "FF9800",
+      "add": "F44336",
+      "all_categories": "673AB7",
+      "beginner_friendly": "28A745",
+      "ongoing_programs": "FF5722",
+      "currency_rates": "00BCD4",
+      "how_it_works": "795548",
+      "donate": "F44336",
+      "github": "333333"
+    }
+  },
+  "template_vars": {
+    "ergo_github_url": "https://github.com/ergoplatform/ergo",
+    "default_repos_count": 18,
+    "update_time": "Midnight UTC"
+  }
+}

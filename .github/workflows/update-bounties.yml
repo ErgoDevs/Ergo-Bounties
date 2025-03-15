@@ -1,0 +1,59 @@
+name: Update Bounty Listings
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily at midnight UTC
+  push:  # Run on any push to the repository
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  update-bounties:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Install dependencies
+        run: pip install requests
+        
+      - name: Run bounty finder script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python .github/workflows/scripts/bounty_finder.py
+        
+      - name: Update README with featured bounties
+        run: |
+          # Check if featured_bounties.md exists
+          if [ -f bounties/featured_bounties.md ]; then
+            # Create a temporary file with the updated content
+            awk '
+            BEGIN { in_section = 0; }
+            /<!-- BEGIN FEATURED BOUNTIES -->/ {
+              print $0;
+              system("cat bounties/featured_bounties.md");
+              in_section = 1;
+            }
+            /<!-- END FEATURED BOUNTIES -->/ {
+              in_section = 0;
+              print $0;
+            }
+            !in_section { print $0; }
+            ' README.md > README.md.new
+            
+            # Replace the original file with the new one
+            mv README.md.new README.md
+          fi
+      
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add bounties/ README.md
+          git commit -m "Update bounty listings [automated]" || echo "No changes to commit"
+          git push

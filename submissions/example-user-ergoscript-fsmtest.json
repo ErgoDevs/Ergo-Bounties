@@ -1,0 +1,18 @@
+{
+  "contributor": "example-user",
+  "wallet_address": "9fMkBPABbYvDtTQbXcCHATNQBCXLBuEYZY8yrpHctVgC6RUEEz3HCVPtciYmwcaFgBKTtNT4QdwzpKjnzUHPXqJxHxQepXj1aBPP9zKP8Wrue7jJcEQ1f26",
+  "contact_method": "Discord: example-user#1234",
+  "work_link": "https://github.com/ergoplatform/sigmastate-interpreter/pull/1100",
+  "work_title": "ErgoScript FSM Test Implementation",
+  "bounty_id": "sigmastate-interpreter#1053",
+  "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1053",
+  "payment_currency": "ERG",
+  "bounty_value": 200.00,
+  "status": "awaiting-review",
+  "submission_date": "2025-03-13",
+  "description": "Implemented ErgoScript version of the Merklized abstract syntax tree / finite state machine example tests as requested in the bounty.",
+  
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}

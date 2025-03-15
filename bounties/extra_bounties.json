@@ -1,0 +1,32 @@
+[
+  {
+    "timestamp": "2025-03-14 08:54:00",
+    "owner": "EF_DAO_LLC",
+    "repo": "educational-rewards",
+    "title": "Educational Reward Program",
+    "url": "https://docs.ergoplatform.com/contribute/",
+    "amount": "Ongoing",
+    "currency": "ERG",
+    "primary_lang": "Various",
+    "secondary_lang": "None",
+    "labels": ["program", "education", "ongoing"],
+    "issue_number": "program-edu",
+    "creator": "ergo-foundation",
+    "description": "Program for creating educational content that benefits the Ergo community. Currently rewarding contributions to Developer Tutorials and Guides."
+  },
+  {
+    "timestamp": "2025-03-14 08:54:00",
+    "owner": "EF_DAO_LLC",
+    "repo": "development-rewards",
+    "title": "Development Reward Program",
+    "url": "https://docs.ergoplatform.com/contribute/",
+    "amount": "Ongoing",
+    "currency": "ERG",
+    "primary_lang": "Various",
+    "secondary_lang": "None",
+    "labels": ["program", "development", "ongoing"],
+    "issue_number": "program-dev",
+    "creator": "ergo-foundation",
+    "description": "Program acknowledging and appreciating significant contributions to the Ergo repositories. Rewards for contributions that enhance the development and improvement of the Ergo ecosystem."
+  }
+]
