@@ -1,0 +1,18 @@
+{
+  "contributor": "YOUR_GITHUB_USERNAME",
+  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "contact_method": "YOUR_CONTACT_INFO",
+  "work_link": "",
+  "work_title": "test bounty",
+  "bounty_id": "ergoplatform/ergodocs#66",
+  "original_issue_link": "https://github.com/ergoplatform/ergodocs/issues/66",
+  "payment_currency": "SigUSD",
+  "bounty_value": 5.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "YYYY-MM-DD",
+  "description": "I am working on this bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
