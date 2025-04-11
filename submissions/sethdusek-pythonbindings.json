@@ -1,0 +1,18 @@
+{
+  "contributor": "SethDusek",
+  "wallet_address": "9gQdd2ycLkjJCP3DfTf1By3wrGotCNaVAw1ZsZ35kjs9HZixAcA",
+  "contact_method": "Discord: dusek_",
+  "work_link": "https://github.com/ergoplatform/sigma-rust/pull/812",
+  "work_title": "Python Bindings",
+  "bounty_id": "sigma-rust#780",
+  "original_issue_link": "https://github.com/ergoplatform/sigma-rust/issues/780",
+  "payment_currency": "SigUSD",
+  "bounty_value": 750.00,
+  "status": "approved",
+  "submission_date": "2025-04-10",
+  "description": "Implemented Python bindings for sigma-rust",
+  
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
