@@ -1,0 +1,18 @@
+{
+  "contributor": "YOUR_GITHUB_USERNAME",
+  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "contact_method": "YOUR_CONTACT_INFO",
+  "work_link": "",
+  "work_title": "Add proof that interlink vector corresponds to its header",
+  "bounty_id": "ergoplatform/ergo#1384",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1384",
+  "payment_currency": "SigUSD",
+  "bounty_value": 1000.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "YYYY-MM-DD",
+  "description": "I am working on this bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
