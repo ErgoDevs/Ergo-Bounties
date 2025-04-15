@@ -1,0 +1,18 @@
+{
+  "contributor": "novamon",
+  "wallet_address": "9iEdzQSkW5U7HcaNT5annKn2rcBbcDABDLtNGL5Qfdz5JT6uAgW",
+  "contact_method": "Discord: novamon_25735#1340839158788128861",
+  "work_link": "https://github.com/ergoplatform/sigmastate-interpreter/pull/1064",
+  "work_title": "I1035 debug function",
+  "bounty_id": "sigmastate-interpreter#1035",
+  "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1035",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500.0,
+  "status": "in-progress",
+  "submission_date": "2025-03-04",
+  "expected_completion": "2025-03-31",
+  "description": "Implement debug function to print a labeled ast and value of expression given.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
