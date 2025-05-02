@@ -30,7 +30,7 @@ Each submission must include the following required fields:
 - `work_title`: A short title describing the work
 - `payment_currency`: Currency for payment (e.g., ERG, SigUSD, RSN)
 - `bounty_value`: The payment amount (numeric value)
-- `status`: Current submission status (`in-progress`, `awaiting-review`, `approved`, `paid`)
+- `status`: Current submission status (`in-progress`, `awaiting-review`, `reviewed`, `paid`). A GitHub Action will validate this on PRs.
 - `submission_date`: Date of submission (leave empty for reservations)
 - `expected_completion`: Estimated completion date (for reservations)
 
@@ -54,9 +54,13 @@ See the [submission template](example-user-ergoscript-fsmtest.json) for a comple
 
 ## Review Process
 
-1. Maintainers will review your submission
-2. If approved, the PR will be merged
-3. Payment will be processed based on the JSON details
-4. The status will be updated to `paid` once payment is complete
+1. Submit your PR with status `awaiting-review`.
+2. A GitHub Action (`validate-submission-status.yml`) checks if the status is valid.
+3. Maintainers review your submission.
+4. If changes are needed, maintainers may update the status to `in-progress` or request changes.
+5. Once approved, maintainers will update the status to `reviewed`.
+6. The PR is merged.
+7. Payment is processed based on the JSON details.
+8. The status is updated to `paid` (usually via separate process or manually).
 
 For more detailed instructions, see the [submission guide](../docs/bounty-submission-guide.md).

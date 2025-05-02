@@ -122,7 +122,7 @@ Copy the template from `submissions/example-user-ergoscript-fsmtest.json` and fi
 - **work_title**: A short title describing the work
 - **payment_currency**: Currency for payment (e.g., ERG, SigUSD, RSN)
 - **bounty_value**: The payment amount (numeric value, based on currency)
-- **status**: Set this to `awaiting-review`
+- **status**: Set this to `awaiting-review`. Allowed statuses are `in-progress`, `awaiting-review`, `reviewed`, `paid`. A GitHub Action will validate this.
 - **submission_date**: Date of submission (YYYY-MM-DD)
 
 ##### Recommended Fields
@@ -155,23 +155,28 @@ git push origin main
 
 ## Review Process
 
-1. Maintainers will review your submission
-2. They will verify:
-   - The work has been completed as per requirements
-   - The PR has been merged in the target repository
-   - The bounty value matches what was advertised
-3. If approved, the PR will be merged
-4. Payment will be processed based on the JSON details
-5. The status will be updated to `paid` once payment is complete
+1. Submit your PR with status `awaiting-review`.
+2. A GitHub Action (`validate-submission-status.yml`) checks if the status is valid. If not, it will comment on the PR asking for correction.
+3. Maintainers review your submission.
+4. They will verify:
+   - The work has been completed as per requirements.
+   - The PR has been merged in the target repository (if applicable).
+   - The bounty value matches what was advertised.
+5. If changes are needed, maintainers may update the status to `in-progress` or request changes.
+6. Once approved, maintainers will update the status to `reviewed`.
+7. The PR containing the submission JSON is merged.
+8. Payment will be processed based on the JSON details.
+9. The status is updated to `paid` (usually via separate process or manually).
 
 ## Payment Process
 
-1. After approval, an authorized person will process the payment
-2. They will update your submission with:
+1. After the submission PR (with status `reviewed`) is merged, an authorized person will process the payment.
+2. They will update your submission file (usually via a direct commit or separate PR) with:
    - `status`: Changed to `paid`
    - `payment_tx_id`: The transaction ID
    - `payment_date`: The date of payment
-3. These updates will be committed to the repository
+3. These updates will be committed to the repository.
+4. The `update-payment-status` workflow will then move the entry from the active report to the `paid.md` report.
 
 ## Tips for Successful Submissions
 
