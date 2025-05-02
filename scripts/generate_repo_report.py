@@ -26,7 +26,8 @@ REPOS_PER_PAGE = 100
 CONFIG_DIR = Path("src/config")
 TRACKED_ORGS_FILE = CONFIG_DIR / "tracked_orgs.json"
 TRACKED_REPOS_FILE = CONFIG_DIR / "tracked_repos.json"
-OUTPUT_FILE = Path("data/repos.md") # Output to data/ directory
+OUTPUT_FILE = Path("data/repos.md")
+ALL_REPOS_FILE = Path("data/all_repos.json") # Input file for all repos
 
 # --- Helper Functions ---
 
@@ -203,6 +204,49 @@ def generate_repos_markdown(repo_details_list):
 
     return org_summary_content + repo_tables_content
 
+
+def generate_all_repos_markdown(repo_details_list):
+    """Generates the markdown table for all repositories, sorted by last push."""
+    if not repo_details_list:
+        return "No additional repository details found.\n"
+
+    # Sort by last push date descending (newest first), handle None values
+    sorted_repos = sorted(
+        repo_details_list,
+        key=lambda x: x['last_push_dt'] if x['last_push_dt'] else datetime.min.replace(tzinfo=timezone.utc),
+        reverse=True
+    )
+
+    content = "## 🌐 All Ergo-Related Repositories (including untracked)\n\n"
+    content += "This list includes repositories from `data/all_repos.json`, sorted by the most recent activity.\n\n"
+
+    headers = ["Repository", "Owner", "📅 Last Push", "⭐ Stars", "📝 Description"]
+    content += "| " + " | ".join(headers) + " |\n"
+    content += "| " + " | ".join(["---"] * len(headers)) + " |\n"
+
+    for repo in sorted_repos:
+        repo_link = f"[{repo['full_name'].split('/')[1]}]({repo['html_url']})"
+        owner_link = f"[{repo['owner']}](https://github.com/{repo['owner']})"
+        # Truncate description
+        description = repo['description'] if repo['description'] else ""
+        if len(description) > 80:
+            description = description[:77] + "..."
+        # Replace pipes and newlines
+        description = description.replace("|", "\\|").replace("\r", "").replace("\n", " ")
+
+        relative_date = format_relative_date(repo['last_push_dt'])
+
+        row = [
+            repo_link,
+            owner_link,
+            relative_date,
+            str(repo['stars']),
+            description
+        ]
+        content += "| " + " | ".join(row) + " |\n"
+
+    return content + "\n"
+
 # --- Main Execution ---
 
 def main():
@@ -212,8 +256,8 @@ def main():
         print("Error: GITHUB_TOKEN or PAT_TOKEN environment variable not set.")
         return
 
-    # --- Load Repositories ---
-    repos_to_scan = set()
+    # --- Load Tracked Repositories ---
+    tracked_repos_to_scan = set()
     try:
         if TRACKED_REPOS_FILE.exists():
             with open(TRACKED_REPOS_FILE, 'r', encoding='utf-8') as f:
@@ -221,7 +265,7 @@ def main():
                 if isinstance(repo_list, list):
                     for repo_info in repo_list:
                         if isinstance(repo_info, dict) and "owner" in repo_info and "repo" in repo_info:
-                             repos_to_scan.add(f"{repo_info['owner']}/{repo_info['repo']}")
+                             tracked_repos_to_scan.add(f"{repo_info['owner']}/{repo_info['repo']}")
                         else:
                              print(f"Warning: Skipping invalid entry in {TRACKED_REPOS_FILE}: {repo_info}")
                 else:
@@ -230,41 +274,84 @@ def main():
         if TRACKED_ORGS_FILE.exists():
             with open(TRACKED_ORGS_FILE, 'r', encoding='utf-8') as f:
                 org_list = json.load(f)
-                if isinstance(org_list, list):
+                if isinstance(org_list, list): # Corrected indentation
                     for org_info in org_list:
-                         if isinstance(org_info, dict) and "org" in org_info:
-                             org_name = org_info["org"]
-                             repos_to_scan.update(get_org_repos(org_name))
-                             time.sleep(API_DELAY_SECONDS)
-                         else:
-                             print(f"Warning: Skipping invalid entry in {TRACKED_ORGS_FILE}: {org_info}")
-                else:
-                     print(f"Warning: Expected a list in {TRACKED_ORGS_FILE}, but found {type(org_list)}. Skipping.")
+                        if isinstance(org_info, dict) and "org" in org_info: # Corrected indentation
+                            org_name = org_info["org"]
+                            tracked_repos_to_scan.update(get_org_repos(org_name))
+                            time.sleep(API_DELAY_SECONDS)
+                        else: # Corrected indentation
+                            print(f"Warning: Skipping invalid entry in {TRACKED_ORGS_FILE}: {org_info}") # Corrected indentation
+                else: # Corrected indentation
+                    print(f"Warning: Expected a list in {TRACKED_ORGS_FILE}, but found {type(org_list)}. Skipping.") # Corrected indentation
     except Exception as e:
-        print(f"Error loading repository configuration: {e}")
-        return
+        print(f"Error loading tracked repository configuration: {e}")
+        # Continue even if tracked repos fail, might still load all_repos
 
-    if not repos_to_scan:
-        print("Error: No repositories found to scan.")
-        return
+    if not tracked_repos_to_scan:
+        print("Warning: No tracked repositories found to scan.")
+        # Continue to try and load all_repos
 
-    print(f"\nFound {len(repos_to_scan)} unique repositories to fetch details for...")
+    print(f"\nFound {len(tracked_repos_to_scan)} unique tracked repositories to fetch details for...")
 
-    # --- Fetch Repository Details ---
-    all_repo_details = []
-    for repo_name in sorted(list(repos_to_scan)):
+    # --- Fetch Tracked Repository Details ---
+    tracked_repo_details = []
+    for repo_name in sorted(list(tracked_repos_to_scan)):
         details = get_repo_details(repo_name)
         if details:
-            all_repo_details.append(details)
+            tracked_repo_details.append(details)
         time.sleep(API_DELAY_SECONDS) # Delay between repo detail fetches
 
-    print(f"\nSuccessfully fetched details for {len(all_repo_details)} repositories.")
+    print(f"\nSuccessfully fetched details for {len(tracked_repo_details)} tracked repositories.")
+
+    # --- Load and Fetch All Repositories (from all_repos.json) ---
+    all_repos_urls = []
+    if ALL_REPOS_FILE.exists():
+        try:
+            with open(ALL_REPOS_FILE, 'r', encoding='utf-8') as f:
+                all_repos_urls = json.load(f)
+            print(f"Loaded {len(all_repos_urls)} URLs from {ALL_REPOS_FILE}")
+        except Exception as e:
+            print(f"Error loading {ALL_REPOS_FILE}: {e}")
+            all_repos_urls = []
+    else:
+        print(f"Warning: {ALL_REPOS_FILE} not found.")
+
+    all_repo_names_to_fetch = set()
+    for url in all_repos_urls:
+        if isinstance(url, str) and url.startswith("https://github.com/"):
+            parts = url.strip('/').split('/')
+            # Check if it's a repo URL (e.g., https://github.com/owner/repo)
+            if len(parts) == 5:
+                repo_name = f"{parts[3]}/{parts[4]}"
+                # Add only if it wasn't already tracked
+                if repo_name not in tracked_repos_to_scan:
+                    all_repo_names_to_fetch.add(repo_name)
+            # Ignore org URLs (e.g., https://github.com/owner) or other formats
+
+    print(f"Found {len(all_repo_names_to_fetch)} additional unique repositories from {ALL_REPOS_FILE} to fetch.")
+
+    all_repo_details_untracked = []
+    for repo_name in sorted(list(all_repo_names_to_fetch)):
+        details = get_repo_details(repo_name)
+        if details:
+            all_repo_details_untracked.append(details)
+        time.sleep(API_DELAY_SECONDS)
+
+    print(f"Successfully fetched details for {len(all_repo_details_untracked)} additional repositories.")
+
+    # Combine tracked and untracked details for the "all repos" section
+    combined_all_repo_details = tracked_repo_details + all_repo_details_untracked
 
     # --- Generate and Write Markdown ---
-    markdown_content = "# 🏗️ Ergo Ecosystem Repositories Overview\n\n" # New title
-    markdown_content += "This page provides an overview of GitHub organizations and repositories actively building on or supporting the Ergo ecosystem. Repositories are tracked for potential bounties.\n\n"
+    markdown_content = "# 🏗️ Ergo Ecosystem Repositories Overview\n\n"
+    markdown_content += "This page provides an overview of GitHub organizations and repositories actively building on or supporting the Ergo ecosystem.\n\n"
+    markdown_content += "## Tracked Repositories\n\n"
+    markdown_content += "Repositories listed here are actively tracked for bounties via `src/config/tracked_repos.json` and `src/config/tracked_orgs.json`.\n\n"
     markdown_content += "*Note: Standard Markdown tables do not support interactive sorting or toggling. The tables below are static.*\n\n"
-    markdown_content += generate_repos_markdown(all_repo_details) # Generate both summary and repo tables
+    markdown_content += generate_repos_markdown(tracked_repo_details) # Generate summary and tables for TRACKED repos
+    markdown_content += "\n---\n\n" # Separator
+    markdown_content += generate_all_repos_markdown(combined_all_repo_details) # Generate table for ALL repos (tracked + untracked from json)
 
     try:
         OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)

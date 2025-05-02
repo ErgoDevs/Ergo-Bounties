@@ -2,7 +2,6 @@
 
 This page provides an overview of GitHub organizations and repositories actively building on or supporting the Ergo ecosystem. Repositories are tracked for potential bounties.
 
-*Note: Standard Markdown tables do not support interactive sorting or toggling. The tables below are static.*
 
 ## 🏢 Organizations
 
