@@ -1,0 +1,212 @@
+[
+  {
+    "name": "Auction-Coin",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "DeCo-Education",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "DjedAlliance",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "ErgoDevs",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "ErgoRaffle",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "Ergohack-Dashboard-Project",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "Kalita-Platform",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "Moria-Finance",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "SavonarolaLabs",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "ScorexFoundation",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "StabilityNexus",
+    "type": "org",
+    "tracked_for_bounties": true
+  },
+  {
+    "name": "arobsn",
+    "type": "user",
+    "tracked_for_bounties": true
+  },
+  {
+    "name": "bitdomains",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "aslesarenko",
+    "type": "user",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "chaincashlabs",
+    "type": "org",
+    "tracked_for_bounties": true
+  },
+  {
+    "name": "coinbarn",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "ergo-index",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "ergo-pad",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "ergoMixer",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "ergonames",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "ergnomes",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "ergopad",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "ergoplatform",
+    "type": "org",
+    "tracked_for_bounties": true
+  },
+  {
+    "name": "ergopool-io",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "fleet-sdk",
+    "type": "org",
+    "tracked_for_bounties": true
+  },
+  {
+    "name": "kushti",
+    "type": "user",
+    "tracked_for_bounties": true
+  },
+  {
+    "name": "learn-ergo",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "minotaur-ergo",
+    "type": "org",
+    "tracked_for_bounties": true
+  },
+  {
+    "name": "nautls",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "paideiadao",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "profit-sharing",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "rosen-bridge",
+    "type": "org",
+    "tracked_for_bounties": true
+  },
+  {
+    "name": "rust-ergo",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "sigmanauts",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "sigmaspace-io",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "sigmastamp",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "skyharbor-market",
+    "type": "org",
+    "tracked_for_bounties": true
+  },
+  {
+    "name": "spectrum-finance",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "thedelphiproject",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "Satergo",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "duckpools",
+    "type": "org",
+    "tracked_for_bounties": false
+  },
+  {
+    "name": "reputation-systems",
+    "type": "org",
+    "tracked_for_bounties": false
+  }
+]

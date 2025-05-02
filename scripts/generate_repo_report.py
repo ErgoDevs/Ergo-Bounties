@@ -24,11 +24,12 @@ API_DELAY_SECONDS = 0.5
 REPOS_PER_PAGE = 100
 
 CONFIG_DIR = Path("src/config")
-TRACKED_ORGS_FILE = CONFIG_DIR / "tracked_orgs.json"
-TRACKED_REPOS_FILE = CONFIG_DIR / "tracked_repos.json"
+ENTITIES_TO_SCAN_FILE = CONFIG_DIR / "entities_to_scan.json" # New consolidated config
+TRACKED_REPOS_FILE = CONFIG_DIR / "tracked_repos.json" # Still needed for individual tracked repos
 TRACKED_REPOS_OUTPUT_FILE = Path("data/tracked_repos.md") # Output for tracked repos
 ALL_REPOS_OUTPUT_FILE = Path("data/all_repos.md")     # Output for all repos
-ALL_REPOS_INPUT_FILE = Path("data/all_repos.json")   # Input file for all repos list
+ALL_REPOS_INPUT_FILE = Path("data/all_repos.json")   # Input file for individual non-org/non-tracked repos
+# ALL_ORGS_INPUT_FILE is no longer needed, replaced by ENTITIES_TO_SCAN_FILE
 
 # --- Helper Functions ---
 
@@ -97,7 +98,17 @@ def get_org_repos(org_name):
     url = f"https://api.github.com/orgs/{org_name}/repos"
     repos = get_paginated_data(url)
     repo_names = [f"{org_name}/{repo['name']}" for repo in repos if repo.get('name')]
-    print(f"Found {len(repo_names)} repositories for {org_name}.")
+    print(f"Found {len(repo_names)} repositories for organization: {org_name}.")
+    return repo_names
+
+def get_user_repos(username):
+    """Gets all repositories for a given user."""
+    print(f"Fetching repositories for user: {username}")
+    url = f"https://api.github.com/users/{username}/repos"
+    repos = get_paginated_data(url)
+    # Filter out forks if desired, or keep all
+    repo_names = [f"{username}/{repo['name']}" for repo in repos if repo.get('name')] # and not repo.get('fork')]
+    print(f"Found {len(repo_names)} repositories for user: {username}.")
     return repo_names
 
 def get_repo_details(repo_full_name):
@@ -257,92 +268,116 @@ def main():
         print("Error: GITHUB_TOKEN or PAT_TOKEN environment variable not set.")
         return
 
-    # --- Load Tracked Repositories ---
-    tracked_repos_to_scan = set()
-    try:
-        if TRACKED_REPOS_FILE.exists():
+    # --- Load Entities and Repos to Scan ---
+    all_entities = []
+    if ENTITIES_TO_SCAN_FILE.exists():
+        try:
+            with open(ENTITIES_TO_SCAN_FILE, 'r', encoding='utf-8') as f:
+                all_entities = json.load(f)
+            print(f"Loaded {len(all_entities)} entities from {ENTITIES_TO_SCAN_FILE}")
+        except Exception as e:
+            print(f"Error loading {ENTITIES_TO_SCAN_FILE}: {e}")
+            # Potentially exit or continue with empty list depending on desired behavior
+            return # Exit if main config is broken
+
+    tracked_repos_to_scan = set() # Repos from entities marked tracked_for_bounties: true
+    all_repos_to_scan = set()     # Repos from ALL entities + individual files
+    entity_names = set(entity['name'] for entity in all_entities if isinstance(entity, dict) and 'name' in entity) # For filtering individual repos
+
+    # Process entities from the new config file
+    for entity_info in all_entities:
+        if isinstance(entity_info, dict) and "name" in entity_info and "type" in entity_info and "tracked_for_bounties" in entity_info:
+            name = entity_info["name"]
+            entity_type = entity_info["type"]
+            is_tracked = entity_info["tracked_for_bounties"]
+            repos_found = set()
+
+            if entity_type == "org":
+                repos_found = get_org_repos(name)
+            elif entity_type == "user":
+                repos_found = get_user_repos(name)
+            else:
+                print(f"Warning: Skipping entry with unknown type in {ENTITIES_TO_SCAN_FILE}: {entity_info}")
+                continue # Skip to next entity
+
+            all_repos_to_scan.update(repos_found)
+            if is_tracked:
+                tracked_repos_to_scan.update(repos_found)
+            time.sleep(API_DELAY_SECONDS)
+        else:
+            print(f"Warning: Skipping invalid entry in {ENTITIES_TO_SCAN_FILE}: {entity_info}")
+
+    # Add individually tracked repos (from old tracked_repos.json)
+    if TRACKED_REPOS_FILE.exists():
+         try:
             with open(TRACKED_REPOS_FILE, 'r', encoding='utf-8') as f:
-                repo_list = json.load(f)
-                if isinstance(repo_list, list):
-                    for repo_info in repo_list:
-                        if isinstance(repo_info, dict) and "owner" in repo_info and "repo" in repo_info:
-                             tracked_repos_to_scan.add(f"{repo_info['owner']}/{repo_info['repo']}")
-                        else:
-                             print(f"Warning: Skipping invalid entry in {TRACKED_REPOS_FILE}: {repo_info}")
-                else:
-                    print(f"Warning: Expected a list in {TRACKED_REPOS_FILE}, but found {type(repo_list)}. Skipping.")
+                individual_tracked_repos = json.load(f)
+            if isinstance(individual_tracked_repos, list):
+                 for repo_info in individual_tracked_repos:
+                     if isinstance(repo_info, dict) and "owner" in repo_info and "repo" in repo_info:
+                         repo_name = f"{repo_info['owner']}/{repo_info['repo']}"
+                         tracked_repos_to_scan.add(repo_name)
+                         all_repos_to_scan.add(repo_name) # Ensure it's also in the 'all' list
+                     else:
+                         print(f"Warning: Skipping invalid entry in {TRACKED_REPOS_FILE}: {repo_info}")
+            else:
+                 print(f"Warning: Expected a list in {TRACKED_REPOS_FILE}, but found {type(individual_tracked_repos)}. Skipping.")
+         except Exception as e:
+             print(f"Error loading or processing {TRACKED_REPOS_FILE}: {e}")
 
-        if TRACKED_ORGS_FILE.exists():
-            with open(TRACKED_ORGS_FILE, 'r', encoding='utf-8') as f:
-                org_list = json.load(f)
-                if isinstance(org_list, list): # Corrected indentation
-                    for org_info in org_list:
-                        if isinstance(org_info, dict) and "org" in org_info: # Corrected indentation
-                            org_name = org_info["org"]
-                            tracked_repos_to_scan.update(get_org_repos(org_name))
-                            time.sleep(API_DELAY_SECONDS)
-                        else: # Corrected indentation
-                            print(f"Warning: Skipping invalid entry in {TRACKED_ORGS_FILE}: {org_info}") # Corrected indentation
-                else: # Corrected indentation
-                    print(f"Warning: Expected a list in {TRACKED_ORGS_FILE}, but found {type(org_list)}. Skipping.") # Corrected indentation
-    except Exception as e:
-        print(f"Error loading tracked repository configuration: {e}")
-        # Continue even if tracked repos fail, might still load all_repos
+    # Add individual non-tracked repos (from all_repos.json), filtering out those whose owner is an entity
+    if ALL_REPOS_INPUT_FILE.exists():
+        try:
+            with open(ALL_REPOS_INPUT_FILE, 'r', encoding='utf-8') as f:
+                individual_repo_urls = json.load(f)
+            print(f"Processing {len(individual_repo_urls)} individual repo URLs from {ALL_REPOS_INPUT_FILE}")
+            for url in individual_repo_urls:
+                 if isinstance(url, str) and url.startswith("https://github.com/"):
+                    parts = url.strip('/').split('/')
+                    if len(parts) == 5: # It's a repo URL
+                        owner = parts[3]
+                        repo = parts[4]
+                        repo_full_name = f"{owner}/{repo}"
+                        # Add only if owner is NOT an entity we already processed
+                        if owner not in entity_names:
+                            all_repos_to_scan.add(repo_full_name)
+        except Exception as e:
+            print(f"Error loading or processing {ALL_REPOS_INPUT_FILE}: {e}")
+    else:
+        print(f"Warning: {ALL_REPOS_INPUT_FILE} not found.")
 
-    if not tracked_repos_to_scan:
-        print("Warning: No tracked repositories found to scan.")
-        # Continue to try and load all_repos
 
-    print(f"\nFound {len(tracked_repos_to_scan)} unique tracked repositories to fetch details for...")
+    print(f"\nTotal unique repositories identified for 'all_repos.md': {len(all_repos_to_scan)}")
+    print(f"Total unique repositories identified for 'tracked_repos.md': {len(tracked_repos_to_scan)}")
 
-    # --- Fetch Tracked Repository Details ---
+    # --- Fetch Details ---
+    # Fetch details only for repos marked as tracked
+    print(f"\nFetching details for {len(tracked_repos_to_scan)} tracked repositories...")
     tracked_repo_details = []
+    fetched_details_repo_names = set() # Keep track of what we've fetched
+
     for repo_name in sorted(list(tracked_repos_to_scan)):
         details = get_repo_details(repo_name)
         if details:
             tracked_repo_details.append(details)
-        time.sleep(API_DELAY_SECONDS) # Delay between repo detail fetches
+            fetched_details_repo_names.add(repo_name)
+        time.sleep(API_DELAY_SECONDS)
+    print(f"Successfully fetched details for {len(tracked_repo_details)} tracked repositories.")
 
-    print(f"\nSuccessfully fetched details for {len(tracked_repo_details)} tracked repositories.")
-
-    # --- Load and Fetch All Repositories (from all_repos.json) ---
-    all_repos_urls = []
-    if ALL_REPOS_INPUT_FILE.exists(): # Use correct input variable
-        try:
-            with open(ALL_REPOS_INPUT_FILE, 'r', encoding='utf-8') as f: # Use correct input variable
-                all_repos_urls = json.load(f)
-            print(f"Loaded {len(all_repos_urls)} URLs from {ALL_REPOS_INPUT_FILE}") # Use correct input variable
-        except Exception as e:
-            print(f"Error loading {ALL_REPOS_INPUT_FILE}: {e}") # Use correct input variable
-            all_repos_urls = []
-    else:
-        print(f"Warning: {ALL_REPOS_INPUT_FILE} not found.") # Use correct input variable
-
-    all_repo_names_to_fetch = set()
-    for url in all_repos_urls:
-        if isinstance(url, str) and url.startswith("https://github.com/"):
-            parts = url.strip('/').split('/')
-            # Check if it's a repo URL (e.g., https://github.com/owner/repo)
-            if len(parts) == 5:
-                repo_name = f"{parts[3]}/{parts[4]}"
-                # Add only if it wasn't already tracked
-                if repo_name not in tracked_repos_to_scan:
-                    all_repo_names_to_fetch.add(repo_name)
-            # Ignore org URLs (e.g., https://github.com/owner) or other formats
-
-    print(f"Found {len(all_repo_names_to_fetch)} additional unique repositories from {ALL_REPOS_INPUT_FILE} to fetch.") # Use correct input variable
-
-    all_repo_details_untracked = []
-    for repo_name in sorted(list(all_repo_names_to_fetch)):
+    # Determine which additional details are needed for the 'all' list
+    additional_repos_to_fetch = all_repos_to_scan - fetched_details_repo_names
+    print(f"\nFetching details for {len(additional_repos_to_fetch)} additional repositories for 'all_repos.md'...")
+    all_repo_details_additional = []
+    for repo_name in sorted(list(additional_repos_to_fetch)):
         details = get_repo_details(repo_name)
         if details:
-            all_repo_details_untracked.append(details)
+            all_repo_details_additional.append(details)
+            # No need to add to fetched_details_repo_names here, already done implicitly
         time.sleep(API_DELAY_SECONDS)
+    print(f"Successfully fetched details for {len(all_repo_details_additional)} additional repositories.")
 
-    print(f"Successfully fetched details for {len(all_repo_details_untracked)} additional repositories.")
-
-    # Combine tracked and untracked details for the "all repos" file
-    combined_all_repo_details = tracked_repo_details + all_repo_details_untracked
+    # Combine for the final "all repos" list
+    combined_all_repo_details = tracked_repo_details + all_repo_details_additional
 
     # --- Generate and Write Tracked Repos Markdown ---
     tracked_markdown_content = "# 🏗️ Tracked Ergo Ecosystem Repositories\n\n"
