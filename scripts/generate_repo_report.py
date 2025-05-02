@@ -26,8 +26,9 @@ REPOS_PER_PAGE = 100
 CONFIG_DIR = Path("src/config")
 TRACKED_ORGS_FILE = CONFIG_DIR / "tracked_orgs.json"
 TRACKED_REPOS_FILE = CONFIG_DIR / "tracked_repos.json"
-OUTPUT_FILE = Path("data/repos.md")
-ALL_REPOS_FILE = Path("data/all_repos.json") # Input file for all repos
+TRACKED_REPOS_OUTPUT_FILE = Path("data/tracked_repos.md") # Output for tracked repos
+ALL_REPOS_OUTPUT_FILE = Path("data/all_repos.md")     # Output for all repos
+ALL_REPOS_INPUT_FILE = Path("data/all_repos.json")   # Input file for all repos list
 
 # --- Helper Functions ---
 
@@ -306,16 +307,16 @@ def main():
 
     # --- Load and Fetch All Repositories (from all_repos.json) ---
     all_repos_urls = []
-    if ALL_REPOS_FILE.exists():
+    if ALL_REPOS_INPUT_FILE.exists(): # Use correct input variable
         try:
-            with open(ALL_REPOS_FILE, 'r', encoding='utf-8') as f:
+            with open(ALL_REPOS_INPUT_FILE, 'r', encoding='utf-8') as f: # Use correct input variable
                 all_repos_urls = json.load(f)
-            print(f"Loaded {len(all_repos_urls)} URLs from {ALL_REPOS_FILE}")
+            print(f"Loaded {len(all_repos_urls)} URLs from {ALL_REPOS_INPUT_FILE}") # Use correct input variable
         except Exception as e:
-            print(f"Error loading {ALL_REPOS_FILE}: {e}")
+            print(f"Error loading {ALL_REPOS_INPUT_FILE}: {e}") # Use correct input variable
             all_repos_urls = []
     else:
-        print(f"Warning: {ALL_REPOS_FILE} not found.")
+        print(f"Warning: {ALL_REPOS_INPUT_FILE} not found.") # Use correct input variable
 
     all_repo_names_to_fetch = set()
     for url in all_repos_urls:
@@ -329,7 +330,7 @@ def main():
                     all_repo_names_to_fetch.add(repo_name)
             # Ignore org URLs (e.g., https://github.com/owner) or other formats
 
-    print(f"Found {len(all_repo_names_to_fetch)} additional unique repositories from {ALL_REPOS_FILE} to fetch.")
+    print(f"Found {len(all_repo_names_to_fetch)} additional unique repositories from {ALL_REPOS_INPUT_FILE} to fetch.") # Use correct input variable
 
     all_repo_details_untracked = []
     for repo_name in sorted(list(all_repo_names_to_fetch)):
@@ -340,26 +341,38 @@ def main():
 
     print(f"Successfully fetched details for {len(all_repo_details_untracked)} additional repositories.")
 
-    # Combine tracked and untracked details for the "all repos" section
+    # Combine tracked and untracked details for the "all repos" file
     combined_all_repo_details = tracked_repo_details + all_repo_details_untracked
 
-    # --- Generate and Write Markdown ---
-    markdown_content = "# 🏗️ Ergo Ecosystem Repositories Overview\n\n"
-    markdown_content += "This page provides an overview of GitHub organizations and repositories actively building on or supporting the Ergo ecosystem.\n\n"
-    markdown_content += "## Tracked Repositories\n\n"
-    markdown_content += "Repositories listed here are actively tracked for bounties via `src/config/tracked_repos.json` and `src/config/tracked_orgs.json`.\n\n"
-    markdown_content += "*Note: Standard Markdown tables do not support interactive sorting or toggling. The tables below are static.*\n\n"
-    markdown_content += generate_repos_markdown(tracked_repo_details) # Generate summary and tables for TRACKED repos
-    markdown_content += "\n---\n\n" # Separator
-    markdown_content += generate_all_repos_markdown(combined_all_repo_details) # Generate table for ALL repos (tracked + untracked from json)
+    # --- Generate and Write Tracked Repos Markdown ---
+    tracked_markdown_content = "# 🏗️ Tracked Ergo Ecosystem Repositories\n\n"
+    tracked_markdown_content += "This page provides an overview of GitHub organizations and repositories actively tracked for bounties via `src/config/tracked_repos.json` and `src/config/tracked_orgs.json`.\n\n"
+    # Removed the note about markdown limitations
+    tracked_markdown_content += generate_repos_markdown(tracked_repo_details) # Generate summary and tables for TRACKED repos
+    tracked_markdown_content += "\n---\n\n"
+    tracked_markdown_content += "[View All Ergo-Related Repositories (including untracked) →](all_repos.md)\n"
 
     try:
-        OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-        with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-            f.write(markdown_content)
-        print(f"Successfully generated repository report at {OUTPUT_FILE}")
+        TRACKED_REPOS_OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True) # Use correct output variable
+        with open(TRACKED_REPOS_OUTPUT_FILE, 'w', encoding='utf-8') as f: # Use correct output variable
+            f.write(tracked_markdown_content)
+        print(f"Successfully generated tracked repository report at {TRACKED_REPOS_OUTPUT_FILE}") # Use correct output variable
     except Exception as e:
-        print(f"Error writing output file {OUTPUT_FILE}: {e}")
+        print(f"Error writing output file {TRACKED_REPOS_OUTPUT_FILE}: {e}") # Use correct output variable
+
+    # --- Generate and Write All Repos Markdown ---
+    all_repos_markdown_content = "# 🌐 All Ergo-Related Repositories\n\n"
+    all_repos_markdown_content += "This list includes all known Ergo-related repositories, combining those actively tracked for bounties and others listed in `data/all_repos.json`. It is sorted by the most recent activity.\n\n"
+    all_repos_markdown_content += "[View Tracked Repositories Only →](tracked_repos.md)\n\n" # Add link back
+    all_repos_markdown_content += generate_all_repos_markdown(combined_all_repo_details) # Generate table for ALL repos
+
+    try:
+        ALL_REPOS_OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True) # Use correct output variable
+        with open(ALL_REPOS_OUTPUT_FILE, 'w', encoding='utf-8') as f: # Use correct output variable
+            f.write(all_repos_markdown_content)
+        print(f"Successfully generated all repositories report at {ALL_REPOS_OUTPUT_FILE}") # Use correct output variable
+    except Exception as e:
+        print(f"Error writing output file {ALL_REPOS_OUTPUT_FILE}: {e}") # Use correct output variable
 
 if __name__ == "__main__":
     main()
