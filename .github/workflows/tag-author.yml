@@ -176,10 +176,14 @@ jobs:
               if (originalAuthor.toLowerCase() === prOpener.toLowerCase()) {
                 console.log(`PR opener (${prOpener}) is the original author (${originalAuthor}). Skipping tag comment.`);
                 // Still return here after attempting to add reviewer
-                return;
+                 return;
               }
 
-              const commentBody = `FYI @${originalAuthor}, bounty \`${bountyId}\` (${originalIssueLink}) is being reserved by @${prOpener}. Reviewer field automatically added to submission file.`;
+              // Link to relevant documentation
+              const submissionGuideLink = `../../docs/bounty-submission-guide.md`; // Relative link from workflow file
+              const reviewerGuideLink = `../../docs/reviewer-guide.md`; // Relative link from workflow file
+
+              const commentBody = `FYI @${originalAuthor} (reviewer) - bounty \`${bountyId}\` (${originalIssueLink}) is being submitted/reserved by @${prOpener}.\n\nReviewer field automatically added to submission file.\n\n**Next Steps:**\n- **Contributor (@${prOpener}):** Please refer to the [Submission Guide](${submissionGuideLink}) for process details.\n- **Reviewer (@${originalAuthor}):** Please refer to the [Reviewer Guide](${reviewerGuideLink}) for your responsibilities.`;
 
               await github.rest.issues.createComment({
                 owner: prOwner,

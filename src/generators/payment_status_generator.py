@@ -5,8 +5,9 @@ from collections import defaultdict
 from pathlib import Path
 
 SUBMISSIONS_DIR = Path("submissions")
-ACTIVE_STATUS_FILE = Path("data/payment_status.md")
-PAID_STATUS_FILE = Path("data/paid.md")
+# Update output paths to be inside the submissions directory
+ACTIVE_STATUS_FILE = SUBMISSIONS_DIR / "payment_status.md"
+PAID_STATUS_FILE = SUBMISSIONS_DIR / "paid.md"
 # Define the new valid statuses and their order for the active report
 ACTIVE_STATUS_ORDER = ["awaiting-review", "reviewed", "in-progress"]
 PAID_STATUS = "paid"
@@ -87,8 +88,8 @@ def generate_markdown_table(submissions):
         work_link_md = f"[Link]({work_link})" if work_link and work_link != "#" else "N/A"
         # Get the source filename added during loading
         source_filename = sub.get("_filename", "")
-        # Create the linked work title
-        linked_work_title = f"[{work_title_text}](../submissions/{source_filename})" if source_filename else work_title_text
+        # Adjust link: MD file is now in the same dir as JSON file
+        linked_work_title = f"[{work_title_text}]({source_filename})" if source_filename else work_title_text
         # Get the last modified date
         last_modified_date = sub.get("_last_modified_date", "N/A")
 

@@ -35,8 +35,8 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "docs: Update payment status reports"
-          # Commit both the active status and paid status files
-          file_pattern: "data/payment_status.md data/paid.md"
+          # Commit both the active status and paid status files from the submissions dir
+          file_pattern: "submissions/payment_status.md submissions/paid.md"
           # Use PAT for potentially stricter push permissions, mirroring update-on-merge.yml
           push_token: ${{ secrets.PAT_TOKEN }}
           commit_user_name: "github-actions[bot]"
