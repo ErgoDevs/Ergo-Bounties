@@ -4,10 +4,14 @@ import time
 import requests
 import re
 from pathlib import Path
+from dotenv import load_dotenv # Import dotenv
+
+# Load environment variables from .env file FIRST
+load_dotenv()
 
 SUBMISSIONS_DIR = Path("submissions")
 IGNORE_FILES = {"example-user-ergoscript-fsmtest.json"}
-GITHUB_TOKEN = "os.environ.get("GITHUB_TOKEN") # Or use PAT_TOKEN if needed"
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") # Or use PAT_TOKEN if needed
 HEADERS = {
     "Authorization": f"token {GITHUB_TOKEN}",
     "Accept": "application/vnd.github.v3+json",

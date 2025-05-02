@@ -1,5 +1,6 @@
 # Core Dependencies
 requests
+python-dotenv # For loading .env files
 
 # Test/Validation Dependencies
 colorama

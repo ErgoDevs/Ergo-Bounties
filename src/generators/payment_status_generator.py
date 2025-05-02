@@ -48,6 +48,12 @@ def format_value(value, currency):
         val_str = str(value) # Fallback to string representation
     return f"{val_str} {currency}" if currency else val_str
 
+def truncate_address(address, start_len=4, end_len=3):
+    """Truncates a string address, showing start and end parts."""
+    if not isinstance(address, str) or len(address) <= start_len + end_len + 3: # +3 for "..."
+        return address # Return original if too short or not a string
+    return f"{address[:start_len]}...{address[-end_len:]}"
+
 def generate_markdown_table(submissions):
     """Generates a Markdown table for a list of submissions."""
     if not submissions:
@@ -80,7 +86,8 @@ def generate_markdown_table(submissions):
             contributor,
             work_title,
             value_str,
-            f"`{wallet}`" if wallet != "N/A" else "N/A", # Use code formatting for address
+            # Truncate address and apply code formatting
+            f"`{truncate_address(wallet)}`" if wallet != "N/A" else "N/A",
             reviewer, # Ensure reviewer is in the correct position
             link_text,
             source_link # Ensure source link is in the correct position
