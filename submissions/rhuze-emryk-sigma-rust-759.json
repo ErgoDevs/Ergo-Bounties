@@ -11,8 +11,8 @@
   "status": "awaiting-review",
   "submission_date": "2025-03-17",
   "description": "Fixed issue #759 (3 hours) and added additional Linux instructions (2 hours). Also created a downloadable Linux Toolbx instance running the Rigel Miner, tested on Aurora Linux.",
-  
   "review_notes": "",
   "payment_tx_id": "",
-  "payment_date": ""
+  "payment_date": "",
+  "reviewer": "kushti"
 }

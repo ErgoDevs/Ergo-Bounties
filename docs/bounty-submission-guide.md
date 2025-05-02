@@ -132,11 +132,12 @@ Copy the template from `submissions/example-user-ergoscript-fsmtest.json` and fi
 - **original_issue_link**: The full URL to the original issue or bounty
 - **description**: A brief summary of the work completed
 
-##### Fields for Reviewers (Leave Empty)
+##### Fields for Reviewers / Automation (Leave Empty)
 
-- **review_notes**: Will be filled by reviewers
-- **payment_tx_id**: Will be filled after payment
-- **payment_date**: Will be filled after payment
+- **reviewer**: GitHub username of the original issue author. This field is automatically added by a bot when you open your Pull Request.
+- **review_notes**: Will be filled by reviewers during the review process.
+- **payment_tx_id**: Will be filled after payment is processed.
+- **payment_date**: Will be filled after payment is processed.
 
 #### 4. Commit & Push Changes
 

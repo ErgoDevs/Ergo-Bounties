@@ -7,12 +7,12 @@
   "bounty_id": "sigma-rust#780",
   "original_issue_link": "https://github.com/ergoplatform/sigma-rust/issues/780",
   "payment_currency": "SigUSD",
-  "bounty_value": 750.00,
+  "bounty_value": 750.0,
   "status": "paid",
   "submission_date": "2025-04-10",
   "description": "Implemented Python bindings for sigma-rust",
-  
   "review_notes": "",
   "payment_tx_id": "cb99d4ed7aab0d4fe05181a82b624e1ac9a69a2a289066522d8340775ddfe75d",
-  "payment_date": "2025-04-25"
+  "payment_date": "2025-04-25",
+  "reviewer": "arobsn"
 }

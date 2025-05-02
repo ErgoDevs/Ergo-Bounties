@@ -41,8 +41,9 @@ Additional recommended fields:
 - `original_issue_link`: The full URL to the original issue or bounty
 - `description`: A brief summary of the work completed
 
-The following fields will be filled out by reviewers:
+The following fields will be filled out by reviewers or automation:
 
+- `reviewer`: GitHub username of the original issue author (automatically added by bot when PR is opened)
 - `review_notes`: Notes from the reviewer
 - `payment_tx_id`: Transaction ID of the payment
 - `payment_date`: Date when payment was processed

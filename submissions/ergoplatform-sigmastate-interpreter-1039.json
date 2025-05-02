@@ -14,5 +14,6 @@
   "description": "Finished implementation of executeFromSelfReg and tests, patched per reviews. Awaiting review and merge",
   "review_notes": "",
   "payment_tx_id": "",
-  "payment_date": ""
+  "payment_date": "",
+  "reviewer": "kushti"
 }

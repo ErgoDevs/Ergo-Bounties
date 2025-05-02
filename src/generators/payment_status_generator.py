@@ -6,6 +6,7 @@ from pathlib import Path
 SUBMISSIONS_DIR = Path("submissions")
 OUTPUT_FILE = Path("data/payment_status.md")
 STATUS_ORDER = ["ready_for_payment", "in-progress", "completed", "paid", "cancelled"] # Prioritize ready_for_payment
+IGNORE_FILES = {"example-user-ergoscript-fsmtest.json"} # Files to ignore
 
 def load_submissions():
     """Loads all submission JSON files from the submissions directory."""
@@ -15,6 +16,9 @@ def load_submissions():
         return submissions
 
     for filename in SUBMISSIONS_DIR.glob("*.json"):
+        if filename.name in IGNORE_FILES:
+            print(f"Ignoring file: {filename.name}")
+            continue
         try:
             with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f)
@@ -49,7 +53,8 @@ def generate_markdown_table(submissions):
     if not submissions:
         return "No submissions in this category.\n"
 
-    headers = ["Contributor", "Work Title", "Value", "Wallet Address", "Work Link"]
+    # Ensure correct headers including Reviewer
+    headers = ["Contributor", "Work Title", "Value", "Wallet Address", "Reviewer", "Work Link", "Source File"]
     table = "| " + " | ".join(headers) + " |\n"
     table += "| " + " | ".join(["---"] * len(headers)) + " |\n"
 
@@ -59,9 +64,15 @@ def generate_markdown_table(submissions):
         value = sub.get("bounty_value", "N/A")
         currency = sub.get("payment_currency", "")
         wallet = sub.get("wallet_address", "N/A")
+        reviewer = sub.get("reviewer", "N/A") # Get the reviewer field
         work_link = sub.get("work_link", "#")
         # Ensure work_link is a valid link or placeholder
         link_text = f"[Link]({work_link})" if work_link and work_link != "#" else "N/A"
+        # Get the source filename added during loading
+        source_filename = sub.get("_filename", "")
+        # Create a relative link with simplified text
+        source_link = f"[submission](../submissions/{source_filename})" if source_filename else "N/A"
+
 
         value_str = format_value(value, currency)
 
@@ -70,7 +81,9 @@ def generate_markdown_table(submissions):
             work_title,
             value_str,
             f"`{wallet}`" if wallet != "N/A" else "N/A", # Use code formatting for address
-            link_text
+            reviewer, # Ensure reviewer is in the correct position
+            link_text,
+            source_link # Ensure source link is in the correct position
         ]
         table += "| " + " | ".join(map(str, row)) + " |\n"
 
