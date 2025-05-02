@@ -1,5 +1,6 @@
-import os
+import os # Import os for path.getmtime
 import json
+import datetime # Import datetime
 from collections import defaultdict
 from pathlib import Path
 
@@ -24,10 +25,15 @@ def load_submissions():
             print(f"Ignoring file: {filename.name}")
             continue
         try:
+            # Get last modified time before opening
+            last_modified_timestamp = os.path.getmtime(filename)
+            last_modified_date = datetime.datetime.fromtimestamp(last_modified_timestamp).strftime('%Y-%m-%d')
+
             with open(filename, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                # Add filename for reference if needed later
+                # Add filename and last modified date for reference
                 data['_filename'] = filename.name
+                data['_last_modified_date'] = last_modified_date
                 submissions.append(data)
         except json.JSONDecodeError:
             print(f"Warning: Could not decode JSON from {filename}")
@@ -63,12 +69,13 @@ def generate_markdown_table(submissions):
     if not submissions:
         return "No submissions in this category.\n"
 
-    # Define headers (same for both active and paid reports)
-    headers = ["Contributor", "Work Title", "Value", "Wallet Address", "Reviewer", "Work Link"]
+    # Add "Last Updated" header
+    headers = ["Contributor", "Work Title", "Value", "Wallet Address", "Reviewer", "Work Link", "Last Updated"]
     table = "| " + " | ".join(headers) + " |\n"
     table += "| " + " | ".join(["---"] * len(headers)) + " |\n"
 
-    for sub in sorted(submissions, key=lambda x: x.get('submission_date', '')): # Sort by submission date
+    # Sort by last modified date descending (most recent first)
+    for sub in sorted(submissions, key=lambda x: x.get('_last_modified_date', '0000-00-00'), reverse=True):
         contributor = sub.get("contributor", "N/A")
         work_title_text = sub.get("work_title", "N/A") # Get the title text
         value = sub.get("bounty_value", "N/A")
@@ -82,6 +89,8 @@ def generate_markdown_table(submissions):
         source_filename = sub.get("_filename", "")
         # Create the linked work title
         linked_work_title = f"[{work_title_text}](../submissions/{source_filename})" if source_filename else work_title_text
+        # Get the last modified date
+        last_modified_date = sub.get("_last_modified_date", "N/A")
 
 
         value_str = format_value(value, currency)
@@ -93,7 +102,8 @@ def generate_markdown_table(submissions):
             # Truncate address and apply code formatting
             f"`{truncate_address(wallet)}`" if wallet != "N/A" else "N/A",
             reviewer, # Ensure reviewer is in the correct position
-            work_link_md # Use the separate work link MD
+            work_link_md, # Use the separate work link MD
+            last_modified_date # Add last updated date
         ]
         table += "| " + " | ".join(map(str, row)) + " |\n"
 
