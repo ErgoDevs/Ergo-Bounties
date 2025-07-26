@@ -1,7 +1,7 @@
 {
-  "contributor": "YOUR_GITHUB_USERNAME",
+  "contributor": "prerak01",
   "wallet_address": "YOUR_WALLET_ADDRESS",
-  "contact_method": "YOUR_CONTACT_INFO",
+  "contact_method": "telegram @log2222",
   "work_link": "",
   "work_title": "Improving /healthcheck ",
   "bounty_id": "BetterMoneyLabs/chaincash-rs#50",
@@ -10,7 +10,7 @@
   "bounty_value": 1.0,
   "status": "in-progress",
   "submission_date": "",
-  "expected_completion": "YYYY-MM-DD",
+  "expected_completion": "2025-07-31",
   "description": "I am working on this bounty",
   "review_notes": "",
   "payment_tx_id": "",
