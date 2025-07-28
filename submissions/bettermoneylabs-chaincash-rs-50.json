@@ -1,8 +1,8 @@
 {
   "contributor": "prerak01",
-  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "wallet_address": "9hXGaQhVBSPoG6xanwjEsDqUEjCAQnfhkYVjnJN8Gmdm8PMneC5",
   "contact_method": "telegram @log2222",
-  "work_link": "",
+  "work_link": "https://github.com/BetterMoneyLabs/chaincash-rs/pull/62",
   "work_title": "Improving /healthcheck ",
   "bounty_id": "BetterMoneyLabs/chaincash-rs#50",
   "original_issue_link": "https://github.com/BetterMoneyLabs/chaincash-rs/issues/50",
@@ -11,7 +11,7 @@
   "status": "in-progress",
   "submission_date": "",
   "expected_completion": "2025-07-31",
-  "description": "I am working on this bounty",
+  "description": "completed",
   "review_notes": "",
   "payment_tx_id": "",
   "payment_date": ""
