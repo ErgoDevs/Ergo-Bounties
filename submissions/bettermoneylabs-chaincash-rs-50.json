@@ -8,11 +8,11 @@
   "original_issue_link": "https://github.com/BetterMoneyLabs/chaincash-rs/issues/50",
   "payment_currency": "g GOLD",
   "bounty_value": 1.0,
-  "status": "in-progress",
-  "submission_date": "",
+  "status": "complete",
+  "submission_date": "2025-07-28",
   "expected_completion": "2025-07-31",
   "description": "completed",
   "review_notes": "",
-  "payment_tx_id": "",
-  "payment_date": ""
+  "payment_tx_id": "c5a511e662a159226800cde3337fb8a9820db85ee6cad5e970399b32bee3a83c",
+  "payment_date": "2025-07-30"
 }
