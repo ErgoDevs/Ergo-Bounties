@@ -32,10 +32,11 @@ def main_with_args():
         print("Enabling verbose logging")
         os.environ['VERBOSE'] = 'true'
     
-    # Check for GitHub token in .env
+    # Check for GitHub token via env or .env (CI-friendly)
     env_path = os.path.join('src', '.env')
-    if not os.path.exists(env_path):
-        print(f"ERROR: GitHub token not found - create {env_path} file with 'github_token=YOUR_TOKEN'")
+    if not (os.environ.get('GITHUB_TOKEN') or os.path.exists(env_path)):
+        print(f"ERROR: No GitHub token found. Set GITHUB_TOKEN env var (preferred in CI) or create {env_path} with 'github_token=YOUR_TOKEN'")
+        print("In GitHub Actions, use: env: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}")
         print("Create a Personal Access Token at: https://github.com/settings/tokens")
         sys.exit(1)
     
