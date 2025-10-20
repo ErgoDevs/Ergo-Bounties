@@ -1,8 +1,16 @@
-# 🌐 All Ergo-Related Repositories
-
-This list includes all known Ergo-related repositories, combining those actively tracked for bounties and others listed in `data/all_repos.json`. It is sorted by the most recent activity.
+#  All Ergo-Related Repositories
 
 [View Tracked Repositories Only →](tracked_repos.md)
+
+## 📊 Ecosystem Activity Overview (Last 30 Days)
+
+- **Total Repositories Listed:** 841
+- **Total Organizations/Users Scanned:** 42
+- **Repositories Updated:** 45
+- **Commits Made:** 632
+- **Unique Contributors:** 36
+
+---
 
 ## 🌐 All Ergo-Related Repositories (including untracked)
 
@@ -10,20 +18,20 @@ This list includes repositories from `data/all_repos.json`, sorted by the most r
 
 | Repository | Owner | 📅 Last Push | ⭐ Stars | 📝 Description |
 | --- | --- | --- | --- | --- |
-| [paideia-cardano-contracts](https://github.com/paideiadao/paideia-cardano-contracts) | [paideiadao](https://github.com/paideiadao) | 30 minutes ago | 0 |  |
-| [Ergo-Bounties](https://github.com/ErgoDevs/Ergo-Bounties) | [ErgoDevs](https://github.com/ErgoDevs) | 58 minutes ago | 11 | Ergo Ecosystem Bounties Posted Weekly in ERG equivalent |
-| [sigmastate-interpreter](https://github.com/ergoplatform/sigmastate-interpreter) | [ergoplatform](https://github.com/ergoplatform) | 4 hours ago | 65 | ErgoScript compiler and ErgoTree Interpreter implementation for Ergo blockchain |
-| [ui](https://github.com/rosen-bridge/ui) | [rosen-bridge](https://github.com/rosen-bridge) | 6 hours ago | 6 |  |
-| [guard-service](https://github.com/rosen-bridge/guard-service) | [rosen-bridge](https://github.com/rosen-bridge) | 6 hours ago | 2 |  |
-| [chaincash](https://github.com/ChainCashLabs/chaincash) | [chaincashlabs](https://github.com/chaincashlabs) | 18 hours ago | 20 | ChainCash - elastic peer-to-peer money collectively backed by blockchain asse... |
-| [ergo](https://github.com/ergoplatform/ergo) | [ergoplatform](https://github.com/ergoplatform) | 18 hours ago | 503 | Ergo protocol description & reference client implementation |
+| [Ergo-Bounties](https://github.com/ErgoDevs/Ergo-Bounties) | [ErgoDevs](https://github.com/ErgoDevs) | 1 hour ago | 11 | Ergo Ecosystem Bounties Posted Weekly in ERG equivalent |
+| [paideia-cardano-contracts](https://github.com/paideiadao/paideia-cardano-contracts) | [paideiadao](https://github.com/paideiadao) | 3 hours ago | 0 |  |
+| [sigmastate-interpreter](https://github.com/ergoplatform/sigmastate-interpreter) | [ergoplatform](https://github.com/ergoplatform) | 6 hours ago | 65 | ErgoScript compiler and ErgoTree Interpreter implementation for Ergo blockchain |
+| [ui](https://github.com/rosen-bridge/ui) | [rosen-bridge](https://github.com/rosen-bridge) | 9 hours ago | 6 |  |
+| [guard-service](https://github.com/rosen-bridge/guard-service) | [rosen-bridge](https://github.com/rosen-bridge) | 9 hours ago | 2 |  |
+| [chaincash](https://github.com/ChainCashLabs/chaincash) | [chaincashlabs](https://github.com/chaincashlabs) | 20 hours ago | 20 | ChainCash - elastic peer-to-peer money collectively backed by blockchain asse... |
+| [ergo](https://github.com/ergoplatform/ergo) | [ergoplatform](https://github.com/ergoplatform) | 21 hours ago | 503 | Ergo protocol description & reference client implementation |
 | [ergo-flash-loan-example](https://github.com/mkermani144/ergo-flash-loan-example) | [mkermani144](https://github.com/mkermani144) | 1 day ago | 0 |  |
 | [nautilus-wallet](https://github.com/nautls/nautilus-wallet) | [nautls](https://github.com/nautls) | 1 day ago | 69 | A secure and user-friendly wallet for the Ergo Platform |
 | [rosen-chains](https://github.com/rosen-bridge/rosen-chains) | [rosen-bridge](https://github.com/rosen-bridge) | 1 day ago | 1 |  |
 | [scanner](https://github.com/rosen-bridge/scanner) | [rosen-bridge](https://github.com/rosen-bridge) | 1 day ago | 3 |  |
 | [ergo](https://github.com/ccellado/ergo) | [ccellado](https://github.com/ccellado) | 1 day ago | 0 | Ergo protocol description & reference client implementation |
-| [awesome-ergo](https://github.com/ergoplatform/awesome-ergo) | [ergoplatform](https://github.com/ergoplatform) | 1 day ago | 66 | A curated list of awesome and useful Ergo resources |
-| [awesome-ergo](https://github.com/glasgowm148/awesome-ergo) | [glasgowm148](https://github.com/glasgowm148) | 1 day ago | 1 | A curated list of awesome and useful Ergo resources |
+| [awesome-ergo](https://github.com/ergoplatform/awesome-ergo) | [ergoplatform](https://github.com/ergoplatform) | 2 days ago | 66 | A curated list of awesome and useful Ergo resources |
+| [awesome-ergo](https://github.com/glasgowm148/awesome-ergo) | [glasgowm148](https://github.com/glasgowm148) | 2 days ago | 1 | A curated list of awesome and useful Ergo resources |
 | [utils](https://github.com/rosen-bridge/utils) | [rosen-bridge](https://github.com/rosen-bridge) | 2 days ago | 1 |  |
 | [ergo-book](https://github.com/kushti/ergo-book) | [kushti](https://github.com/kushti) | 2 days ago | 4 |  |
 | [fleet](https://github.com/fleet-sdk/fleet) | [fleet-sdk](https://github.com/fleet-sdk) | 2 days ago | 38 | 🦾 Simple, powerful, and extensible Ergo Blockchain SDK |
@@ -380,7 +388,6 @@ This list includes repositories from `data/all_repos.json`, sorted by the most r
 | [kodegen](https://github.com/rosen-bridge/kodegen) | [rosen-bridge](https://github.com/rosen-bridge) | 1 year ago | 0 |  |
 | [zio-optics](https://github.com/aslesarenko/zio-optics) | [aslesarenko](https://github.com/aslesarenko) | 1 year ago | 0 | Easily modify parts of larger data structures |
 | [ergo-token-list](https://github.com/kushti/ergo-token-list) | [kushti](https://github.com/kushti) | 1 year ago | 0 | 🪙 JSON schema and token list of Ergo assets |
-| [sigmanauts-mining-ui](https://github.com/SavonarolaLabs/sigmanauts-mining-ui) | [SavonarolaLabs](https://github.com/SavonarolaLabs) | 1 year ago | 0 |  |
 | [minotaur-wallet](https://github.com/DjedAlliance/minotaur-wallet) | [DjedAlliance](https://github.com/DjedAlliance) | 1 year ago | 0 | Multiplatform Ergo Wallet |
 | [ergo-mining-pool](https://github.com/mgpai22/ergo-mining-pool) | [mgpai22](https://github.com/mgpai22) | 1 year ago | 0 |  |
 | [p2p-test](https://github.com/SavonarolaLabs/p2p-test) | [SavonarolaLabs](https://github.com/SavonarolaLabs) | 1 year ago | 0 |  |

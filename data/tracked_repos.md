@@ -89,7 +89,7 @@ Repositories are grouped by organization and sorted by star count within each gr
 
 | Repository | ⭐ Stars | 🍴 Forks | 🐛 Open Issues | 📅 Last Push | 📝 Description |
 | --- | --- | --- | --- | --- | --- |
-| [chaincash](https://github.com/ChainCashLabs/chaincash) | 20 | 2 | 4 | 18 hours ago | ChainCash - elastic peer-to-peer money collectively backed by blockchain asse... |
+| [chaincash](https://github.com/ChainCashLabs/chaincash) | 20 | 2 | 4 | 20 hours ago | ChainCash - elastic peer-to-peer money collectively backed by blockchain asse... |
 | [chaincash-rs](https://github.com/ChainCashLabs/chaincash-rs) | 7 | 4 | 14 | 7 months ago | ChainCash Server: Free Banking for Everyone! |
 | [ccips](https://github.com/ChainCashLabs/ccips) | 0 | 0 | 0 | 1 year ago | ChainCash Improvement Proposals |
 
@@ -97,11 +97,11 @@ Repositories are grouped by organization and sorted by star count within each gr
 
 | Repository | ⭐ Stars | 🍴 Forks | 🐛 Open Issues | 📅 Last Push | 📝 Description |
 | --- | --- | --- | --- | --- | --- |
-| [ergo](https://github.com/ergoplatform/ergo) | 503 | 176 | 196 | 18 hours ago | Ergo protocol description & reference client implementation |
+| [ergo](https://github.com/ergoplatform/ergo) | 503 | 176 | 196 | 21 hours ago | Ergo protocol description & reference client implementation |
 | [ergo-wallet-app](https://github.com/ergoplatform/ergo-wallet-app) | 105 | 35 | 24 | 9 months ago | Ergo Wallet App |
 | [sigma-rust](https://github.com/ergoplatform/sigma-rust) | 72 | 51 | 68 | 4 weeks ago | Rust implementation of ErgoTree interpreter and wallet-related features |
-| [awesome-ergo](https://github.com/ergoplatform/awesome-ergo) | 66 | 12 | 0 | 1 day ago | A curated list of awesome and useful Ergo resources |
-| [sigmastate-interpreter](https://github.com/ergoplatform/sigmastate-interpreter) | 65 | 42 | 137 | 4 hours ago | ErgoScript compiler and ErgoTree Interpreter implementation for Ergo blockchain |
+| [awesome-ergo](https://github.com/ergoplatform/awesome-ergo) | 66 | 12 | 0 | 2 days ago | A curated list of awesome and useful Ergo resources |
+| [sigmastate-interpreter](https://github.com/ergoplatform/sigmastate-interpreter) | 65 | 42 | 137 | 6 hours ago | ErgoScript compiler and ErgoTree Interpreter implementation for Ergo blockchain |
 | [oracle-core](https://github.com/ergoplatform/oracle-core) | 64 | 39 | 20 | 1 week ago | Core off-chain component of Oracle Pools |
 | [eips](https://github.com/ergoplatform/eips) | 63 | 34 | 30 | 4 months ago | Ergo Improvement Proposals |
 | [ergoscript-by-example](https://github.com/ergoplatform/ergoscript-by-example) | 54 | 25 | 5 | 1 year ago | Learn ErgoScript by reading example smart contracts powered by Ergo Playground. |
@@ -234,9 +234,9 @@ Repositories are grouped by organization and sorted by star count within each gr
 | --- | --- | --- | --- | --- | --- |
 | [watcher](https://github.com/rosen-bridge/watcher) | 7 | 2 | 1 | 5 days ago |  |
 | [operation](https://github.com/rosen-bridge/operation) | 6 | 9 | 4 | 2 months ago |  |
-| [ui](https://github.com/rosen-bridge/ui) | 6 | 6 | 7 | 6 hours ago |  |
+| [ui](https://github.com/rosen-bridge/ui) | 6 | 6 | 7 | 9 hours ago |  |
 | [scanner](https://github.com/rosen-bridge/scanner) | 3 | 2 | 1 | 1 day ago |  |
-| [guard-service](https://github.com/rosen-bridge/guard-service) | 2 | 2 | 0 | 6 hours ago |  |
+| [guard-service](https://github.com/rosen-bridge/guard-service) | 2 | 2 | 0 | 9 hours ago |  |
 | [rosen-sdk](https://github.com/rosen-bridge/rosen-sdk) | 2 | 0 | 0 | 10 months ago |  |
 | [contract](https://github.com/rosen-bridge/contract) | 1 | 0 | 0 | 4 days ago |  |
 | [landing](https://github.com/rosen-bridge/landing) | 1 | 3 | 1 | 6 months ago |  |

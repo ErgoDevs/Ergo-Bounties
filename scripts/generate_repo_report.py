@@ -5,7 +5,7 @@ import time
 import requests
 from pathlib import Path
 from dotenv import load_dotenv
-from datetime import datetime, timezone # Changed import
+from datetime import datetime, timezone, timedelta # Added timedelta
 from operator import itemgetter
 
 # Add project root to sys.path to allow importing 'src' if needed later
@@ -259,6 +259,77 @@ def generate_all_repos_markdown(repo_details_list):
 
     return content + "\n"
 
+
+def get_repo_activity_last_month(repo_full_name):
+    """Fetches commit count and unique contributors for the last 30 days."""
+    print(f"Fetching activity for {repo_full_name}...")
+    owner, repo = repo_full_name.split('/')
+    one_month_ago = datetime.now(timezone.utc) - timedelta(days=30)
+    since_date_str = one_month_ago.isoformat()
+
+    commits_url = f"https://api.github.com/repos/{owner}/{repo}/commits?since={since_date_str}&per_page=100"
+
+    commit_count = 0
+    contributors = set()
+    page_url = commits_url
+
+    while page_url:
+        response = None # Initialize response to None before the try block
+        try:
+            # print(f"Fetching commits page: {page_url}") # Optional: verbose logging
+            response = requests.get(page_url, headers=HEADERS)
+            # Handle 404 specifically - repo might be gone or private
+            if response.status_code == 404:
+                print(f"Warning: Repo {repo_full_name} not found or inaccessible (404). Skipping activity check.")
+                break
+            # Handle other errors
+            response.raise_for_status()
+
+            data = response.json()
+
+            if not isinstance(data, list):
+                 print(f"Warning: Unexpected commit data format for {repo_full_name}. Skipping.")
+                 break # Stop processing this repo if data format is wrong
+
+            commit_count += len(data)
+            for commit in data:
+                # Try to get login from author field first, fallback to committer if author is null
+                if commit.get('author') and commit['author'].get('login'):
+                    contributors.add(commit['author']['login'])
+                elif commit.get('committer') and commit['committer'].get('login'):
+                     # Less ideal, but better than nothing if author is null
+                     contributors.add(commit['committer']['login'])
+                # Handle cases where commit info might be incomplete (e.g., null author/committer)
+
+            page_url = response.links.get("next", {}).get("url")
+            if page_url:
+                time.sleep(API_DELAY_SECONDS / 2) # Slightly shorter delay for pagination within a repo
+
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching commits for {repo_full_name} from {page_url}: {e}")
+            if response is not None and response.status_code == 403:
+                 print("Rate limit likely exceeded or token permissions issue.")
+            # Stop processing this repo on error to avoid hammering API
+            break
+        except Exception as e:
+            print(f"Unexpected error processing commits for {repo_full_name}: {e}")
+            break # Stop processing this repo on unexpected error
+
+    print(f" -> Found {commit_count} commits, {len(contributors)} contributors for {repo_full_name} in last 30 days.")
+    return {'commit_count': commit_count, 'contributors': contributors}
+
+
+def generate_stats_markdown(total_repos, total_entities, updated_last_month, commits_last_month, unique_contributors_last_month):
+    """Generates the markdown section for the stats."""
+    stats_content = "## 📊 Ecosystem Activity Overview (Last 30 Days)\n\n"
+    stats_content += f"- **Total Repositories Listed:** {total_repos}\n"
+    stats_content += f"- **Total Organizations/Users Scanned:** {total_entities}\n"
+    stats_content += f"- **Repositories Updated:** {updated_last_month}\n"
+    stats_content += f"- **Commits Made:** {commits_last_month}\n"
+    stats_content += f"- **Unique Contributors:** {unique_contributors_last_month}\n\n"
+    stats_content += "---\n\n" # Add a separator
+    return stats_content
+
 # --- Main Execution ---
 
 def main():
@@ -376,8 +447,33 @@ def main():
         time.sleep(API_DELAY_SECONDS)
     print(f"Successfully fetched details for {len(all_repo_details_additional)} additional repositories.")
 
-    # Combine for the final "all repos" list
+    # 5. Combine tracked repo details with the newly fetched details for the "all repos" file
     combined_all_repo_details = tracked_repo_details + all_repo_details_additional
+
+    # --- Calculate Activity Stats (Last 30 Days) ---
+    print("\nCalculating activity stats for the last 30 days...")
+    total_commits_last_month = 0
+    all_contributors_last_month = set()
+    repos_updated_last_month = 0
+    one_month_ago_dt = datetime.now(timezone.utc) - timedelta(days=30)
+
+    # Iterate over the combined list to calculate stats
+    for repo_detail in combined_all_repo_details:
+        # Check if updated recently
+        if repo_detail['last_push_dt'] and repo_detail['last_push_dt'] >= one_month_ago_dt:
+            repos_updated_last_month += 1
+
+        # Fetch commit activity
+        activity = get_repo_activity_last_month(repo_detail['full_name'])
+        total_commits_last_month += activity['commit_count']
+        all_contributors_last_month.update(activity['contributors'])
+        time.sleep(API_DELAY_SECONDS) # Delay between repos for activity check
+
+    unique_contributors_last_month = len(all_contributors_last_month)
+    print(f"\nStats Calculation Complete:")
+    print(f" - Repos Updated: {repos_updated_last_month}")
+    print(f" - Commits: {total_commits_last_month}")
+    print(f" - Unique Contributors: {unique_contributors_last_month}")
 
     # --- Generate and Write Tracked Repos Markdown ---
     tracked_markdown_content = "# 🏗️ Tracked Ergo Ecosystem Repositories\n\n"
@@ -396,9 +492,17 @@ def main():
         print(f"Error writing output file {TRACKED_REPOS_OUTPUT_FILE}: {e}") # Use correct output variable
 
     # --- Generate and Write All Repos Markdown ---
-    all_repos_markdown_content = "# 🌐 All Ergo-Related Repositories\n\n"
-    all_repos_markdown_content += "This list includes all known Ergo-related repositories, combining those actively tracked for bounties and others listed in `data/all_repos.json`. It is sorted by the most recent activity.\n\n"
+    stats_section = generate_stats_markdown(
+        total_repos=len(combined_all_repo_details),
+        total_entities=len(all_entities),
+        updated_last_month=repos_updated_last_month,
+        commits_last_month=total_commits_last_month,
+        unique_contributors_last_month=unique_contributors_last_month
+    )
+    all_repos_markdown_content = "#  All Ergo-Related Repositories\n\n"
     all_repos_markdown_content += "[View Tracked Repositories Only →](tracked_repos.md)\n\n" # Add link back
+    all_repos_markdown_content += stats_section # Prepend the stats section
+    # The generate_all_repos_markdown function already adds the H2 title for the table
     all_repos_markdown_content += generate_all_repos_markdown(combined_all_repo_details) # Generate table for ALL repos
 
     try:
