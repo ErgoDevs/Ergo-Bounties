@@ -3,7 +3,7 @@
   <p><em>The Central Hub for Discovering, Claiming, and Managing Ergo Bounties</em></p>
   <p>
     <a href="/data/all.md"><img src="https://img.shields.io/badge/Open%20Bounties-106%2B-4CAF50" alt="Open Bounties"></a>
-    <a href="/data/summary.md"><img src="https://img.shields.io/badge/💰%20Total%20Value-47,712.30%20ERG-2196F3" alt="Total Value"></a>
+    <a href="/data/summary.md"><img src="https://img.shields.io/badge/💰%20Total%20Value-49,576.74%20ERG-2196F3" alt="Total Value"></a>
     <a href="/data/high-value-bounties.md"><img src="https://img.shields.io/badge/🌟%20High%20Value-11%2B%20Over%201000%20ERG-FFC107" alt="High Value Bounties"></a>
     <a href="/docs/ongoing-programs.md"><img src="https://img.shields.io/badge/🔥%20Grants%20and%20Initiatives-9C27B0" alt="Featured Bounties"></a>
   </p>
@@ -19,12 +19,12 @@
   <div>
     <h3>🔤 By Programming Language</h3>
     <p>
-          <a href="/data/by_language/scala.md"><img src="https://img.shields.io/badge/Scala-71-DC322F"></a>
-    <a href="/data/by_language/rust.md"><img src="https://img.shields.io/badge/Rust-20-DEA584"></a>
-    <a href="/data/by_language/typescript.md"><img src="https://img.shields.io/badge/TypeScript-6-3178C6"></a>
-    <a href="/data/by_language/svelte.md"><img src="https://img.shields.io/badge/Svelte-4-DC322F"></a>
+          <a href="/data/by_language/scala.md"><img src="https://img.shields.io/badge/Scala-72-DC322F"></a>
+    <a href="/data/by_language/rust.md"><img src="https://img.shields.io/badge/Rust-13-DEA584"></a>
+    <a href="/data/by_language/typescript.md"><img src="https://img.shields.io/badge/TypeScript-8-3178C6"></a>
+    <a href="/data/by_language/svelte.md"><img src="https://img.shields.io/badge/Svelte-5-DC322F"></a>
     <a href="/data/by_language/various.md"><img src="https://img.shields.io/badge/Various-3-DC322F"></a>
-    <a href="/data/by_language/java.md"><img src="https://img.shields.io/badge/Java-1-007396"></a>
+    <a href="/data/by_language/java.md"><img src="https://img.shields.io/badge/Java-2-007396"></a>
       <a href="/data/summary.md#languages">
         <img src="https://img.shields.io/badge/🌐%20All%20Languages-purple" alt="All Languages">
       </a>
@@ -60,4 +60,4 @@
    <!--  <a href="https://github.com/ergoplatform/Ergo-Bounties"><img src="https://img.shields.io/badge/⭐%20Star%20on%20GitHub-333333" alt="Star on GitHub"></a>-->
   </p>
 </div>
-<!-- Latest Update: 2025-03-27 -->
+<!-- Latest Update: 2025-10-20 -->
