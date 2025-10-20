@@ -8,11 +8,12 @@
   "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1039",
   "payment_currency": "SigUSD",
   "bounty_value": 500.0,
-  "status": "completed",
+  "status": "awaiting-review",
   "submission_date": "2025-03-04",
   "expected_completion": "2025-03-19",
   "description": "Finished implementation of executeFromSelfReg and tests, patched per reviews. Awaiting review and merge",
   "review_notes": "",
   "payment_tx_id": "",
-  "payment_date": ""
+  "payment_date": "",
+  "reviewer": "kushti"
 }

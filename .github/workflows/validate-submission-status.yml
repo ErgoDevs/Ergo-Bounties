@@ -1,0 +1,133 @@
+name: Validate Submission Status
+
+on:
+  pull_request:
+    types: [opened, synchronize] # Run on PR creation and updates
+    paths:
+      - 'submissions/**.json' # Only run if submission JSONs change
+
+permissions:
+  pull-requests: write # To comment on the PR
+
+jobs:
+  validate_status:
+    runs-on: ubuntu-latest
+    # Avoid loops if actions commit, and don't run on forks initially
+    if: github.event.pull_request.user.login != 'github-actions[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Fetch history to compare changes against base branch
+          fetch-depth: 0
+
+      - name: Get changed submission files
+        id: changed_files
+        # Uses an action to reliably get files changed in the PR compared to the base branch
+        uses: tj-actions/changed-files@v44
+        with:
+          files: submissions/*.json
+
+      - name: Validate status field
+        # Only run if a JSON file in submissions/ was added or modified in this PR
+        if: steps.changed_files.outputs.any_changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const prNumber = context.issue.number;
+            const prOwner = context.repo.owner;
+            const prRepo = context.repo.repo;
+
+            const validStatuses = new Set(['in-progress', 'awaiting-review', 'reviewed', 'paid']);
+            const changedFiles = `${{ steps.changed_files.outputs.all_changed_files }}`.split(' ');
+            let invalidFiles = [];
+
+            console.log('Changed submission files:', changedFiles);
+
+            for (const file of changedFiles) {
+              // Ensure we only process JSON files within the submissions directory that were added or modified
+              if (!file.startsWith('submissions/') || !file.endsWith('.json')) {
+                console.log(`Skipping non-submission JSON file: ${file}`);
+                continue;
+              }
+              // Check if the file actually exists in the checkout (handles deleted files in PR)
+              if (!fs.existsSync(file)) {
+                 console.log(`Skipping deleted file: ${file}`);
+                 continue;
+              }
+
+              console.log(`Validating status in: ${file}`);
+              let submissionData;
+              try {
+                const fileContent = fs.readFileSync(file, 'utf8');
+                submissionData = JSON.parse(fileContent);
+              } catch (error) {
+                console.error(`Error reading or parsing ${file}:`, error);
+                // Optionally comment about parse error, but focus is on status validation
+                invalidFiles.push({ file: file, status: 'PARSE_ERROR', error: error.message });
+                continue; // Skip status check if parsing failed
+              }
+
+              const status = submissionData.status ? String(submissionData.status).toLowerCase() : null; // Get status, lowercase it
+
+              if (!status) {
+                console.log(`Status field missing or empty in ${file}.`);
+                invalidFiles.push({ file: file, status: 'MISSING' });
+              } else if (!validStatuses.has(status)) {
+                console.log(`Invalid status '${status}' found in ${file}.`);
+                invalidFiles.push({ file: file, status: status });
+              } else {
+                 console.log(`Status '${status}' in ${file} is valid.`);
+              }
+            }
+
+            if (invalidFiles.length > 0) {
+              let commentBody = `⚠️ Found issues with submission status in this PR:\n\n`;
+              for (const invalid of invalidFiles) {
+                if (invalid.status === 'PARSE_ERROR') {
+                  commentBody += `- **${invalid.file}**: Could not parse JSON. Error: ${invalid.error}\n`;
+                } else if (invalid.status === 'MISSING') {
+                  commentBody += `- **${invalid.file}**: The \`status\` field is missing or empty.\n`;
+                } else {
+                  commentBody += `- **${invalid.file}**: Invalid status found: \`${invalid.status}\`.\n`;
+                }
+              }
+              commentBody += `\nPlease ensure the \`status\` field is one of the allowed values: \`${[...validStatuses].join('`, `')}\`.`;
+
+              // Check for existing comments from this action to avoid spamming
+              const { data: comments } = await github.rest.issues.listComments({
+                 owner: prOwner,
+                 repo: prRepo,
+                 issue_number: prNumber,
+              });
+              const botComment = comments.find(comment =>
+                 comment.user.login === 'github-actions[bot]' &&
+                 comment.body.includes('Found issues with submission status')
+              );
+
+              if (botComment) {
+                 console.log('Updating existing validation comment.');
+                 await github.rest.issues.updateComment({
+                   owner: prOwner,
+                   repo: prRepo,
+                   comment_id: botComment.id,
+                   body: commentBody,
+                 });
+              } else {
+                 console.log('Creating new validation comment.');
+                 await github.rest.issues.createComment({
+                   owner: prOwner,
+                   repo: prRepo,
+                   issue_number: prNumber,
+                   body: commentBody,
+                 });
+              }
+              // Fail the workflow step to make the issue visible in PR checks
+              core.setFailed(`Invalid status found in submission files: ${invalidFiles.map(f => f.file).join(', ')}`);
+            } else {
+              console.log('All submission statuses are valid.');
+              // Optional: Could delete previous validation comments if they exist
+            }

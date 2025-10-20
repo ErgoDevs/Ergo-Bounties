@@ -15,11 +15,16 @@ jobs:
     # Avoid loops if actions commit, and don't run on forks initially
     if: github.event.pull_request.user.login != 'github-actions[bot]' && github.event.pull_request.head.repo.full_name == github.repository
     steps:
+      # Checkout with PAT to allow pushing changes back to the PR branch
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           # Fetch history to compare changes against base branch
           fetch-depth: 0
+          # Use PAT for push permissions
+          token: ${{ secrets.PAT_TOKEN }}
+          # Ensure we check out the PR branch head
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Get changed submission files
         id: changed_files
@@ -41,6 +46,7 @@ jobs:
             const prOwner = context.repo.owner;
             const prRepo = context.repo.repo;
             const prOpener = context.payload.pull_request.user.login;
+            const prBranch = context.payload.pull_request.head.ref;
 
             // Get the first changed JSON file in submissions/
             // Assumes only one submission JSON per PR for simplicity
@@ -114,13 +120,70 @@ jobs:
               const originalAuthor = issue.user.login;
               console.log(`Original author found: ${originalAuthor}`);
 
+              // --- Add reviewer to JSON ---
+              try {
+                console.log(`Attempting to add reviewer '${originalAuthor}' to ${submissionFile}`);
+                // Re-read the file in case it was modified by previous steps (unlikely here, but good practice)
+                const currentContent = fs.readFileSync(submissionFile, 'utf8');
+                const currentData = JSON.parse(currentContent);
+
+                // Add or update the reviewer field
+                currentData.reviewer = originalAuthor;
+
+                // Write the updated JSON back with standard indentation
+                fs.writeFileSync(submissionFile, JSON.stringify(currentData, null, 2) + '\n', 'utf8');
+                console.log(`Successfully updated ${submissionFile} with reviewer.`);
+
+                // --- Commit and push the change ---
+                const { execSync } = require('child_process');
+                console.log('Configuring git user...');
+                execSync(`git config --global user.name "github-actions[bot]"`);
+                execSync(`git config --global user.email "github-actions[bot]@users.noreply.github.com"`);
+
+                console.log(`Adding ${submissionFile} to git...`);
+                execSync(`git add ${submissionFile}`);
+
+                // Check if there are changes staged
+                const statusOutput = execSync('git status --porcelain').toString();
+                if (statusOutput.includes(submissionFile)) {
+                  console.log('Committing changes...');
+                  const commitMessage = `ci: Add reviewer (${originalAuthor}) to ${submissionFile}`;
+                  execSync(`git commit -m "${commitMessage}"`);
+
+                  console.log(`Pushing changes to branch ${prBranch}...`);
+                  // Use the PAT implicitly via checkout token for push
+                  execSync(`git push origin HEAD:${prBranch}`);
+                  console.log('Push successful.');
+                } else {
+                   console.log('No changes detected in submission file after update attempt. Skipping commit/push.');
+                }
+
+              } catch (commitError) {
+                 console.error('Error updating submission JSON or committing/pushing:', commitError);
+                 // Optionally, comment on the PR about the failure
+                 await github.rest.issues.createComment({
+                   owner: prOwner,
+                   repo: prRepo,
+                   issue_number: prNumber,
+                   body: `⚠️ Failed to automatically add reviewer '${originalAuthor}' to \`${submissionFile}\`. Please add it manually. Error: ${commitError.message}`
+                 });
+                 // Continue to commenting step despite commit failure
+              }
+              // --- End add reviewer ---
+
+
               // Avoid tagging the PR opener if they are the original author
               if (originalAuthor.toLowerCase() === prOpener.toLowerCase()) {
-                console.log(`PR opener (${prOpener}) is the original author (${originalAuthor}). Skipping tag.`);
-                return;
+                console.log(`PR opener (${prOpener}) is the original author (${originalAuthor}). Skipping tag comment.`);
+                // Still return here after attempting to add reviewer
+                 return;
               }
 
-              const commentBody = `FYI @${originalAuthor}, bounty \`${bountyId}\` (${originalIssueLink}) is being reserved by @${prOpener}.`;
+              // Link to relevant documentation
+              const submissionGuideLink = `../../docs/bounty-submission-guide.md`; // Relative link from workflow file
+              const reviewerGuideLink = `../../docs/reviewer-guide.md`; // Relative link from workflow file
+
+              const commentBody = `FYI @${originalAuthor} (reviewer) - bounty \`${bountyId}\` (${originalIssueLink}) is being submitted/reserved by @${prOpener}.\n\nReviewer field automatically added to submission file.\n\n**Next Steps:**\n- **Contributor (@${prOpener}):** Please refer to the [Submission Guide](${submissionGuideLink}) for process details.\n- **Reviewer (@${originalAuthor}):** Please refer to the [Reviewer Guide](${reviewerGuideLink}) for your responsibilities.`;
 
               await github.rest.issues.createComment({
                 owner: prOwner,
