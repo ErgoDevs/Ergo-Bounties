@@ -7,7 +7,7 @@
   "bounty_id": "sigmastate-interpreter#1035",
   "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1035",
   "payment_currency": "SigUSD",
-  "bounty_value": 500.0,
+  "bounty_value": 500,
   "status": "in-progress",
   "submission_date": "2025-03-04",
   "expected_completion": "2025-03-31",
