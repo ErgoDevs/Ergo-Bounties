@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2025-10-22 01:52:14 -->
+<!-- Generated on: 2025-10-22 12:51:56 -->
 
 # RSN (Governance Token) Bounties
 
-*Report generated: 2025-10-22 01:52:14 UTC*
+*Report generated: 2025-10-22 12:51:56 UTC*
 
-![Total Bounties: 6](https://img.shields.io/badge/Total%20Bounties-6-blue) ![Total Value: 76.47 ERG](https://img.shields.io/badge/Total%20Value-76.47%20ERG-green)
+![Total Bounties: 6](https://img.shields.io/badge/Total%20Bounties-6-blue) ![Total Value: 76.46 ERG](https://img.shields.io/badge/Total%20Value-76.46%20ERG-green)
 
 ## Navigation
 
