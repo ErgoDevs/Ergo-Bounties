@@ -1,19 +1,19 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2025-10-31 12:50:22 -->
+<!-- Generated on: 2025-11-01 01:54:10 -->
 
 # BENE ($1) Bounties
 
-*Report generated: 2025-10-31 12:50:22 UTC*
+*Report generated: 2025-11-01 01:54:10 UTC*
 
-![Total Bounties: 4](https://img.shields.io/badge/Total%20Bounties-4-blue) ![Total Value: 316.20 ERG](https://img.shields.io/badge/Total%20Value-316.20%20ERG-green)
+![Total Bounties: 4](https://img.shields.io/badge/Total%20Bounties-4-blue) ![Total Value: 316.23 ERG](https://img.shields.io/badge/Total%20Value-316.23%20ERG-green)
 
 ## Navigation
 
-[![All Bounties](https://img.shields.io/badge/All%20Bounties-106-blue)](../all.md) [![By Language](https://img.shields.io/badge/By%20Language-7-green)](../summary.md#languages) [![By Currency](https://img.shields.io/badge/By%20Currency-7-yellow)](../summary.md#currencies) [![By Organization](https://img.shields.io/badge/By%20Organization-9-orange)](../summary.md#projects)
+[![All Bounties](https://img.shields.io/badge/All%20Bounties-107-blue)](../all.md) [![By Language](https://img.shields.io/badge/By%20Language-7-green)](../summary.md#languages) [![By Currency](https://img.shields.io/badge/By%20Currency-7-yellow)](../summary.md#currencies) [![By Organization](https://img.shields.io/badge/By%20Organization-9-orange)](../summary.md#projects)
 
 ## Current BENE ($1) Rate
 
-1 BENE = 1.581000 ERG
+1 BENE = 1.581173 ERG
 
 ## BENE ($1) Bounties
 
