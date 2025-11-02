@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2025-11-02 01:56:44 -->
+<!-- Generated on: 2025-11-02 12:42:15 -->
 
 # stabilitynexus Bounties
 
-*Report generated: 2025-11-02 01:56:44 UTC*
+*Report generated: 2025-11-02 12:42:15 UTC*
 
-![Total Bounties: 3](https://img.shields.io/badge/Total%20Bounties-3-blue) ![Total Value: 158.04 ERG](https://img.shields.io/badge/Total%20Value-158.04%20ERG-green)
+![Total Bounties: 3](https://img.shields.io/badge/Total%20Bounties-3-blue) ![Total Value: 158.00 ERG](https://img.shields.io/badge/Total%20Value-158.00%20ERG-green)
 
 ## Navigation
 
