@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2025-11-16 01:58:34 -->
+<!-- Generated on: 2025-11-16 12:43:05 -->
 
 # BetterMoneyLabs Bounties
 
-*Report generated: 2025-11-16 01:58:34 UTC*
+*Report generated: 2025-11-16 12:43:05 UTC*
 
-![Total Bounties: 9](https://img.shields.io/badge/Total%20Bounties-9-blue) ![Total Value: 285.04 ERG](https://img.shields.io/badge/Total%20Value-285.04%20ERG-green)
+![Total Bounties: 9](https://img.shields.io/badge/Total%20Bounties-9-blue) ![Total Value: 285.83 ERG](https://img.shields.io/badge/Total%20Value-285.83%20ERG-green)
 
 ## Navigation
 
