@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2025-11-21 12:49:45 -->
+<!-- Generated on: 2025-11-22 01:47:52 -->
 
 # input-output-hk Bounties
 
-*Report generated: 2025-11-21 12:49:45 UTC*
+*Report generated: 2025-11-22 01:47:52 UTC*
 
-![Total Bounties: 1](https://img.shields.io/badge/Total%20Bounties-1-blue) ![Total Value: 1110.19 ERG](https://img.shields.io/badge/Total%20Value-1110.19%20ERG-green)
+![Total Bounties: 1](https://img.shields.io/badge/Total%20Bounties-1-blue) ![Total Value: 1110.18 ERG](https://img.shields.io/badge/Total%20Value-1110.18%20ERG-green)
 
 ## Navigation
 
