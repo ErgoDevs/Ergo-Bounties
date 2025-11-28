@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2025-11-28 01:51:50 -->
+<!-- Generated on: 2025-11-28 12:50:34 -->
 
 # Rust Bounties
 
-*Report generated: 2025-11-28 01:51:50 UTC*
+*Report generated: 2025-11-28 12:50:34 UTC*
 
-![Total Bounties: 13](https://img.shields.io/badge/Total%20Bounties-13-blue) ![Total Value: 5955.96 ERG](https://img.shields.io/badge/Total%20Value-5955.96%20ERG-green)
+![Total Bounties: 13](https://img.shields.io/badge/Total%20Bounties-13-blue) ![Total Value: 5955.00 ERG](https://img.shields.io/badge/Total%20Value-5955.00%20ERG-green)
 
 ## Navigation
 
