@@ -1,0 +1,18 @@
+{
+  "contributor": "shubham5080",
+  "wallet_address": "9iMCHG1dQiqiYwVXuynGGpxPNywBkw1uGvhrkp3D5pu1Vnt8WHU",
+  "contact_method": "Discord: shubham_5080",
+  "work_link": "",
+  "work_title": "Direct campaign loading (avoid fetching all campaigns)",
+  "bounty_id": "stabilitynexus/BenefactionPlatform-Ergo#74",
+  "original_issue_link": "https://github.com/StabilityNexus/BenefactionPlatform-Ergo/issues/74",
+  "payment_currency": "BENE",
+  "bounty_value": 50.0,
+  "status": "in-progress",
+  "submission_date": "2025-12-05",
+  "expected_completion": "2025-12-10",
+  "description": "I am currently implementing optimized direct campaign loading so the platform no longer needs to fetch all campaigns unnecessarily. This enhancement improves performance, reduces server load, and makes campaign retrieval significantly more efficient.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
