@@ -1,5 +1,5 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2025-12-10 12:55:35 -->
+<!-- Generated on: 2025-12-11 02:00:27 -->
 
 # Summary of Bounties
 
@@ -11,16 +11,16 @@
 
 | Project | Count | Value |
 |----------|-------|-------|
-| [ergoplatform](/data/by_org/ergoplatform.md) | 85 | 55,139.70 ERG |
+| [ergoplatform](/data/by_org/ergoplatform.md) | 85 | 55,167.17 ERG |
 | [DevDAO](/data/by_org/devdao.md) | 1 | 3,000.00 ERG |
-| [fleet-sdk](/data/by_org/fleet-sdk.md) | 3 | 1,600.27 ERG |
-| [input-output-hk](/data/by_org/input-output-hk.md) | 1 | 967.91 ERG |
-| [StabilityNexus](/data/by_org/stabilitynexus.md) | 3 | 580.75 ERG |
-| [stabilitynexus](/data/by_org/stabilitynexus.md) | 4 | 580.75 ERG |
-| [BetterMoneyLabs](/data/by_org/bettermoneylabs.md) | 9 | 257.45 ERG |
-| [rosen-bridge](/data/by_org/rosen-bridge.md) | 6 | 79.33 ERG |
+| [fleet-sdk](/data/by_org/fleet-sdk.md) | 3 | 1,601.12 ERG |
+| [input-output-hk](/data/by_org/input-output-hk.md) | 1 | 968.47 ERG |
+| [StabilityNexus](/data/by_org/stabilitynexus.md) | 3 | 581.08 ERG |
+| [stabilitynexus](/data/by_org/stabilitynexus.md) | 4 | 581.08 ERG |
+| [BetterMoneyLabs](/data/by_org/bettermoneylabs.md) | 9 | 257.83 ERG |
+| [rosen-bridge](/data/by_org/rosen-bridge.md) | 6 | 79.83 ERG |
 | [EF_DAO_LLC](/data/by_org/ef_dao_llc.md) | 2 | 0.00 ERG |
-| **Total** | **114** | **62,206.15 ERG** |
+| **Total** | **114** | **62,236.58 ERG** |
 
 ## Currencies
 
@@ -29,11 +29,11 @@ Open bounties are updated daily with values shown in ERG equivalent. Some bounti
 [View current currency prices →](/data/currency_prices.md)
 | Currency | Count | Total Value (ERG) |
 |----------|-------|------------------|
-| [SigUSD ($1)](/data/by_currency/sigusd.md) | 52 | 50283.11 |
+| [SigUSD ($1)](/data/by_currency/sigusd.md) | 52 | 50311.85 |
 | [ERG](/data/by_currency/erg.md) | 33 | 10350.00 |
-| [BENE ($1)](/data/by_currency/bene.md) | 6 | 1161.50 |
-| [Gold (per gram)](/data/by_currency/gold.md) | 6 | 261.67 |
-| [RSN (Governance Token)](/data/by_currency/rsn.md) | 6 | 79.33 |
+| [BENE ($1)](/data/by_currency/bene.md) | 6 | 1162.16 |
+| [Gold (per gram)](/data/by_currency/gold.md) | 6 | 262.21 |
+| [RSN (Governance Token)](/data/by_currency/rsn.md) | 6 | 79.83 |
 
 [View all currencies →](/data/by_currency/)
 
