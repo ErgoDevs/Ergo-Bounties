@@ -1,0 +1,20 @@
+{
+  "contributor": "ayush18",
+  "wallet_address": "9gKJBgaEiZzvg5xddsS3BXH6jG5VfJ2k2GiWk6GfemwbKY1X7QC",
+  "contact_method": "Discord: 1013089497933680691",
+  "work_link": "https://github.com/fleet-sdk/docs/pull/NEW",
+  "work_title": "Fleet SDK Educational Documentation - Installation, Core Concepts, Tutorial, Contract Signing",
+  "bounty_id": "docs#8",
+  "original_issue_link": "https://github.com/fleet-sdk/docs/issues/8",
+  "payment_currency": "ERG",
+  "bounty_value": 1578,
+  "status": "in-progress",
+  "submission_date": "2025-12-13",
+  "expected_completion": "2025-12-15",
+  "description": "Comprehensive Fleet SDK documentation addressing issues #3, #8, #10, and #11. Added: 1) Complete installation guide (fresh install to running examples), 2) Core concepts chapter (UTXO, Boxes, Transactions, Tokens), 3) Full educational tutorial (Build Your First dApp with wallet connection, transfers, token minting), 4) Contract signing documentation for handling non-wallet boxes. Total: 1,895 lines of new documentation.",
+  
+  "reviewer": "",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
