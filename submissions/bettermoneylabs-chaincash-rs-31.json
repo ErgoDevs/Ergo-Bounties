@@ -1,0 +1,18 @@
+{
+  "contributor": "Bhavik-Mittal-26",
+  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "contact_method": "26bmittal@gmail.com",
+  "work_link": "",
+  "work_title": "Unlock nodes wallet if locked",
+  "bounty_id": "BetterMoneyLabs/chaincash-rs#31",
+  "original_issue_link": "https://github.com/BetterMoneyLabs/chaincash-rs/issues/31",
+  "payment_currency": "GORT",
+  "bounty_value": 50.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2025-12-14",
+  "description": "I am working on this bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
