@@ -1,0 +1,18 @@
+{
+  "contributor": "dimension-drifter",
+  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "contact_method": "connectwithdeepam@gmail.com",
+  "work_link": "",
+  "work_title": "Missing Automatic-Module-Name",
+  "bounty_id": "ergoplatform/sigmastate-interpreter#1028",
+  "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1028",
+  "payment_currency": "ERG",
+  "bounty_value": 50.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2025-12-13",
+  "description": "I am working on this bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
