@@ -1,0 +1,18 @@
+{
+  "contributor": "dimension-drifter",
+  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "contact_method": "connectwithdeepam@gmail.com",
+  "work_link": "",
+  "work_title": "Set Loglevel via ergo.conf",
+  "bounty_id": "ergoplatform/ergo#1633",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1633",
+  "payment_currency": "SigUSD",
+  "bounty_value": 200.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2025-12-14",
+  "description": "I am working on this bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
