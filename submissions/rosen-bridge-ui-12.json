@@ -1,0 +1,18 @@
+{
+  "contributor": "Bhavik-Mittal-26",
+  "wallet_address": "TBD",
+  "contact_method": "email: 26bmittal@gmail.com",
+  "work_link": "",
+  "work_title": "Add wallet disconnect button",
+  "bounty_id": "rosen-bridge/ui#12",
+  "original_issue_link": "https://github.com/rosen-bridge/ui/issues/12",
+  "payment_currency": "RSN",
+  "bounty_value": 7.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2025-12-14",
+  "description": "Reserving this bounty. Planning to add a disconnect wallet button in the UI with proper state handling.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
