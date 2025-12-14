@@ -1,0 +1,18 @@
+{
+  "contributor": "dimension-drifter",
+  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "contact_method": "connectwithdeepam@gmail.com",
+  "work_link": "",
+  "work_title": "Do not wallet-rescan blockchain from height 0 after wallet initialization",
+  "bounty_id": "ergoplatform/ergo#1722",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1722",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2025-12-14",
+  "description": "I am working on this bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
