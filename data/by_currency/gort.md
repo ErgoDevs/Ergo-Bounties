@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2025-12-13 12:47:43 -->
+<!-- Generated on: 2025-12-14 02:06:43 -->
 
 # GORT (Governance Token) Bounties
 
-*Report generated: 2025-12-13 12:47:43 UTC*
+*Report generated: 2025-12-14 02:06:43 UTC*
 
-![Total Bounties: 5](https://img.shields.io/badge/Total%20Bounties-5-blue) ![Total Value: 71.15 ERG](https://img.shields.io/badge/Total%20Value-71.15%20ERG-green)
+![Total Bounties: 5](https://img.shields.io/badge/Total%20Bounties-5-blue) ![Total Value: 71.76 ERG](https://img.shields.io/badge/Total%20Value-71.76%20ERG-green)
 
 ## Navigation
 
@@ -13,7 +13,7 @@
 
 ## Current GORT (Governance Token) Rate
 
-1 GORT = 0.040656 ERG
+1 GORT = 0.041003 ERG
 
 ## GORT (Governance Token) Bounties
 

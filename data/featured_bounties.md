@@ -1,5 +1,5 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2025-12-13 12:47:43 -->
+<!-- Generated on: 2025-12-14 02:06:43 -->
 
 # Featured Bounties
 
@@ -12,13 +12,13 @@
 | Bounty | Organization | Value | Currency |
 |--------|--------------|-------|----------|
 | [Keystone Wallet Integration](https://discord.com/channels/668903786361651200/669989266478202917/1344310506277830697) | [DevDAO](by_org/devdao.md) | 3000.00 ERG | [ERG](by_currency/erg.md) |
-| [Finish SigmaMap implementation](https://github.com/ergoplatform/sigmastate-interpreter/issues/1067) | [ergoplatform](by_org/ergoplatform.md) | 2036.18 ERG | [SigUSD ($1)](by_currency/sigusd.md) |
+| [Finish SigmaMap implementation](https://github.com/ergoplatform/sigmastate-interpreter/issues/1067) | [ergoplatform](by_org/ergoplatform.md) | 2041.46 ERG | [SigUSD ($1)](by_currency/sigusd.md) |
 
 ## Weekly Summary
 
 | Date | Open Bounties | Total Value |
 |------|--------------|-------------|
-| [Dec 13, 2025](/data/all.md#all-bounties) | 115 | 64,855.52 ERG |
+| [Dec 14, 2025](/data/all.md#all-bounties) | 115 | 64,994.40 ERG |
 
 
 
