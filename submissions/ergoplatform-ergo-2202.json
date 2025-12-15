@@ -1,0 +1,18 @@
+{
+  "contributor": "dimension-drifter",
+  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "contact_method": "connectwithdeepam@gmail.com",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2259",
+  "work_title": "Github actions CI fails",
+  "bounty_id": "ergoplatform/ergo#2202",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/2202",
+  "payment_currency": "ERG",
+  "bounty_value": 50.0,
+  "status": "awaiting-review",
+  "submission_date": "2025-12-14",
+  "expected_completion": "2025-12-14",
+  "description": "I am working on this bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
