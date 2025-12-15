@@ -1,0 +1,18 @@
+{
+  "contributor": "dimension-drifter",
+  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "contact_method": "connectwithdeepam@gmail.com",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2265",
+  "work_title": "Wallet API and Exchange Integration Documentation",
+  "bounty_id": "ergoplatform/ergo#878",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/878",
+  "payment_currency": "ERG",
+  "bounty_value": 200.0,
+  "status": "awaiting-review",
+  "submission_date": "2025-12-14",
+  "expected_completion": "2025-12-14",
+  "description": "I am working on this bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
