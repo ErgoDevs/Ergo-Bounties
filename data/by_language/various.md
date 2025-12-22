@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2025-12-22 02:05:53 -->
+<!-- Generated on: 2025-12-22 12:53:18 -->
 
 # Various Bounties
 
-*Report generated: 2025-12-22 02:05:53 UTC*
+*Report generated: 2025-12-22 12:53:18 UTC*
 
-![Total Bounties: 3](https://img.shields.io/badge/Total%20Bounties-3-blue) ![Total Value: 1599.11 ERG](https://img.shields.io/badge/Total%20Value-1599.11%20ERG-green)
+![Total Bounties: 3](https://img.shields.io/badge/Total%20Bounties-3-blue) ![Total Value: 1608.08 ERG](https://img.shields.io/badge/Total%20Value-1608.08%20ERG-green)
 
 ## Navigation
 
@@ -15,7 +15,7 @@
 
 |Organisation|Bounty|Bounty Value|Reserve|
 |---|---|---|---|
-| [fleet-sdk](by_org/fleet-sdk.md) | [docs](https://github.com/fleet-sdk/docs)/[[Educational] Fleet-Tutorial + Bounties](https://github.com/fleet-sdk/docs/issues/8) | Σ1599 | [![Reserve](https://img.shields.io/badge/-Reserve-brightgreen?style=flat-square)](https://github.com/ErgoDevs/Ergo-Bounties/new/main?filename=submissions/fleet-sdk-docs-8.json&value=%7B%0A%20%20%22contributor%22%3A%20%22YOUR_GITHUB_USERNAME%22%2C%0A%20%20%22wallet_address%22%3A%20%22YOUR_WALLET_ADDRESS%22%2C%0A%20%20%22contact_method%22%3A%20%22YOUR_CONTACT_INFO%22%2C%0A%20%20%22work_link%22%3A%20%22%22%2C%0A%20%20%22work_title%22%3A%20%22%5BEducational%5D%20Fleet-Tutorial%20%2B%20Bounties%22%2C%0A%20%20%22bounty_id%22%3A%20%22fleet-sdk/docs%238%22%2C%0A%20%20%22original_issue_link%22%3A%20%22https%3A//github.com/fleet-sdk/docs/issues/8%22%2C%0A%20%20%22payment_currency%22%3A%20%22SigUSD%22%2C%0A%20%20%22bounty_value%22%3A%20775.0%2C%0A%20%20%22status%22%3A%20%22in-progress%22%2C%0A%20%20%22submission_date%22%3A%20%22%22%2C%0A%20%20%22expected_completion%22%3A%20%22YYYY-MM-DD%22%2C%0A%20%20%22description%22%3A%20%22I%20am%20working%20on%20this%20bounty%22%2C%0A%20%20%22review_notes%22%3A%20%22%22%2C%0A%20%20%22payment_tx_id%22%3A%20%22%22%2C%0A%20%20%22payment_date%22%3A%20%22%22%0A%7D&message=Claim%20Bounty%20fleet-sdk/docs%238&description=I%20want%20to%20claim%20this%20bounty%20posted%20by%20fleet-sdk.%0A%0ABounty:%20%5BEducational%5D%20Fleet-Tutorial%20%2B%20Bounties) |
+| [fleet-sdk](by_org/fleet-sdk.md) | [docs](https://github.com/fleet-sdk/docs)/[[Educational] Fleet-Tutorial + Bounties](https://github.com/fleet-sdk/docs/issues/8) | Σ1608 | [![Reserve](https://img.shields.io/badge/-Reserve-brightgreen?style=flat-square)](https://github.com/ErgoDevs/Ergo-Bounties/new/main?filename=submissions/fleet-sdk-docs-8.json&value=%7B%0A%20%20%22contributor%22%3A%20%22YOUR_GITHUB_USERNAME%22%2C%0A%20%20%22wallet_address%22%3A%20%22YOUR_WALLET_ADDRESS%22%2C%0A%20%20%22contact_method%22%3A%20%22YOUR_CONTACT_INFO%22%2C%0A%20%20%22work_link%22%3A%20%22%22%2C%0A%20%20%22work_title%22%3A%20%22%5BEducational%5D%20Fleet-Tutorial%20%2B%20Bounties%22%2C%0A%20%20%22bounty_id%22%3A%20%22fleet-sdk/docs%238%22%2C%0A%20%20%22original_issue_link%22%3A%20%22https%3A//github.com/fleet-sdk/docs/issues/8%22%2C%0A%20%20%22payment_currency%22%3A%20%22SigUSD%22%2C%0A%20%20%22bounty_value%22%3A%20775.0%2C%0A%20%20%22status%22%3A%20%22in-progress%22%2C%0A%20%20%22submission_date%22%3A%20%22%22%2C%0A%20%20%22expected_completion%22%3A%20%22YYYY-MM-DD%22%2C%0A%20%20%22description%22%3A%20%22I%20am%20working%20on%20this%20bounty%22%2C%0A%20%20%22review_notes%22%3A%20%22%22%2C%0A%20%20%22payment_tx_id%22%3A%20%22%22%2C%0A%20%20%22payment_date%22%3A%20%22%22%0A%7D&message=Claim%20Bounty%20fleet-sdk/docs%238&description=I%20want%20to%20claim%20this%20bounty%20posted%20by%20fleet-sdk.%0A%0ABounty:%20%5BEducational%5D%20Fleet-Tutorial%20%2B%20Bounties) |
 | [EF_DAO_LLC](by_org/ef_dao_llc.md) | [educational-rewards](https://github.com/EF_DAO_LLC/educational-rewards)/[Educational Reward Program](#-educational-reward-program) | - | [Details](/docs/ongoing-programs.md) |
 | [EF_DAO_LLC](by_org/ef_dao_llc.md) | [development-rewards](https://github.com/EF_DAO_LLC/development-rewards)/[Development Reward Program](#-development-reward-program) | - | [Details](/docs/ongoing-programs.md) |
 
