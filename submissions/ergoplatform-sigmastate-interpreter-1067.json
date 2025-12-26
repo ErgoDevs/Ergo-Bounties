@@ -1,0 +1,18 @@
+{
+  "contributor": "ergobuganonymous",
+  "wallet_address": "9gAvs2bBKQ23CsxbNpiBfF56CbA4MAJEzZZy51Kgc6U8EezbcCn",
+  "contact_method": "discord username: ergobuganonymous",
+  "work_link": "",
+  "work_title": "Finish SigmaMap implementation",
+  "bounty_id": "ergoplatform/sigmastate-interpreter#1067",
+  "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1067",
+  "payment_currency": "SigUSD",
+  "bounty_value": 1000.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2025-10-23",
+  "description": "I am working on this bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
