@@ -1,0 +1,18 @@
+{
+  "contributor": "dimension-drifter",
+  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "contact_method": "connectwithdeepam@gmail.com",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2276",
+  "work_title": "Optimize VersionedLDBAVLStorage methods",
+  "bounty_id": "ergoplatform/ergo#1598",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1598",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500.0,
+  "status": "awaiting-review",
+  "submission_date": "2025-12-14",
+  "expected_completion": "2025-12-14",
+  "description": "I am working on th-is bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
