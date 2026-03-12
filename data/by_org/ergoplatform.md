@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-03-12 02:34:17 -->
+<!-- Generated on: 2026-03-12 13:12:52 -->
 
 # ergoplatform Bounties
 
-*Report generated: 2026-03-12 02:34:17 UTC*
+*Report generated: 2026-03-12 13:12:52 UTC*
 
-![Total Bounties: 83](https://img.shields.io/badge/Total%20Bounties-83-blue) ![Total Value: 100607.42 ERG](https://img.shields.io/badge/Total%20Value-100607.42%20ERG-green)
+![Total Bounties: 83](https://img.shields.io/badge/Total%20Bounties-83-blue) ![Total Value: 100606.98 ERG](https://img.shields.io/badge/Total%20Value-100606.98%20ERG-green)
 
 ## Navigation
 
