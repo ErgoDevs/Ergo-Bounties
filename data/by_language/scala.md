@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-04-03 02:46:25 -->
+<!-- Generated on: 2026-04-03 13:14:14 -->
 
 # Scala Bounties
 
-*Report generated: 2026-04-03 02:46:25 UTC*
+*Report generated: 2026-04-03 13:14:14 UTC*
 
-![Total Bounties: 75](https://img.shields.io/badge/Total%20Bounties-75-blue) ![Total Value: 89770.13 ERG](https://img.shields.io/badge/Total%20Value-89770.13%20ERG-green)
+![Total Bounties: 75](https://img.shields.io/badge/Total%20Bounties-75-blue) ![Total Value: 89770.00 ERG](https://img.shields.io/badge/Total%20Value-89770.00%20ERG-green)
 
 ## Navigation
 
