@@ -1,23 +1,23 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-04-15 13:49:44 -->
+<!-- Generated on: 2026-04-16 03:21:57 -->
 
 # Currency Prices
 
-*Report generated: 2026-04-15 13:49:44 UTC*
+*Report generated: 2026-04-16 03:21:57 UTC*
 
 ## Navigation
 
-[![All Bounties](https://img.shields.io/badge/All%20Bounties-104-blue)](all.md) [![By Language](https://img.shields.io/badge/By%20Language-7-green)](summary.md#languages) [![By Currency](https://img.shields.io/badge/By%20Currency-6-yellow)](summary.md#currencies) [![By Organization](https://img.shields.io/badge/By%20Organization-8-orange)](summary.md#projects)
+[![All Bounties](https://img.shields.io/badge/All%20Bounties-111-blue)](all.md) [![By Language](https://img.shields.io/badge/By%20Language-7-green)](summary.md#languages) [![By Currency](https://img.shields.io/badge/By%20Currency-7-yellow)](summary.md#currencies) [![By Organization](https://img.shields.io/badge/By%20Organization-9-orange)](summary.md#projects)
 
 ## Current Prices
 
 | Currency | ERG Equivalent | Notes |
 |----------|----------------|-------|
-| [BENE ($1)](by_currency/bene.md) | 3.303961 | Each BENE is worth $1 in ERG |
-| [GORT (Governance Token)](by_currency/gort.md) | 0.036188 | Governance token for ErgoDEX |
+| [BENE ($1)](by_currency/bene.md) | 3.302368 | Each BENE is worth $1 in ERG |
+| [GORT (Governance Token)](by_currency/gort.md) | 0.036183 | Governance token for ErgoDEX |
 | [RSN (Governance Token)](by_currency/rsn.md) | 0.033569 | Governance token for Rosen Bridge |
-| [SigUSD ($1)](by_currency/sigusd.md) | 3.303961 | Stablecoin pegged to USD |
-| [Gold (per gram)](by_currency/gold.md) | 20.070631 | Price per gram of gold in ERG |
+| [SigUSD ($1)](by_currency/sigusd.md) | 3.302368 | Stablecoin pegged to USD |
+| [Gold (per gram)](by_currency/gold.md) | 20.557251 | Price per gram of gold in ERG |
 
 *Note: These prices are used to calculate ERG equivalents for bounties paid in different currencies.*
 
