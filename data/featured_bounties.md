@@ -1,5 +1,5 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-04-24 03:22:09 -->
+<!-- Generated on: 2026-04-24 13:47:14 -->
 
 # Featured Bounties
 
@@ -11,14 +11,14 @@
 
 | Bounty | Organization | Value | Currency |
 |--------|--------------|-------|----------|
-| [Finish SigmaMap implementation](https://github.com/ergoplatform/sigmastate-interpreter/issues/1067) | [ergoplatform](by_org/ergoplatform.md) | 3183.29 ERG | [SigUSD ($1)](by_currency/sigusd.md) |
-| [Implement UTXO set scan](https://github.com/ergoplatform/ergo/issues/2034) | [ergoplatform](by_org/ergoplatform.md) | 3183.29 ERG | [SigUSD ($1)](by_currency/sigusd.md) |
+| [Finish SigmaMap implementation](https://github.com/ergoplatform/sigmastate-interpreter/issues/1067) | [ergoplatform](by_org/ergoplatform.md) | 3183.18 ERG | [SigUSD ($1)](by_currency/sigusd.md) |
+| [Implement UTXO set scan](https://github.com/ergoplatform/ergo/issues/2034) | [ergoplatform](by_org/ergoplatform.md) | 3183.18 ERG | [SigUSD ($1)](by_currency/sigusd.md) |
 
 ## Weekly Summary
 
 | Date | Open Bounties | Total Value |
 |------|--------------|-------------|
-| [Apr 24, 2026](/data/all.md#all-bounties) | 109 | 94,170.10 ERG |
+| [Apr 24, 2026](/data/all.md#all-bounties) | 109 | 94,166.74 ERG |
 
 
 
