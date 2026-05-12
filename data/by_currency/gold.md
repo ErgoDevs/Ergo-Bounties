@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-05-12 03:40:45 -->
+<!-- Generated on: 2026-05-12 14:35:17 -->
 
 # Gold (per gram) Bounties
 
-*Report generated: 2026-05-12 03:40:45 UTC*
+*Report generated: 2026-05-12 14:35:17 UTC*
 
-![Total Bounties: 6](https://img.shields.io/badge/Total%20Bounties-6-blue) ![Total Value: 146.12 ERG](https://img.shields.io/badge/Total%20Value-146.12%20ERG-green)
+![Total Bounties: 6](https://img.shields.io/badge/Total%20Bounties-6-blue) ![Total Value: 143.54 ERG](https://img.shields.io/badge/Total%20Value-143.54%20ERG-green)
 
 ## Navigation
 
