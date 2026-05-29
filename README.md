@@ -69,4 +69,12 @@
 - Maintainers: use [reviewer guide](/docs/reviewer-guide.md), [payment status](/submissions/payment_status.md), [payment queue](/submissions/payment_queue.md), and [triage dashboard](/submissions/triage.md)
 - Automation details: [how it works](/docs/how-it-works.md)
 
+## Source Files vs Generated Files
+
+Edit source inputs, not generated bounty pages.
+
+- Edit tracked sources: `src/config/tracked_repos.json`, `src/config/tracked_orgs.json`, `src/config/extra_bounties.json`, `submissions/*.json`, `src/**`, and `docs/**`.
+- Do not manually edit generated outputs: `data/*.md`, `data/by_language/*.md`, `data/by_currency/*.md`, `data/by_org/*.md`, `submissions/payment_status.md`, `submissions/payment_queue.md`, `submissions/paid.md`, or generated README badges.
+- Regenerate and validate locally with `./scripts/run_live_update.sh` or `./test.sh` after source changes.
+
 <!-- Latest Update: 2026-05-29 -->

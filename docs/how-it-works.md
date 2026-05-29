@@ -38,6 +38,29 @@ To add a new repository to the tracking system:
 
 Once merged, the automation will include the new repository's bounties in the next update.
 
+## Source of Truth
+
+The repository separates editable source inputs from generated outputs.
+
+Editable source inputs:
+
+- `src/config/tracked_repos.json`: individual repositories to scan
+- `src/config/tracked_orgs.json`: organizations whose non-archived repositories are scanned
+- `src/config/extra_bounties.json`: manually maintained bounties and ongoing programs
+- `submissions/*.json`: contributor reservations, review states, and payment records
+- `src/**`: generator, API, extraction, validation, and formatting code
+- `docs/**`: maintainer and contributor documentation
+
+Generated outputs:
+
+- `data/all.md`, `data/summary.md`, `data/featured_bounties.md`, `data/high-value-bounties.md`
+- `data/new-bounties.md`, `data/recently-active.md`, `data/stale-bounties.md`, `data/starter-bounties.md`
+- `data/by_language/*.md`, `data/by_currency/*.md`, `data/by_org/*.md`
+- `submissions/payment_status.md`, `submissions/payment_queue.md`, `submissions/paid.md`, `submissions/triage.md`
+- README badges and latest-update marker
+
+Do not patch generated totals or category pages directly. Update the source config or generator code, run the generator, and commit the regenerated output.
+
 ## Adding Manual Bounties and Grants
 
 For bounties that aren't in GitHub repositories or don't follow standard formats:
@@ -195,7 +218,9 @@ Two main configuration files control the system behavior:
 Contains project-wide constants like:
 ```json
 {
-  "language_colors": { "Scala": "DC322F", "Rust": "DEA584" }
+  "language_colors": {
+    "Scala": "DC322F",
+    "Rust": "DEA584"
   }
 }
 ```

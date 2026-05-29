@@ -2,6 +2,7 @@
 """Validate generated bounty output files."""
 
 import logging
+import json
 import re
 import sys
 from pathlib import Path
@@ -25,6 +26,20 @@ except ImportError:
 SCRIPT_DIR = Path(__file__).parent.resolve()
 PROJECT_ROOT = SCRIPT_DIR.parent.parent.resolve()
 BOUNTIES_DIR = PROJECT_ROOT / "data"
+README_PATH = PROJECT_ROOT / "README.md"
+EXTRA_BOUNTIES_PATH = PROJECT_ROOT / "src" / "config" / "extra_bounties.json"
+MANUAL_BOUNTY_REQUIRED_FIELDS = {
+    "owner",
+    "repo",
+    "title",
+    "url",
+    "amount",
+    "currency",
+    "primary_lang",
+    "issue_number",
+    "creator",
+    "status",
+}
 
 logging.basicConfig(
     level=logging.INFO,
@@ -129,6 +144,83 @@ def validate_output_files(bounties_dir: Path) -> bool:
             overall_success = False
         else:
             print_status("Checking duplicate bounty URLs", True, "No duplicates.")
+
+    summary_file = bounties_dir / "summary.md"
+    high_value_file = bounties_dir / "high-value-bounties.md"
+    if summary_file.exists() and README_PATH.exists():
+        summary_text = summary_file.read_text(encoding="utf-8")
+        readme_text = README_PATH.read_text(encoding="utf-8")
+        total_match = re.search(r"\| \*\*Total\*\* \| \*\*(\d+)\*\* \| \*\*([\d,]+\.\d{2}) ERG\*\* \|", summary_text)
+        open_badge = re.search(r"Open%20Bounties-(\d+)(?:\+|%2B)?-4CAF50", readme_text)
+        value_badge = re.search(r"Total%20Value-([\d,]+\.\d{2})%20ERG-2196F3", readme_text)
+        if not total_match or not open_badge or not value_badge:
+            print_status("Checking README summary badges", False, "Could not parse summary or README badges.")
+            overall_success = False
+        else:
+            summary_count, summary_value = total_match.groups()
+            if summary_count != open_badge.group(1) or summary_value != value_badge.group(1):
+                print_status(
+                    "Checking README summary badges",
+                    False,
+                    f"README has {open_badge.group(1)} / {value_badge.group(1)}, summary has {summary_count} / {summary_value}.",
+                )
+                overall_success = False
+            else:
+                print_status("Checking README summary badges", True, "README matches summary totals.")
+
+    if high_value_file.exists() and README_PATH.exists():
+        high_value_text = high_value_file.read_text(encoding="utf-8")
+        readme_text = README_PATH.read_text(encoding="utf-8")
+        high_value_count = re.search(r"Total high-value bounties: \*\*(\d+)\*\*", high_value_text)
+        high_value_badge = re.search(r"High%20Value-(\d+)(?:\+|%2B)?%20Over%201000%20ERG-FFC107", readme_text)
+        if not high_value_count or not high_value_badge:
+            print_status("Checking README high-value badge", False, "Could not parse high-value count or README badge.")
+            overall_success = False
+        elif high_value_count.group(1) != high_value_badge.group(1):
+            print_status(
+                "Checking README high-value badge",
+                False,
+                f"README has {high_value_badge.group(1)}, high-value page has {high_value_count.group(1)}.",
+            )
+            overall_success = False
+        else:
+            print_status("Checking README high-value badge", True, "README matches high-value page.")
+
+    if EXTRA_BOUNTIES_PATH.exists():
+        try:
+            extra_bounties = json.loads(EXTRA_BOUNTIES_PATH.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            print_status("Checking manual bounty config", False, f"Invalid JSON: {exc}")
+            return False
+
+        config_ok = isinstance(extra_bounties, list)
+        bad_entries = []
+        if config_ok:
+            for index, bounty in enumerate(extra_bounties):
+                if not isinstance(bounty, dict):
+                    bad_entries.append(f"entry {index} is not an object")
+                    continue
+                missing = sorted(field for field in MANUAL_BOUNTY_REQUIRED_FIELDS if not str(bounty.get(field, "")).strip())
+                if missing:
+                    bad_entries.append(f"entry {index} missing {', '.join(missing)}")
+                url = str(bounty.get("url", "")).strip()
+                if url and not (url.startswith("https://") or url.startswith("http://") or url.startswith("#")):
+                    bad_entries.append(f"entry {index} has unsupported url {url}")
+                amount = str(bounty.get("amount", "")).strip()
+                if amount not in {"Ongoing", "Not specified"}:
+                    try:
+                        if float(amount) <= 0:
+                            bad_entries.append(f"entry {index} amount must be positive")
+                    except ValueError:
+                        bad_entries.append(f"entry {index} amount is not numeric/Ongoing/Not specified")
+        if not config_ok:
+            print_status("Checking manual bounty config", False, "Expected a list.")
+            overall_success = False
+        elif bad_entries:
+            print_status("Checking manual bounty config", False, "; ".join(bad_entries[:3]))
+            overall_success = False
+        else:
+            print_status("Checking manual bounty config", True, "Manual bounties are structurally valid.")
 
     if overall_success:
         logger.info("All required output files validated successfully.")
