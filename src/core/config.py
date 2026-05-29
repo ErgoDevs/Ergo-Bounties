@@ -19,6 +19,8 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Union
 
+from dotenv import load_dotenv
+
 # Configure logging
 logger = logging.getLogger(__name__)
 
@@ -41,56 +43,21 @@ class BountyConfig:
         
     def _get_github_token(self) -> Optional[str]:
         """
-        Get GitHub token from environment variable or .env file.
+        Get GitHub token from environment variable or local .env files.
         
         Returns:
             GitHub token or None if not found
         """
-        # First try environment variable
-        token = os.environ.get("GITHUB_TOKEN")
+        for env_path in (Path("src") / ".env", Path(".env")):
+            if env_path.exists():
+                load_dotenv(env_path, override=False)
+
+        token = os.environ.get("GITHUB_TOKEN") or os.environ.get("github_token")
         if token:
-            logger.info("GitHub token found in environment variables")
+            logger.info("GitHub token loaded from environment")
             return token
-            
-        # Try .env file in src directory
-        env_file = Path(os.path.join('src', '.env'))
-        if env_file.exists():
-            try:
-                with open(env_file, 'r') as f:
-                    for line in f:
-                        line = line.strip()
-                        if line and not line.startswith('#'):
-                            if line.startswith('github_token='):
-                                token = line.split('=', 1)[1].strip('"\'')
-                                logger.info("GitHub token loaded from .env file")
-                                return token
-                            elif line.startswith('GITHUB_TOKEN='):
-                                token = line.split('=', 1)[1].strip('"\'')
-                                logger.info("GitHub token loaded from .env file")
-                                return token
-            except Exception as e:
-                logger.error(f"Error reading .env file: {e}")
-        
-        # Also try .env in the root directory
-        env_file = Path('.env')
-        if env_file.exists():
-            try:
-                with open(env_file, 'r') as f:
-                    for line in f:
-                        line = line.strip()
-                        if line and not line.startswith('#'):
-                            if line.startswith('github_token='):
-                                token = line.split('=', 1)[1].strip('"\'')
-                                logger.info("GitHub token loaded from .env file")
-                                return token
-                            elif line.startswith('GITHUB_TOKEN='):
-                                token = line.split('=', 1)[1].strip('"\'')
-                                logger.info("GitHub token loaded from .env file")
-                                return token
-            except Exception as e:
-                logger.error(f"Error reading .env file: {e}")
-        
-        logger.error("GITHUB_TOKEN environment variable or .env file with 'github_token=' is required")
+
+        logger.error("GITHUB_TOKEN environment variable or .env file entry is required")
         return None
     
     def _load_constants(self) -> Dict[str, Any]:
