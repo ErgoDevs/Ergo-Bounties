@@ -1,13 +1,21 @@
 import os # Import os for path.getmtime
 import json
 import datetime # Import datetime
+import sys
 from collections import defaultdict
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src.utils.common import escape_markdown_cell, escape_markdown_link_text
 
 SUBMISSIONS_DIR = Path("submissions")
 # Update output paths to be inside the submissions directory
 ACTIVE_STATUS_FILE = SUBMISSIONS_DIR / "payment_status.md"
 PAID_STATUS_FILE = SUBMISSIONS_DIR / "paid.md"
+PAYMENT_QUEUE_FILE = SUBMISSIONS_DIR / "payment_queue.md"
 # Define the new valid statuses and their order for the active report
 ACTIVE_STATUS_ORDER = ["awaiting-review", "reviewed", "in-progress"]
 PAID_STATUS = "paid"
@@ -89,7 +97,11 @@ def generate_markdown_table(submissions):
         # Get the source filename added during loading
         source_filename = sub.get("_filename", "")
         # Adjust link: MD file is now in the same dir as JSON file
-        linked_work_title = f"[{work_title_text}]({source_filename})" if source_filename else work_title_text
+        linked_work_title = (
+            f"[{escape_markdown_link_text(work_title_text)}]({source_filename})"
+            if source_filename
+            else escape_markdown_cell(work_title_text)
+        )
         # Get the last modified date
         last_modified_date = sub.get("_last_modified_date", "N/A")
 
@@ -97,14 +109,14 @@ def generate_markdown_table(submissions):
         value_str = format_value(value, currency)
 
         row = [
-            contributor,
+            escape_markdown_cell(contributor),
             linked_work_title, # Use the title linked to the source JSON
-            value_str,
+            escape_markdown_cell(value_str),
             # Truncate address and apply code formatting
-            f"`{truncate_address(wallet)}`" if wallet != "N/A" else "N/A",
-            reviewer, # Ensure reviewer is in the correct position
+            f"`{escape_markdown_cell(truncate_address(wallet))}`" if wallet != "N/A" else "N/A",
+            escape_markdown_cell(reviewer), # Ensure reviewer is in the correct position
             work_link_md, # Use the separate work link MD
-            last_modified_date # Add last updated date
+            escape_markdown_cell(last_modified_date) # Add last updated date
         ]
         table += "| " + " | ".join(map(str, row)) + " |\n"
 
@@ -138,6 +150,44 @@ def write_markdown_file(output_path, title, description, grouped_submissions, st
         print(f"Successfully generated status file at {output_path}")
     except Exception as e:
         print(f"Error writing output file {output_path}: {e}")
+
+
+def generate_payment_queue(reviewed_submissions):
+    """Writes a focused payment queue for reviewed, unpaid submissions."""
+    markdown_content = "# Payment Queue\n\n"
+    markdown_content += "Reviewed submissions waiting for payment.\n\n"
+
+    if not reviewed_submissions:
+        markdown_content += "No submissions waiting for payment.\n"
+    else:
+        headers = ["Contributor", "Work Title", "Value", "Wallet Address", "Reviewer", "Work Link", "Submitted"]
+        markdown_content += "| " + " | ".join(headers) + " |\n"
+        markdown_content += "| " + " | ".join(["---"] * len(headers)) + " |\n"
+        for sub in sorted(reviewed_submissions, key=lambda x: x.get("submission_date", "0000-00-00")):
+            work_link = sub.get("work_link", "")
+            work_link_md = f"[Link]({work_link})" if work_link else "N/A"
+            filename = sub.get("_filename", "")
+            title = sub.get("work_title", "N/A")
+            title_md = (
+                f"[{escape_markdown_link_text(title)}]({filename})"
+                if filename
+                else escape_markdown_cell(title)
+            )
+            row = [
+                escape_markdown_cell(sub.get("contributor", "N/A")),
+                title_md,
+                escape_markdown_cell(format_value(sub.get("bounty_value", "N/A"), sub.get("payment_currency", ""))),
+                f"`{escape_markdown_cell(sub.get('wallet_address', 'N/A'))}`",
+                escape_markdown_cell(sub.get("reviewer", "N/A")),
+                work_link_md,
+                escape_markdown_cell(sub.get("submission_date", "N/A")),
+            ]
+            markdown_content += "| " + " | ".join(map(str, row)) + " |\n"
+
+    PAYMENT_QUEUE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(PAYMENT_QUEUE_FILE, "w", encoding="utf-8") as f:
+        f.write(markdown_content)
+    print(f"Successfully generated payment queue at {PAYMENT_QUEUE_FILE}")
 
 
 def main():
@@ -183,6 +233,8 @@ def main():
         grouped_submissions,
         [PAID_STATUS] # Only include the paid status
     )
+
+    generate_payment_queue(grouped_submissions.get("reviewed", []))
 
 if __name__ == "__main__":
     main()

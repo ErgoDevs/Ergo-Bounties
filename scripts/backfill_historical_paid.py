@@ -18,7 +18,7 @@ from collections import Counter # Import Counter for statistics
 
 # --- Configuration ---
 load_dotenv()
-TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("PAT_TOKEN")
+TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
 HEADERS = {
     "Authorization": f"token {TOKEN}",
     "Accept": "application/vnd.github.v3+json",
@@ -216,7 +216,7 @@ def main():
     """Main function to fetch historical issues and append to paid.md."""
     print("Starting historical paid bounty backfill...")
     if not TOKEN:
-        print("Error: GITHUB_TOKEN or PAT_TOKEN environment variable not set.")
+        print("Error: GITHUB_TOKEN or GH_TOKEN environment variable not set.")
         return
 
     # --- Load Repositories ---

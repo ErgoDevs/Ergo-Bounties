@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Submission guide
+    url: https://github.com/ErgoDevs/Ergo-Bounties/blob/main/docs/bounty-submission-guide.md
+    about: How to reserve a bounty or submit completed work.

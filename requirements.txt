@@ -1,9 +1,9 @@
 # Core Dependencies
-requests
-python-dotenv # For loading .env files
+requests>=2.32,<3
+python-dotenv>=1.0,<2 # For loading .env files
 
 # Test/Validation Dependencies
-colorama
-tabulate
-pytest
-pytest-mock
+colorama>=0.4,<1
+tabulate>=0.9,<1
+pytest>=8,<9
+pytest-mock>=3.14,<4

@@ -1,0 +1,40 @@
+name: Reserve bounty
+description: Reserve a bounty before starting work.
+title: "[Reservation] "
+labels: ["reservation"]
+body:
+  - type: input
+    id: contributor
+    attributes:
+      label: GitHub username
+      description: Must match your GitHub account.
+    validations:
+      required: true
+  - type: input
+    id: bounty
+    attributes:
+      label: Bounty ID
+      description: "Example: ergoplatform/ergo#1234"
+    validations:
+      required: true
+  - type: input
+    id: issue
+    attributes:
+      label: Original issue URL
+      description: GitHub issue or PR URL.
+    validations:
+      required: true
+  - type: input
+    id: expected
+    attributes:
+      label: Expected completion
+      description: YYYY-MM-DD
+    validations:
+      required: true
+  - type: textarea
+    id: plan
+    attributes:
+      label: Plan
+      description: Short implementation plan.
+    validations:
+      required: true

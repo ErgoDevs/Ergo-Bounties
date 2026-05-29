@@ -2,18 +2,16 @@ name: Update Bounties
 
 on:
   schedule:
-    - cron: '0 */12 * * *'  # Run every 12 hours
+    - cron: '0 0 * * *'  # Run daily
   push:
     branches: [ update ]
   workflow_dispatch:  # Allow manual trigger
 
-# This is crucial - explicitly allow the workflow to write to the repository
-permissions:
-  contents: write
-
 jobs:
   update-bounties:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,42 +24,28 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests colorama tabulate pathlib
+          pip install -r requirements.txt
       
       - name: Run bounty finder
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Using the module entry point instead of the direct script path
           python -m src.bounty_finder
+
+      - name: Validate generated output
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python -m src.tests.run_bounty_check
 
       - name: Commit and push if changes
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add data/
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update bounties: $(date +'%Y-%m-%d %H:%M')"
-          git push
-
-  validate-bounties:
-    runs-on: ubuntu-latest
-    needs: update-bounties
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-          
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests colorama tabulate pathlib
-      
-      - name: Run validation
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          python -m src.tests.run_bounty_check
+          git add data/ README.md docs/ongoing-programs.md
+          if git diff --cached --quiet; then
+            echo "No bounty data changes."
+          else
+            git commit -m "Update bounties: $(date +'%Y-%m-%d %H:%M')"
+            git push
+          fi

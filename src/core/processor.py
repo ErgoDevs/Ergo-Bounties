@@ -13,18 +13,54 @@ the generators that create the output markdown files.
 """
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Any, Tuple, Optional, Set
 
 from ..api.github_client import GitHubClient
 from ..api.currency_client import CurrencyClient
 from .extractors import is_bounty_issue, extract_bounty_info
 
+import json
 import os # Added for os.listdir and os.path.isdir
 import re # Added for regex in submission parsing
+from urllib.parse import urlparse
 
 # Configure logging
 logger = logging.getLogger(__name__)
+
+ACTIVE_SUBMISSION_STATUSES = {"in-progress", "awaiting-review", "reviewed"}
+PLACEHOLDERS = {"", "YOUR_GITHUB_USERNAME", "YOUR_WALLET_ADDRESS", "YOUR_CONTACT_INFO", "YYYY-MM-DD"}
+
+
+def _normalize_bounty_id(value: str) -> Optional[str]:
+    """Normalize owner/repo#number bounty IDs and GitHub issue/PR URLs."""
+    raw = str(value or "").strip()
+    if not raw:
+        return None
+
+    parsed = urlparse(raw)
+    if parsed.netloc.lower() == "github.com":
+        match = re.fullmatch(r"/([^/]+)/([^/]+)/(?:issues|pull)/(\d+)", parsed.path)
+        if match:
+            owner, repo, number = match.groups()
+            return f"{owner.lower()}/{repo.lower()}#{number}"
+
+    match = re.fullmatch(r"([^/\s]+)/([^#\s]+)#(\d+)", raw)
+    if match:
+        owner, repo, number = match.groups()
+        return f"{owner.lower()}/{repo.lower()}#{number}"
+    return None
+
+
+def _issue_bounty_id(owner: str, repo: str, issue_number: Any) -> str:
+    return f"{owner.lower()}/{repo.lower()}#{issue_number}"
+
+
+def _case_insensitive_key(mapping: Dict[str, Any], key: str) -> str:
+    """Return the existing key matching key case-insensitively, or key."""
+    lowered = key.lower()
+    return next((existing for existing in mapping if existing.lower() == lowered), key)
+
 
 class BountyProcessor:
     """
@@ -46,27 +82,43 @@ class BountyProcessor:
         self.bounty_data = []
         self.project_totals = {}
         self.reserved_count = 0
-        self.submitted_issue_numbers = self._get_submitted_issue_numbers()
+        self.reserved_bounty_ids = self._get_reserved_bounty_ids()
 
-    def _get_submitted_issue_numbers(self) -> Set[str]:
+    def _get_reserved_bounty_ids(self) -> Set[str]:
         """
-        Scans the submissions directory and returns a set of issue numbers
-        extracted from the JSON filenames.
+        Scans active submissions and returns normalized owner/repo#number IDs.
         """
         submission_path = "submissions"
-        issue_numbers = set()
+        bounty_ids = set()
         if os.path.isdir(submission_path):
-            logger.info(f"Scanning {submission_path} for submitted issue numbers...")
+            logger.info(f"Scanning {submission_path} for reserved bounty IDs...")
             for filename in os.listdir(submission_path):
                 if filename.endswith(".json"):
-                    # Extract number, assuming format like owner-repo-NUMBER.json
-                    match = re.search(r'-(\d+)\.json$', filename)
-                    if match:
-                        issue_numbers.add(match.group(1))
-            logger.info(f"Found {len(issue_numbers)} submitted issue numbers.")
+                    try:
+                        with open(os.path.join(submission_path, filename), "r", encoding="utf-8") as f:
+                            submission = json.load(f)
+                    except (OSError, json.JSONDecodeError):
+                        continue
+
+                    status = str(submission.get("status", "")).strip().lower()
+                    wallet = str(submission.get("wallet_address", "")).strip()
+                    contributor = str(submission.get("contributor", "")).strip()
+                    if (
+                        status not in ACTIVE_SUBMISSION_STATUSES
+                        or wallet in PLACEHOLDERS
+                        or contributor in PLACEHOLDERS
+                    ):
+                        continue
+
+                    bounty_id = _normalize_bounty_id(submission.get("bounty_id", ""))
+                    if not bounty_id:
+                        bounty_id = _normalize_bounty_id(submission.get("original_issue_link", ""))
+                    if bounty_id:
+                        bounty_ids.add(bounty_id)
+            logger.info(f"Found {len(bounty_ids)} reserved bounty IDs.")
         else:
             logger.warning(f"Submissions directory not found: {submission_path}")
-        return issue_numbers
+        return bounty_ids
 
     def process_repositories(self, repos_to_query: List[Dict[str, str]]) -> None:
         """
@@ -87,8 +139,9 @@ class BountyProcessor:
             secondary_lang = languages[1] if len(languages) > 1 else "None"
 
             # Initialize project counter if not exists
-            if owner not in self.project_totals:
-                self.project_totals[owner] = {"count": 0, "value": 0.0}
+            project_key = _case_insensitive_key(self.project_totals, owner)
+            if project_key not in self.project_totals:
+                self.project_totals[project_key] = {"count": 0, "value": 0.0}
 
             # Get issues
             issues = self.github_client.get_repository_issues(owner, repo_name)
@@ -96,7 +149,7 @@ class BountyProcessor:
             # Process each issue
             for issue in issues:
                 self._process_issue(issue, owner, repo_name, primary_lang, secondary_lang)
-        print(f"Reserved bounties: {self.reserved_count}")
+        logger.info(f"Reserved bounties: {self.reserved_count}")
 
     def process_organizations(self, orgs_to_query: List[Dict[str, str]], repos_to_query: List[Dict[str, str]]) -> List[Dict[str, str]]:
         """
@@ -110,7 +163,7 @@ class BountyProcessor:
             Updated list of repositories
         """
         updated_repos = repos_to_query.copy()
-        processed_repos = {f"{repo['owner']}/{repo['repo']}" for repo in repos_to_query}
+        processed_repos = {f"{repo['owner']}/{repo['repo']}".lower() for repo in repos_to_query}
 
         for org_entry in orgs_to_query:
             org = org_entry['org']
@@ -130,11 +183,12 @@ class BountyProcessor:
 
                 # Add to repos_to_query if not already there
                 repo_id = f"{org}/{repo['name']}"
-                if repo_id not in processed_repos:
+                repo_key = repo_id.lower()
+                if repo_key not in processed_repos:
                     logger.info(f"Adding repository from organization: {repo_id}")
                     repo_entry = {"owner": org, "repo": repo['name']}
                     updated_repos.append(repo_entry)
-                    processed_repos.add(repo_id)
+                    processed_repos.add(repo_key)
 
         return updated_repos
 
@@ -150,9 +204,9 @@ class BountyProcessor:
             secondary_lang: Secondary language of the repository
         """
         if issue['state'] == 'open':
-            # Check against pre-scanned submission issue numbers
-            issue_number_str = str(issue['number'])
-            if issue_number_str in self.submitted_issue_numbers:
+            # Check against pre-scanned active submission IDs.
+            bounty_id = _issue_bounty_id(owner, repo_name, issue["number"])
+            if bounty_id in self.reserved_bounty_ids:
                  logger.debug(f"Issue {issue['html_url']} marked as Reserved due to submission file.")
                  issue['state'] = 'Reserved' # Mark as Reserved if submission exists
                  self.reserved_count += 1 # Increment counter
@@ -169,7 +223,7 @@ class BountyProcessor:
 
                 # Store the bounty information
                 bounty_info = {
-                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
                     "owner": owner,
                     "repo": repo_name,
                     "title": title,
@@ -181,17 +235,22 @@ class BountyProcessor:
                     "labels": [label['name'] for label in labels],
                     "issue_number": issue['number'],
                     "creator": issue['user']['login'],  # GitHub username of the issue creator
-                    "status": issue['state']  # Add status
+                    "status": issue['state'],  # Add status
+                    "created_at": issue.get("created_at", ""),
+                    "updated_at": issue.get("updated_at", ""),
+                    "comments": issue.get("comments", 0),
+                    "assignees": [assignee.get("login", "") for assignee in issue.get("assignees", [])],
                 }
 
                 self.bounty_data.append(bounty_info)
 
                 # Update project totals
-                self.project_totals[owner]["count"] += 1
+                project_key = _case_insensitive_key(self.project_totals, owner)
+                self.project_totals[project_key]["count"] += 1
 
                 # Calculate ERG value for totals
                 erg_value = self.currency_client.calculate_erg_value(amount, currency)
-                self.project_totals[owner]["value"] += erg_value
+                self.project_totals[project_key]["value"] += erg_value
 
     def get_bounty_data(self) -> List[Dict[str, Any]]:
         """
@@ -224,16 +283,17 @@ class BountyProcessor:
 
             # Update project totals
             owner = bounty["owner"]
-            if owner not in self.project_totals:
-                self.project_totals[owner] = {"count": 0, "value": 0.0}
+            project_key = _case_insensitive_key(self.project_totals, owner)
+            if project_key not in self.project_totals:
+                self.project_totals[project_key] = {"count": 0, "value": 0.0}
 
-            self.project_totals[owner]["count"] += 1
+            self.project_totals[project_key]["count"] += 1
 
             # Calculate ERG value for totals
             amount = bounty.get("amount", "Not specified")
             currency = bounty.get("currency", "Not specified")
             erg_value = self.currency_client.calculate_erg_value(amount, currency)
-            self.project_totals[owner]["value"] += erg_value
+            self.project_totals[project_key]["value"] += erg_value
 
     def get_total_stats(self) -> Tuple[int, float]:
         """

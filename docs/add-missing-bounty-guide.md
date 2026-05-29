@@ -85,6 +85,14 @@ If you prefer not to edit the JSON file yourself:
 
 > 💡 **Note:** The bounty listings are automatically updated daily via GitHub Actions. When you add a new repository to `src/config/tracked_repos.json` or a new organization to `src/config/tracked_orgs.json`, the system will automatically include their bounties in the next update.
 
+After the next update, new matches may appear in:
+
+- [all bounties](/data/all.md)
+- [new bounties](/data/new-bounties.md)
+- [recently active](/data/recently-active.md)
+- [starter-sized bounties](/data/starter-bounties.md)
+- [high-value bounties](/data/high-value-bounties.md)
+
 ## How the Automated System Works
 
 Our automated bounty tracking system:
@@ -93,6 +101,8 @@ Our automated bounty tracking system:
 3. Identifies issues with bounty tags and extracts their details
 4. Updates the bounty listings in various formats
 5. Categorizes bounties by language and project
+6. Hides bounties already reserved by open submission PRs
+7. Validates generated output before committing updates
 
 For more details on how the system works, see the [How It Works](/docs/how-it-works.md) guide.
 

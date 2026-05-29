@@ -22,14 +22,14 @@ Reserving a bounty helps:
 
 1. Navigate to the bounty you want to work on in the [bounties list](/data/all.md)
 2. Click the "Claim" button next to the bounty
-3. This will open a new GitHub issue in the repository with a pre-filled template
-4. Fill in any additional information requested in the template
-5. Submit the issue to reserve the bounty
+3. This opens a pre-filled submission file/PR flow where available
+4. Set `status` to `in-progress`, add `expected_completion`, and leave `work_link` empty until work is complete
+5. Open the PR. The triage bot will validate it and mark the bounty reserved while the PR stays open.
 
 ### Manual Method (Using JSON)
 
 1. **First, check if the bounty is already reserved**:
-   - Review [open pull requests](https://github.com/ErgoDevs/Ergo-Bounties/pulls) to see if anyone is already working on your target bounty
+   - Review [open pull requests](https://github.com/ErgoDevs/Ergo-Bounties/pulls) and [submission triage](/submissions/triage.md) to see if anyone is already working on your target bounty
    - Check the original bounty issue/repository as well, as not everyone may use this central repository
    - PRs with "[WIP]" in the title indicate in-progress work
 
@@ -48,8 +48,8 @@ Reserving a bounty helps:
      ```
 
 3. **Submit as a PR**:
-   - Title format: `[WIP] Bounty repo#issue - Brief description`
-   - Example: `[WIP] Bounty sigmastate-interpreter#1053 - FSM Test Implementation`
+   - Title format: `[WIP] Bounty owner/repo#issue - Brief description`
+   - Example: `[WIP] Bounty ergoplatform/sigmastate-interpreter#1053 - FSM Test Implementation`
 
 4. **Work on your implementation**:
    - The open PR serves as your reservation
@@ -127,7 +127,7 @@ Copy the template from `submissions/example-user-ergoscript-fsmtest.json` and fi
 
 ##### Recommended Fields
 
-- **bounty_id**: The GitHub issue number in `{repo}#{issue_number}` format (if applicable)
+- **bounty_id**: The GitHub issue number in `owner/repo#issue_number` format. Legacy `repo#issue_number` values may appear in older files, but new submissions should use the full form.
 - **contact_method**: A way for reviewers to reach out if they have questions
 - **original_issue_link**: The full URL to the original issue or bounty
 - **description**: A brief summary of the work completed
@@ -156,7 +156,7 @@ git push origin main
 ## Review Process
 
 1. Submit your PR with status `awaiting-review`.
-2. A GitHub Action (`validate-submission-status.yml`) checks if the status is valid. If not, it will comment on the PR asking for correction.
+2. A GitHub Action (`triage-submission-prs.yml`) validates the submission, labels the PR, comments with required fixes, checks the linked upstream PR merge state, and requests/tags a reviewer where possible.
 3. Maintainers review your submission.
 4. They will verify:
    - The work has been completed as per requirements.
@@ -165,18 +165,19 @@ git push origin main
 5. If changes are needed, maintainers may update the status to `in-progress` or request changes.
 6. Once approved, maintainers will update the status to `reviewed`.
 7. The PR containing the submission JSON is merged.
-8. Payment will be processed based on the JSON details.
-9. The status is updated to `paid` (usually via separate process or manually).
+8. Reviewed submissions appear in [payment queue](/submissions/payment_queue.md).
+9. Payment will be processed based on the JSON details.
+10. The status is updated to `paid` with `payment_tx_id` and `payment_date`.
 
 ## Payment Process
 
-1. After the submission PR (with status `reviewed`) is merged, an authorized person will process the payment.
-2. They will update your submission file (usually via a direct commit or separate PR) with:
+1. After the submission PR (with status `reviewed`) is merged, it appears in `submissions/payment_queue.md`.
+2. An authorized person processes the payment.
+3. They update your submission file (usually via a direct commit or separate PR) with:
    - `status`: Changed to `paid`
    - `payment_tx_id`: The transaction ID
    - `payment_date`: The date of payment
-3. These updates will be committed to the repository.
-4. The `update-payment-status` workflow will then move the entry from the active report to the `paid.md` report.
+4. The `update-payment-status` workflow updates `payment_status.md`, `payment_queue.md`, and `paid.md`.
 
 ## Tips for Successful Submissions
 
@@ -191,8 +192,9 @@ git push origin main
 If you encounter issues with your submission:
 
 1. Check the PR comments for feedback from reviewers
-2. Make any requested changes to your submission
-3. If your PR is closed without merging, you may need to create a new PR with corrections
+2. Check labels such as `missing-wallet`, `upstream-unmerged`, `stale-reservation`, `duplicate-bounty`, or `invalid-submission`
+3. Make any requested changes to your submission
+4. If your PR is closed without merging, create a new PR with corrections
 
 ## Resources for Help
 

@@ -15,7 +15,7 @@ sys.path.insert(0, str(project_root))
 
 # --- Configuration ---
 load_dotenv()
-TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("PAT_TOKEN")
+TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
 HEADERS = {
     "Authorization": f"token {TOKEN}",
     "Accept": "application/vnd.github.v3+json",
@@ -336,7 +336,7 @@ def main():
     """Main function to load repos, fetch details, and generate the report."""
     print("Starting repository report generation...")
     if not TOKEN:
-        print("Error: GITHUB_TOKEN or PAT_TOKEN environment variable not set.")
+        print("Error: GITHUB_TOKEN or GH_TOKEN environment variable not set.")
         return
 
     # --- Load Entities and Repos to Scan ---

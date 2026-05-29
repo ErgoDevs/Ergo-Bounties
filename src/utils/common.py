@@ -16,7 +16,7 @@ import os
 import json
 import logging
 import urllib.parse
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, Union, Optional, List
 
@@ -162,7 +162,26 @@ def get_current_timestamp() -> str:
     Returns:
         Formatted timestamp (YYYY-MM-DD HH:MM:SS)
     """
-    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+
+def escape_markdown_cell(value: Any) -> str:
+    """Escape dynamic text for a GitHub markdown table cell."""
+    text = "" if value is None else str(value)
+    return text.replace("\r", " ").replace("\n", " ").replace("|", "\\|")
+
+
+def escape_markdown_link_text(value: Any) -> str:
+    """Escape dynamic text used inside markdown link brackets."""
+    text = "" if value is None else str(value)
+    return (
+        text.replace("\r", " ")
+        .replace("\n", " ")
+        .replace("\\", "\\\\")
+        .replace("|", "\\|")
+        .replace("[", "\\[")
+        .replace("]", "\\]")
+    )
 
 def format_navigation_badges(
     total_bounties: int,
@@ -191,6 +210,10 @@ def format_navigation_badges(
     badges.append(f"[![By Language](https://img.shields.io/badge/By%20Language-{languages_count}-green)]({relative_path}summary.md#languages)")
     badges.append(f"[![By Currency](https://img.shields.io/badge/By%20Currency-{currencies_count}-yellow)]({relative_path}summary.md#currencies)")
     badges.append(f"[![By Organization](https://img.shields.io/badge/By%20Organization-{orgs_count}-orange)]({relative_path}summary.md#projects)")
+    badges.append(f"[![New](https://img.shields.io/badge/New-Recent-blueviolet)]({relative_path}new-bounties.md)")
+    badges.append(f"[![Active](https://img.shields.io/badge/Recently%20Active-Updated-success)]({relative_path}recently-active.md)")
+    badges.append(f"[![Starter](https://img.shields.io/badge/Starter-Friendly-brightgreen)]({relative_path}starter-bounties.md)")
+    badges.append(f"[![Stale](https://img.shields.io/badge/Stale-180d%2B-lightgrey)]({relative_path}stale-bounties.md)")
 
 
     return " ".join(badges)
@@ -256,7 +279,7 @@ def get_currency_display_name(currency: str) -> str:
     return CURRENCY_DISPLAY_NAMES.get(currency, currency)
 
 
-def format_currency_link(currency: str, directory: str = "by_currency") -> str:
+def format_currency_link(currency: str, directory: str = "by_currency", prefix: str = "") -> str:
     """
     Format a currency name as a link to its dedicated page.
 
@@ -269,9 +292,9 @@ def format_currency_link(currency: str, directory: str = "by_currency") -> str:
     """
     filename = get_currency_filename(currency) # Use the consolidated function
     display_name = get_currency_display_name(currency) # Use the new display name function
-    return f"[{display_name}]({directory}/{filename}.md)"
+    return f"[{display_name}]({prefix}{directory}/{filename}.md)"
 
-def format_organization_link(org: str, directory: str = "by_org") -> str:
+def format_organization_link(org: str, directory: str = "by_org", prefix: str = "") -> str:
     """
     Format an organization name as a link to its dedicated page.
 
@@ -282,9 +305,9 @@ def format_organization_link(org: str, directory: str = "by_org") -> str:
     Returns:
         Markdown link to the organization page
     """
-    return f"[{org}]({directory}/{org.lower()}.md)"
+    return f"[{org}]({prefix}{directory}/{org.lower()}.md)"
 
-def format_language_link(language: str, directory: str = "by_language") -> str:
+def format_language_link(language: str, directory: str = "by_language", prefix: str = "") -> str:
     """
     Format a language name as a link to its dedicated page.
 
@@ -295,7 +318,7 @@ def format_language_link(language: str, directory: str = "by_language") -> str:
     Returns:
         Markdown link to the language page
     """
-    return f"[{language}]({directory}/{language.lower()}.md)"
+    return f"[{language}]({prefix}{directory}/{language.lower()}.md)"
 
 def wrap_with_guardrails(content: str, header: str = "") -> str:
     """

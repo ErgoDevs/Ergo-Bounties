@@ -16,7 +16,7 @@ formats markdown content, and writes output files.
 """
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Any
 from pathlib import Path
 import os
@@ -29,6 +29,7 @@ from ..utils.common import (
     create_claim_url,
     get_currency_filename,
     get_currency_display_name,
+    escape_markdown_link_text,
     # CONSTANTS # Load constants locally in this module instead
 )
 from ..utils.markdown import (
@@ -105,9 +106,10 @@ def group_by_organization(bounty_data: List[Dict[str, Any]]) -> Dict[str, List[D
     orgs = {}
     for bounty in bounty_data:
         owner = bounty["owner"]
-        if owner not in orgs:
-            orgs[owner] = []
-        orgs[owner].append(bounty)
+        org_key = next((key for key in orgs if key.lower() == owner.lower()), owner)
+        if org_key not in orgs:
+            orgs[org_key] = []
+        orgs[org_key].append(bounty)
     return orgs
 
 
@@ -288,6 +290,16 @@ def find_beginner_friendly_bounties(bounty_data: List[Dict[str, Any]]) -> List[D
 
 # --- Generator Functions ---
 
+def _clear_markdown_dir(directory: Path) -> None:
+    """Remove old generated markdown pages before writing current category pages."""
+    ensure_directory(directory)
+    for path in directory.glob("*.md"):
+        try:
+            path.unlink()
+        except OSError as e:
+            logger.error(f"Error removing stale generated file {path}: {e}")
+            raise
+
 def _generate_markdown_page(
     filename: str,
     title: str,
@@ -299,7 +311,8 @@ def _generate_markdown_page(
     extra_content: str = "", # For things like currency rate display
     # Add flags to control table columns
     show_org: bool = True,
-    show_language: bool = True
+    show_language: bool = True,
+    sort_by: str = "value"
 ) -> None:
     """
     Helper function to generate a standard markdown bounty page.
@@ -339,9 +352,9 @@ def _generate_markdown_page(
     content = ""
     content += f"*Report generated: {get_current_timestamp()} UTC*\n\n"
     # Add stats badges for the specific page
-    content += f"![Total Bounties: {page_bounty_count}](https://img.shields.io/badge/Total%20Bounties-{page_bounty_count}-blue) "
+    content += f"![Total Bounties: {page_bounty_count}](https://img.shields.io/badge/Total%20Bounties-{page_bounty_count}-blue)"
     if page_value > 0: # Only show value if it's positive
-        content += f"![Total Value: {page_value:.2f} ERG](https://img.shields.io/badge/Total%20Value-{page_value:.2f}%20ERG-green)"
+        content += f" ![Total Value: {page_value:.2f} ERG](https://img.shields.io/badge/Total%20Value-{page_value:.2f}%20ERG-green)"
     content += "\n\n"
 
     # Add navigation badges (using global counts)
@@ -364,7 +377,9 @@ def _generate_markdown_page(
         page_bounties,
         conversion_rates,
         show_org=show_org,
-        show_language=show_language
+        show_language=show_language,
+        sort_by=sort_by,
+        link_prefix=nav_relative_path
     )
 
     # Add footer buttons
@@ -399,7 +414,7 @@ def generate_language_files(
     """
     languages = group_by_language(bounty_data)
     language_dir = Path(bounties_dir) / 'by_language'
-    ensure_directory(language_dir)
+    _clear_markdown_dir(language_dir)
 
     logger.info(f"Generating language-specific files for {len(languages)} languages")
 
@@ -437,7 +452,7 @@ def generate_organization_files(
     """
     orgs = group_by_organization(bounty_data)
     org_dir = Path(bounties_dir) / 'by_org'
-    ensure_directory(org_dir)
+    _clear_markdown_dir(org_dir)
 
     logger.info(f"Generating organization-specific files for {len(orgs)} organizations")
 
@@ -475,7 +490,7 @@ def generate_currency_files(
     """
     currencies_dict = group_by_currency(bounty_data)
     currency_dir = Path(bounties_dir) / 'by_currency'
-    ensure_directory(currency_dir)
+    _clear_markdown_dir(currency_dir)
 
     logger.info(f"Generating currency-specific files for {len(currencies_dict)} currencies")
 
@@ -523,7 +538,7 @@ def generate_currency_files(
 
         content += f"## {display_name} Bounties\n\n"
         # Currency pages show all columns (defaults are True)
-        content += generate_standard_bounty_table(currency_bounties, conversion_rates)
+        content += generate_standard_bounty_table(currency_bounties, conversion_rates, link_prefix="../")
         content += add_footer_buttons("../")
 
         final_content = wrap_with_guardrails(content, page_title)
@@ -558,7 +573,7 @@ def generate_currency_files(
         )
         content += "## Bounties with Unspecified Value\n\n"
         # Not specified page shows all columns (defaults are True)
-        content += generate_standard_bounty_table(not_specified_bounties, conversion_rates)
+        content += generate_standard_bounty_table(not_specified_bounties, conversion_rates, link_prefix="../")
         content += "\n[View summary of bounties with unspecified value in summary file →](../summary.md#bounties-with-unspecified-value)\n\n"
         content += add_footer_buttons("../")
 
@@ -818,6 +833,50 @@ def generate_main_file(
         logger.error(f"Error writing file {md_file}: {e}")
 
 
+def generate_bounty_discovery_files(
+    bounty_data: List[Dict[str, Any]],
+    conversion_rates: Dict[str, float],
+    total_bounties: int,
+    bounties_dir: str
+) -> None:
+    """Generate alternate bounty views for discovery and maintenance."""
+    now = datetime.now(timezone.utc)
+
+    def parse_dt(value: str):
+        if not value:
+            return None
+        try:
+            return datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            return None
+
+    def age_days(bounty: Dict[str, Any]) -> int:
+        created = parse_dt(bounty.get("created_at", ""))
+        return (now - created).days if created else 0
+
+    beginner = find_beginner_friendly_bounties(bounty_data)
+    stale = [b for b in bounty_data if age_days(b) >= 180 and b.get("status", "").lower() == "open"]
+
+    views = [
+        ("new-bounties.md", "# New Bounties", bounty_data, "new"),
+        ("recently-active.md", "# Recently Active Bounties", bounty_data, "updated"),
+        ("stale-bounties.md", "# Stale Bounties", stale, "old"),
+        ("starter-bounties.md", "# Starter Bounties", beginner, "updated"),
+    ]
+
+    for filename, title, bounties, sort_by in views:
+        _generate_markdown_page(
+            filename=str(Path(bounties_dir) / filename),
+            title=title,
+            page_bounties=bounties,
+            all_bounty_data=bounty_data,
+            conversion_rates=conversion_rates,
+            total_bounties=total_bounties,
+            nav_relative_path="",
+            sort_by=sort_by
+        )
+
+
 def generate_summary_file(
     bounty_data: List[Dict[str, Any]], # Added bounty_data
     project_totals: Dict[str, Dict[str, Any]],
@@ -958,7 +1017,7 @@ def update_ongoing_programs_table(
 
     if ongoing_programs:
         # Generate the ongoing programs table content
-        ongoing_table_content = generate_ongoing_programs_table(ongoing_programs)
+        ongoing_table_content = generate_ongoing_programs_table(ongoing_programs, link_prefix="/data/")
 
         # Update the table between guardrails
         try:
@@ -1023,7 +1082,11 @@ def update_ongoing_programs_table(
         # Generate the extra bounties table with an explanatory header
         intro_text = "These grants and additional bounties are pulled from src/config/extra_bounties.json:\n\n"
         # Ongoing programs page shows all columns (defaults are True)
-        bounty_table_content = intro_text + generate_standard_bounty_table(extra_bounties, conversion_rates)
+        bounty_table_content = intro_text + generate_standard_bounty_table(
+            extra_bounties,
+            conversion_rates,
+            link_prefix="/data/"
+        )
 
         # Update the table between guardrails
         try:
@@ -1106,7 +1169,7 @@ def generate_featured_bounties_file(
     )
 
     # Get current date for the week row
-    current_date = datetime.now().strftime("%b %d, %Y")
+    current_date = datetime.now(timezone.utc).strftime("%b %d, %Y")
 
     # Write the featured bounties table
     content += "## Top Bounties by Value\n\n"
@@ -1122,7 +1185,7 @@ def generate_featured_bounties_file(
         # Calculate ERG equivalent
         erg_equiv = bounty["value"]
 
-        content += f"| [{bounty['title']}]({bounty['url']}) | {org_link} | {erg_equiv:.2f} ERG | {currency_link} |\n"
+        content += f"| [{escape_markdown_link_text(bounty['title'])}]({bounty['url']}) | {org_link} | {erg_equiv:.2f} ERG | {currency_link} |\n"
 
     content += "\n## Weekly Summary\n\n"
     content += "| Date | Open Bounties | Total Value |\n"

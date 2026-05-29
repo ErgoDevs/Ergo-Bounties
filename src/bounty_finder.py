@@ -37,6 +37,7 @@ from src.generators.main import (
     generate_main_file,
     generate_summary_file,
     generate_featured_bounties_file,
+    generate_bounty_discovery_files,
     update_readme_badges,
     update_ongoing_programs_table,
     generate_high_value_bounties_file,
@@ -178,6 +179,13 @@ def main():
         # orgs, # Removed
         bounties_dir,
         high_value_threshold=1000
+    )
+
+    generate_bounty_discovery_files(
+        bounty_data,
+        conversion_rates,
+        total_bounties,
+        bounties_dir
     )
 
     # Update the README.md badges with the latest bounty counts and values

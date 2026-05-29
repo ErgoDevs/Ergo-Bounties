@@ -1,92 +1,73 @@
 #!/usr/bin/env python3
-"""
-GitHub Actions Compatibility Test
+"""Lightweight workflow sanity checks without network access."""
 
-This script checks if the necessary components required by GitHub Actions workflow
-are properly configured and available for use.
-"""
-
-import os
-import sys
-import inspect
-import importlib
 from pathlib import Path
 
-# Add the parent directory to sys.path so we can import modules correctly
-sys.path.append(str(Path(__file__).parent.parent.parent))
 
-def test_create_claim_url_import():
-    """Test if create_claim_url is properly imported in the generators/main.py file."""
-    try:
-        from src.generators.main import generate_high_value_bounties_file
-        # Check if 'create_claim_url' is imported in the file
-        from src.utils.common import create_claim_url
-        
-        # Get source code
-        source_code = inspect.getsource(generate_high_value_bounties_file)
-        
-        # Verify create_claim_url is used properly in the function
-        if "create_claim_url(" in source_code:
-            print("✅ create_claim_url is correctly imported and used in generators/main.py")
-            return True
-        else:
-            print("❌ create_claim_url is imported but not used in generators/main.py")
-            return False
-    except ImportError:
-        print("❌ Failed to import create_claim_url in generators/main.py")
+ROOT = Path(__file__).resolve().parents[2]
+WORKFLOWS = ROOT / ".github" / "workflows"
+
+
+def test_required_workflows_exist() -> bool:
+    required = {
+        "update-bounties.yml",
+        "update-on-merge.yml",
+        "update-payment-status.yml",
+        "triage-submission-prs.yml",
+        "ops-status.yml",
+    }
+    existing = {path.name for path in WORKFLOWS.glob("*.yml")}
+    missing = sorted(required - existing)
+    if missing:
+        print(f"Missing workflows: {', '.join(missing)}")
         return False
+    return True
 
-def test_bounty_finder_execution():
-    """Test if bounty_finder.py can be imported and executed without errors."""
-    try:
-        import src.bounty_finder
-        # Check if the main function exists
-        if hasattr(src.bounty_finder, 'main'):
-            print("✅ bounty_finder.py has a main function and can be imported")
-            return True
-        else:
-            print("❌ bounty_finder.py does not have a main function")
-            return False
-    except ImportError:
-        print("❌ Failed to import bounty_finder.py")
+
+def test_removed_workflows_stay_removed() -> bool:
+    removed = {"tag-author.yml", "validate-submission-status.yml"}
+    existing = {path.name for path in WORKFLOWS.glob("*.yml")}
+    unexpected = sorted(removed & existing)
+    if unexpected:
+        print(f"Removed workflows still present: {', '.join(unexpected)}")
         return False
+    return True
 
-def test_run_bounty_check_execution():
-    """Test if run_bounty_check.py can be imported and executed without errors."""
-    try:
-        import src.tests.run_bounty_check
-        # Check if the main function exists
-        if hasattr(src.tests.run_bounty_check, 'main'):
-            print("✅ run_bounty_check.py has a main function and can be imported")
-            return True
-        else:
-            print("❌ run_bounty_check.py does not have a main function")
-            return False
-    except ImportError:
-        print("❌ Failed to import run_bounty_check.py")
+
+def test_no_known_bad_workflow_refs() -> bool:
+    text = "\n".join(path.read_text(encoding="utf-8") for path in WORKFLOWS.glob("*.yml"))
+    bad = ["tj-actions/changed-files", "PAT_TOKEN", "continue-on-error: true"]
+    found = [item for item in bad if item in text]
+    if found:
+        print(f"Unsafe workflow references found: {', '.join(found)}")
         return False
+    return True
 
-def main():
-    """Run all GitHub Actions compatibility tests."""
-    print("\n==== GITHUB ACTIONS COMPATIBILITY TEST ====\n")
 
-    tests = [
-        # test_create_claim_url_import, # Removed: Logic moved, test no longer accurate
-        test_bounty_finder_execution,
-        test_run_bounty_check_execution
+def test_workflow_script_paths_exist() -> bool:
+    paths = [
+        ROOT / "src" / "bounty_finder.py",
+        ROOT / "src" / "tests" / "run_bounty_check.py",
+        ROOT / "src" / "generators" / "payment_status_generator.py",
+        ROOT / "scripts" / "triage_submission_prs.py",
+        ROOT / "scripts" / "update_ops_issue.py",
     ]
-    
-    results = []
-    for test in tests:
-        results.append(test())
-    
-    print("\n==== TEST SUMMARY ====")
-    if all(results):
-        print("✅ All tests passed! GitHub Actions should work correctly.")
-        return 0
-    else:
-        print("❌ Some tests failed. GitHub Actions may not work correctly.")
-        return 1
+    missing = [str(path.relative_to(ROOT)) for path in paths if not path.exists()]
+    if missing:
+        print(f"Workflow script paths missing: {', '.join(missing)}")
+        return False
+    return True
+
+
+def main() -> int:
+    checks = [
+        test_required_workflows_exist,
+        test_removed_workflows_stay_removed,
+        test_no_known_bad_workflow_refs,
+        test_workflow_script_paths_exist,
+    ]
+    return 0 if all(check() for check in checks) else 1
+
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

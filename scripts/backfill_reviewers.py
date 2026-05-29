@@ -11,7 +11,7 @@ load_dotenv()
 
 SUBMISSIONS_DIR = Path("submissions")
 IGNORE_FILES = {"example-user-ergoscript-fsmtest.json"}
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") # Or use PAT_TOKEN if needed
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
 HEADERS = {
     "Authorization": f"token {GITHUB_TOKEN}",
     "Accept": "application/vnd.github.v3+json",
@@ -106,7 +106,7 @@ def main():
     """Main function to iterate through submissions and backfill reviewers."""
     print("Starting reviewer backfill process...")
     if not GITHUB_TOKEN:
-        print("Error: GITHUB_TOKEN environment variable not set. Cannot query GitHub API.")
+        print("Error: GITHUB_TOKEN or GH_TOKEN environment variable not set. Cannot query GitHub API.")
         return
 
     updated_count = 0

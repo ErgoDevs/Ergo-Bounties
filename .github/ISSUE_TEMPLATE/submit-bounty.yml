@@ -1,0 +1,58 @@
+name: Submit completed bounty
+description: Submit completed bounty work for review/payment.
+title: "[Submission] "
+labels: ["submission"]
+body:
+  - type: input
+    id: contributor
+    attributes:
+      label: GitHub username
+    validations:
+      required: true
+  - type: input
+    id: wallet
+    attributes:
+      label: Wallet address
+    validations:
+      required: true
+  - type: input
+    id: work
+    attributes:
+      label: Work PR URL
+      description: Must be a GitHub pull request URL.
+    validations:
+      required: true
+  - type: input
+    id: bounty
+    attributes:
+      label: Bounty ID
+      description: "Example: ergoplatform/ergo#1234"
+    validations:
+      required: true
+  - type: input
+    id: issue
+    attributes:
+      label: Original issue URL
+    validations:
+      required: true
+  - type: input
+    id: value
+    attributes:
+      label: Bounty value
+      description: Numeric amount.
+    validations:
+      required: true
+  - type: input
+    id: currency
+    attributes:
+      label: Payment currency
+      description: "Example: ERG, SigUSD, RSN, BENE."
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: What was completed.
+    validations:
+      required: true

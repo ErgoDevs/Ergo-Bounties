@@ -28,6 +28,7 @@ from src.generators.main import (
     find_high_value_bounties,
     find_beginner_friendly_bounties
 )
+from src.utils.markdown import generate_standard_bounty_table, update_readme_badges
 
 # --- Mock Data ---
 
@@ -114,6 +115,16 @@ def test_group_by_organization(mock_bounty_data):
     assert len(result["org1"]) == 2
     assert len(result["org2"]) == 1
 
+
+def test_group_by_organization_merges_case_variants():
+    result = group_by_organization([
+        {"owner": "StabilityNexus"},
+        {"owner": "stabilitynexus"},
+    ])
+
+    assert list(result) == ["StabilityNexus"]
+    assert len(result["StabilityNexus"]) == 2
+
 def test_group_by_currency(mock_bounty_data):
     """Test the group_by_currency function."""
     result = group_by_currency(mock_bounty_data)
@@ -192,11 +203,92 @@ def test_generate_main_file(mock_ts, mock_ensure_dir, mock_file_open, mock_bount
     assert "![All Bounties]" in written_content # Check navigation badge alt text
     assert "<!-- Generated on: 2025-03-26 14:00:00 -->" in written_content # Check timestamp format in comment
 
-# Add more tests here for other generator functions
-# e.g., test_generate_language_files, test_generate_summary_file, etc.
-# Remember to mock file operations (open, os.path.exists, os.listdir) and dependencies like ensure_directory
+def test_bounty_table_escapes_dynamic_markdown(mock_conversion_rates):
+    """Issue titles are untrusted and must not break markdown tables."""
+    bounties = [{
+        "owner": "org",
+        "repo": "repo",
+        "title": "Fix parser | handle [brackets]",
+        "url": "https://github.com/org/repo/issues/1",
+        "amount": "10",
+        "currency": "ERG",
+        "primary_lang": "Python",
+        "issue_number": 1,
+        "creator": "author",
+        "status": "open",
+        "created_at": "2026-01-01T00:00:00Z",
+        "updated_at": "2026-01-02T00:00:00Z",
+        "comments": 3,
+    }]
 
-def test_placeholder_generator(mock_bounty_data):
-    """A placeholder test to ensure the file runs."""
-    # TODO: Add real tests for other generator functions
-    assert len(mock_bounty_data) == 3
+    table = generate_standard_bounty_table(bounties, mock_conversion_rates)
+
+    assert "Fix parser \\| handle \\[brackets\\]" in table
+    assert "| 3 |" in table
+
+
+def test_bounty_table_uses_link_prefix_for_subpages(mock_conversion_rates):
+    bounties = [{
+        "owner": "org",
+        "repo": "repo",
+        "title": "Fix links",
+        "url": "https://github.com/org/repo/issues/1",
+        "amount": "10",
+        "currency": "ERG",
+        "primary_lang": "Python",
+        "issue_number": 1,
+        "creator": "author",
+        "status": "open",
+        "created_at": "2026-01-01T00:00:00Z",
+        "updated_at": "2026-01-02T00:00:00Z",
+        "comments": 0,
+    }]
+
+    table = generate_standard_bounty_table(bounties, mock_conversion_rates, link_prefix="../")
+
+    assert "[org](../by_org/org.md)" in table
+    assert "[Python](../by_language/python.md)" in table
+
+
+def test_bounty_table_does_not_link_non_github_bounty_url(mock_conversion_rates):
+    bounties = [{
+        "owner": "org",
+        "repo": "repo",
+        "title": "External bounty",
+        "url": "javascript:alert(1)",
+        "amount": "10",
+        "currency": "ERG",
+        "primary_lang": "Python",
+        "issue_number": 1,
+        "creator": "author",
+        "status": "open",
+        "created_at": "2026-01-01T00:00:00Z",
+        "updated_at": "2026-01-02T00:00:00Z",
+        "comments": 0,
+    }]
+
+    table = generate_standard_bounty_table(bounties, mock_conversion_rates)
+
+    assert "[External bounty](javascript:alert(1))" not in table
+    assert "External bounty" in table
+
+
+def test_update_readme_badges_updates_encoded_plus_counts(tmp_path, monkeypatch):
+    readme = tmp_path / "README.md"
+    readme.write_text(
+        "\n".join([
+            "https://img.shields.io/badge/Open%20Bounties-106%2B-4CAF50",
+            "https://img.shields.io/badge/💰%20Total%20Value-51,119.53%20ERG-2196F3",
+            "https://img.shields.io/badge/🌟%20High%20Value-11%2B%20Over%201000%20ERG-FFC107",
+            "<!-- Latest Update: 2025-10-21 -->",
+        ]),
+        encoding="utf-8",
+    )
+    monkeypatch.chdir(tmp_path)
+
+    assert update_readme_badges(108, 111126.69, 38, {}) is True
+
+    content = readme.read_text(encoding="utf-8")
+    assert "Open%20Bounties-108%2B-4CAF50" in content
+    assert "Total%20Value-111,126.69%20ERG-2196F3" in content
+    assert "High%20Value-38%2B%20Over%201000%20ERG-FFC107" in content

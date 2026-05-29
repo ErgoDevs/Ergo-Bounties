@@ -1,0 +1,92 @@
+name: Triage Submission PRs
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited]
+    paths:
+      - 'submissions/**.json'
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Optional PR number to triage'
+        required: false
+
+jobs:
+  triage-pr:
+    if: github.event_name == 'pull_request_target' || (github.event_name == 'workflow_dispatch' && inputs.pr != '')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Triage current submission PR
+        if: github.event_name == 'pull_request_target'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/triage_submission_prs.py \
+            --pr "${{ github.event.pull_request.number }}" \
+            --comment \
+            --apply-labels \
+            --request-reviewer \
+            --exit-zero
+
+      - name: Triage selected submission PR
+        if: github.event_name == 'workflow_dispatch' && inputs.pr != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ inputs.pr }}
+        run: |
+          case "${PR_NUMBER}" in
+            ''|*[!0-9]*)
+              echo "pr input must be a positive integer" >&2
+              exit 2
+              ;;
+          esac
+          python scripts/triage_submission_prs.py \
+            --pr "${PR_NUMBER}" \
+            --comment \
+            --apply-labels \
+            --request-reviewer \
+            --exit-zero
+
+  triage-dashboard:
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.pr == '')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Triage all open submission PRs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/triage_submission_prs.py \
+            --apply-labels \
+            --close-invalid \
+            --close-stale \
+            --write-dashboard submissions/triage.md \
+            --exit-zero
+
+      - name: Commit dashboard
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          test -f submissions/triage.md || exit 0
+          git add submissions/triage.md
+          if git diff --cached --quiet; then
+            echo "No dashboard changes."
+          else
+            git commit -m "Update submission triage dashboard"
+            git push
+          fi

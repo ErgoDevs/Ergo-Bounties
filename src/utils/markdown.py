@@ -14,7 +14,8 @@ These utilities ensure consistent formatting across all generated markdown files
 import re
 import logging
 from typing import Dict, List, Any, Optional
-from datetime import datetime
+from datetime import datetime, timezone
+from urllib.parse import urlparse
 
 from .common import (
     format_navigation_badges,
@@ -26,11 +27,24 @@ from .common import (
     get_current_timestamp,
     wrap_with_guardrails,
     create_claim_url,
-    get_repo_name_from_input # Added import for helper
+    get_repo_name_from_input, # Added import for helper
+    escape_markdown_cell,
+    escape_markdown_link_text,
 )
 
 # Configure logging
 logger = logging.getLogger(__name__)
+
+
+def _is_github_url(value: str) -> bool:
+    parsed = urlparse(str(value))
+    return parsed.scheme == "https" and parsed.netloc.lower() == "github.com"
+
+
+def _safe_markdown_link(text: Any, url: Any) -> str:
+    escaped = escape_markdown_link_text(text)
+    url_text = str(url or "")
+    return f"[{escaped}]({url_text})" if _is_github_url(url_text) else escaped
 
 def generate_navigation_section(
     total_bounties: int, 
@@ -98,7 +112,7 @@ def generate_filter_section(
     content += "**By Currency:** "
     currency_links = []
     for currency_name, currency_bounties_list in currencies_dict.items():
-        currency_file_name = format_currency_filename(currency_name)
+        currency_file_name = get_currency_filename(currency_name)
         currency_links.append(f"[{currency_name} ({len(currency_bounties_list)})]({path_prefix}by_currency/{currency_file_name}.md)")
     content += " • ".join(currency_links)
     content += "\n\n"
@@ -117,7 +131,9 @@ def generate_standard_bounty_table(
     bounties: List[Dict[str, Any]],
     conversion_rates: Dict[str, float],
     show_org: bool = True,
-    show_language: bool = True
+    show_language: bool = True,
+    sort_by: str = "value",
+    link_prefix: str = "",
 ) -> str:
     """
     Generate a standard bounty table for markdown files with configurable columns.
@@ -139,8 +155,8 @@ def generate_standard_bounty_table(
     if show_org:
         header_parts.append("Organisation")
         separator_parts.append("---")
-    header_parts.extend(["Bounty", "Bounty Value"]) # Renamed columns
-    separator_parts.extend(["---", "---"])
+    header_parts.extend(["Bounty", "Value", "Age", "Updated", "Comments"])
+    separator_parts.extend(["---", "---", "---", "---", "---"])
     if show_language:
         header_parts.append("Primary Language")
         separator_parts.append("---")
@@ -154,12 +170,31 @@ def generate_standard_bounty_table(
     currency_client = CurrencyClient()
     currency_client.rates = conversion_rates
 
-    # Sort bounties by ERG value (highest first)
-    sorted_bounties = sorted(
-        bounties,
-        key=lambda b: currency_client.calculate_erg_value(b["amount"], b["currency"]),
-        reverse=True
-    )
+    def parse_github_date(value: str):
+        if not value:
+            return None
+        try:
+            return datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            return None
+
+    def format_age(value: str) -> str:
+        parsed = parse_github_date(value)
+        if not parsed:
+            return "-"
+        days = max((datetime.now(timezone.utc) - parsed).days, 0)
+        return "today" if days == 0 else f"{days}d"
+
+    def sort_key(bounty: Dict[str, Any]):
+        if sort_by == "new":
+            return parse_github_date(bounty.get("created_at", "")) or datetime.min.replace(tzinfo=timezone.utc)
+        if sort_by == "updated":
+            return parse_github_date(bounty.get("updated_at", "")) or datetime.min.replace(tzinfo=timezone.utc)
+        if sort_by == "old":
+            return parse_github_date(bounty.get("created_at", "")) or datetime.max.replace(tzinfo=timezone.utc)
+        return currency_client.calculate_erg_value(bounty["amount"], bounty["currency"])
+
+    sorted_bounties = sorted(bounties, key=sort_key, reverse=(sort_by != "old"))
 
     # Add rows for each bounty
     for bounty in sorted_bounties:
@@ -173,10 +208,13 @@ def generate_standard_bounty_table(
         issue_number = bounty["issue_number"]
         creator = bounty["creator"] # Keep creator for claim URL
 
-        # Calculate ERG equivalent for display
-        erg_value = currency_client.calculate_erg_value(amount, currency) # Returns float
-        # Format as Σ{int} or "-"
-        erg_value_display = f"Σ{int(erg_value)}" if erg_value > 0.0 else "-"
+        erg_value = currency_client.calculate_erg_value(amount, currency)
+        if amount in {"Not specified", "Ongoing"} or erg_value <= 0.0:
+            value_display = str(amount)
+        elif currency == "ERG":
+            value_display = f"Σ{int(erg_value)}"
+        else:
+            value_display = f"{amount} {currency} (~Σ{int(erg_value)})"
 
         # Create a claim link that opens a PR template
         claim_url = create_claim_url(owner, repo_name, issue_number, title, url, currency, amount, creator)
@@ -185,11 +223,14 @@ def generate_standard_bounty_table(
         repo_name_simple = get_repo_name_from_input(repo_name)
         repo_url = f"https://github.com/{owner}/{repo_name_simple}"
         # Combine repo link and title link for the 'Bounty' column
-        bounty_display = f"[{repo_name_simple}]({repo_url})/[{title}]({url})"
+        bounty_display = (
+            f"{_safe_markdown_link(repo_name_simple, repo_url)}/"
+            f"{_safe_markdown_link(title, url)}"
+        )
 
         # Add organization and language links (only if shown)
-        org_link = format_organization_link(owner) if show_org else ""
-        primary_lang_link = format_language_link(primary_lang) if show_language else ""
+        org_link = format_organization_link(owner, prefix=link_prefix) if show_org else ""
+        primary_lang_link = format_language_link(primary_lang, prefix=link_prefix) if show_language else ""
 
         # Create a nicer reserve button/status badge using shields.io
         if "status" in bounty and bounty["status"] == "Reserved":
@@ -205,11 +246,21 @@ def generate_standard_bounty_table(
             # Green reserve badge/button
             reserve_button = f"[![Reserve](https://img.shields.io/badge/-Reserve-brightgreen?style=flat-square)]({claim_url})"
 
+        age_display = format_age(bounty.get("created_at", ""))
+        updated_display = format_age(bounty.get("updated_at", ""))
+        comments = bounty.get("comments", 0)
+
         # Build row dynamically
         row_parts = []
         if show_org:
             row_parts.append(org_link)
-        row_parts.extend([bounty_display, erg_value_display])
+        row_parts.extend([
+            bounty_display,
+            escape_markdown_cell(value_display),
+            age_display,
+            updated_display,
+            str(comments),
+        ])
         if show_language:
             row_parts.append(primary_lang_link)
         row_parts.append(reserve_button)
@@ -217,7 +268,7 @@ def generate_standard_bounty_table(
         content += f"| {' | '.join(row_parts)} |\n"
     return content
 
-def generate_ongoing_programs_table(ongoing_programs: List[Dict[str, Any]]) -> str:
+def generate_ongoing_programs_table(ongoing_programs: List[Dict[str, Any]], link_prefix: str = "") -> str:
     """
     Generate a table for ongoing programs.
     
@@ -241,10 +292,13 @@ def generate_ongoing_programs_table(ongoing_programs: List[Dict[str, Any]]) -> s
         primary_lang = program["primary_lang"]
         
         # Add organization and language links
-        org_link = format_organization_link(owner)
-        primary_lang_link = format_language_link(primary_lang)
+        org_link = format_organization_link(owner, prefix=link_prefix)
+        primary_lang_link = format_language_link(primary_lang, prefix=link_prefix)
         
-        content += f"| {org_link} | [{title}]({url}) | [Details]({url}) | {primary_lang_link} |\n"
+        content += (
+            f"| {org_link} | [{escape_markdown_link_text(title)}]({url}) | "
+            f"[Details]({url}) | {primary_lang_link} |\n"
+        )
     
     return content
 
@@ -283,12 +337,12 @@ def update_readme_badges(
                         count = len(langs_data[lang_key])
                         new_badge_part = f'{badge_text}-{count}-{badge_color}'
                         updated_line = re.sub(r'badge/([^-%]+)-\d+-[0-9A-F]+', f'badge/{new_badge_part}', line)
-                        print(f"DEBUG: Updated language badge line for {lang_key}: {updated_line}")
+                        logger.debug(f"Updated language badge line for {lang_key}: {updated_line}")
                         return updated_line
                     else:
-                        print(f"DEBUG: No matching language key found for URL language '{lang_name_in_url}' in line: {line}")
+                        logger.debug(f"No matching language key found for URL language '{lang_name_in_url}' in line: {line}")
                 else:
-                    print(f"DEBUG: Language badge line format not matched: {line}")
+                    logger.debug(f"Language badge line format not matched: {line}")
             return line # Return original line if no match or update needed
 
         # --- Define replacement rules ---
@@ -296,13 +350,13 @@ def update_readme_badges(
             # 1. General path replacement
             lambda line: line.replace("/bounties/", "/data/"),
             # 2. Specific badge value updates
-            (r'Open%20Bounties-\d+\+?-4CAF50', f'Open%20Bounties-{total_bounties}%2B-4CAF50'),
+            (r'Open%20Bounties-\d+(?:\+|%2B)?-4CAF50', f'Open%20Bounties-{total_bounties}%2B-4CAF50'),
             (r'Total%20Value-[\d,\.]+%20ERG-2196F3', f'Total%20Value-{total_value:,.2f}%20ERG-2196F3'),
-            (r'High%20Value-\d+\+?%20Over%201000%20ERG-FFC107', f'High%20Value-{high_value_count}%2B%20Over%201000%20ERG-FFC107'),
+            (r'High%20Value-\d+(?:\+|%2B)?%20Over%201000%20ERG-FFC107', f'High%20Value-{high_value_count}%2B%20Over%201000%20ERG-FFC107'),
             # 3. Language badge update (using helper)
             lambda line: _update_language_badge_line(line, languages),
             # 4. Timestamp update
-            lambda line: f"<!-- Latest Update: {datetime.now().strftime('%Y-%m-%d')} -->" if "Latest Update:" in line else line,
+            lambda line: f"<!-- Latest Update: {datetime.now(timezone.utc).strftime('%Y-%m-%d')} -->" if "Latest Update:" in line else line,
         ]
 
         # --- Apply rules line by line ---
@@ -318,14 +372,8 @@ def update_readme_badges(
                     if isinstance(pattern, str) and pattern.split('%')[0] in processed_line:
                          processed_line = re.sub(pattern, replacement, processed_line)
 
-            # Debug logging for significant changes (optional)
             if processed_line != line:
-                 if "Open%20Bounties" in processed_line: print(f"DEBUG: Updated bounties badge line: {processed_line}")
-                 elif "Total%20Value" in processed_line: print(f"DEBUG: Updated total value badge line: {processed_line}")
-                 elif "High%20Value" in processed_line: print(f"DEBUG: Updated high value badge line: {processed_line}")
-                 # Language badge debug is inside the helper
-                 elif "Latest Update:" in processed_line: print(f"DEBUG: Updated timestamp: {processed_line}")
-                 elif "/data/" in processed_line and "/bounties/" not in processed_line and line.startswith("    <a href="): print(f"DEBUG: Updated path in line: {processed_line}")
+                logger.debug(f"Updated README line: {processed_line}")
 
 
             new_lines.append(processed_line)

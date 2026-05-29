@@ -3,6 +3,7 @@ Unit tests for the BountyProcessor class.
 """
 
 import pytest
+import json
 from unittest.mock import MagicMock, patch
 
 # Assuming BountyProcessor is importable like this
@@ -58,11 +59,6 @@ def test_processor_initialization(processor, mock_rates):
     assert processor.currency_client.rates == mock_rates
     assert processor.github_client is not None
 
-def test_placeholder_bounty_processing(processor):
-    """A placeholder test to ensure the file runs."""
-    # TODO: Add real tests for process_repositories, process_organizations, etc.
-    assert True
-
 def test_process_issue_marks_reserved_based_on_submission(processor, mock_github_client, mocker):
     """Test that an issue is marked as Reserved if a submission file exists."""
     repo_owner = "test-owner"
@@ -70,10 +66,7 @@ def test_process_issue_marks_reserved_based_on_submission(processor, mock_github
     issue_number_reserved = 123
     issue_number_open = 456
 
-    # Mock the _get_submitted_issue_numbers to simulate finding a submission
-    mocker.patch.object(processor, '_get_submitted_issue_numbers', return_value={str(issue_number_reserved)})
-    # Re-initialize the attribute based on the mocked method for this test instance
-    processor.submitted_issue_numbers = processor._get_submitted_issue_numbers()
+    processor.reserved_bounty_ids = {f"{repo_owner}/{repo_name}#{issue_number_reserved}"}
 
     # Mock GitHub API to return two issues: one matching the submission, one not
     mock_issues = [
@@ -122,6 +115,75 @@ def test_process_issue_marks_reserved_based_on_submission(processor, mock_github
     assert open_bounty["currency"] == "ERG", "Currency should be extracted correctly"
 
 
-# Add more tests here for different methods of BountyProcessor
-# e.g., test_process_repositories_finds_bounty, test_add_extra_bounties,
-# test_group_by_language, test_find_featured_bounties, etc.
+def test_process_issue_reservation_uses_full_bounty_id(processor):
+    """Same issue number in another repo must not be marked reserved."""
+    processor.reserved_bounty_ids = {"test-owner/test-repo#123"}
+    issue = {
+        "number": 123,
+        "title": "Bounty: Other repo issue",
+        "state": "open",
+        "labels": [{"name": "bounty"}],
+        "html_url": "https://github.com/test-owner/other-repo/issues/123",
+        "body": "Amount: 50 ERG",
+        "user": {"login": "creator"},
+    }
+    processor.project_totals["test-owner"] = {"count": 0, "value": 0.0}
+
+    processor._process_issue(issue, "test-owner", "other-repo", "Python", "None")
+
+    assert processor.bounty_data[0]["status"] == "open"
+    assert processor.reserved_count == 0
+
+
+def test_reserved_bounty_ids_ignore_placeholders_and_use_bounty_id(tmp_path, monkeypatch, mock_github_client, mock_currency_client, mock_rates):
+    """Only active, non-placeholder submissions should reserve exact bounty IDs."""
+    submissions = tmp_path / "submissions"
+    submissions.mkdir()
+    (submissions / "valid.json").write_text(json.dumps({
+        "status": "in-progress",
+        "contributor": "alice",
+        "wallet_address": "9abc",
+        "bounty_id": "Owner/Repo#12",
+    }), encoding="utf-8")
+    (submissions / "placeholder.json").write_text(json.dumps({
+        "status": "in-progress",
+        "contributor": "bob",
+        "wallet_address": "YOUR_WALLET_ADDRESS",
+        "bounty_id": "Owner/Other#12",
+    }), encoding="utf-8")
+    monkeypatch.chdir(tmp_path)
+
+    with patch('src.core.processor.GitHubClient', return_value=mock_github_client), \
+         patch('src.core.processor.CurrencyClient', return_value=mock_currency_client):
+        proc = BountyProcessor(github_token="mock_token", rates=mock_rates)
+
+    assert proc.reserved_bounty_ids == {"owner/repo#12"}
+
+
+def test_process_organizations_dedupes_case_insensitive(processor, mock_github_client):
+    processor.github_client = mock_github_client
+    mock_github_client.get_organization_repos.return_value = [
+        {"name": "BenefactionPlatform-Ergo", "archived": False, "fork": False, "has_issues": True}
+    ]
+
+    repos = processor.process_organizations(
+        [{"org": "stabilitynexus"}],
+        [{"owner": "StabilityNexus", "repo": "BenefactionPlatform-Ergo"}],
+    )
+
+    assert repos == [{"owner": "StabilityNexus", "repo": "BenefactionPlatform-Ergo"}]
+
+
+def test_project_totals_merge_owner_case(processor):
+    processor.project_totals["stabilitynexus"] = {"count": 1, "value": 0.0}
+
+    processor.add_extra_bounties([{
+        "owner": "StabilityNexus",
+        "repo": "BenefactionPlatform-Ergo",
+        "amount": "100",
+        "currency": "ERG",
+    }])
+
+    assert list(processor.project_totals) == ["stabilitynexus"]
+    assert processor.project_totals["stabilitynexus"]["count"] == 2
+    assert processor.project_totals["stabilitynexus"]["value"] == 100.0

@@ -5,28 +5,45 @@ on:
   pull_request:
     types: [closed] # Trigger when a PR is closed
 
-permissions:
-  contents: write # To commit updated markdown files
-
 jobs:
   update_bounties:
     # Only run if the PR was merged and involved changes to submissions/
     if: github.event.pull_request.merged == true && github.event.pull_request.user.login != 'github-actions[bot]'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          # Need full history for changed-files and potentially the python script
+          # Need history to diff the merged PR.
           fetch-depth: 0
-          # Use a token with write permissions to push changes
-          token: ${{ secrets.PAT_TOKEN }} # Requires a Personal Access Token stored as a secret
 
       - name: Get changed submission files
         id: changed_files
-        uses: tj-actions/changed-files@v44
-        with:
-          files: submissions/*.json
+        shell: bash
+        run: |
+          merge_sha="${{ github.event.pull_request.merge_commit_sha }}"
+          base_sha="${{ github.event.pull_request.base.sha }}"
+          head_sha="${{ github.event.pull_request.head.sha }}"
+
+          if git rev-parse --verify "${merge_sha}^1" >/dev/null 2>&1; then
+            changed_files="$(git diff --name-only "${merge_sha}^1" "${merge_sha}" -- 'submissions/*.json')"
+          else
+            changed_files="$(git diff --name-only "${base_sha}" "${head_sha}" -- 'submissions/*.json')"
+          fi
+
+          if [ -n "${changed_files}" ]; then
+            echo "any_changed=true" >> "${GITHUB_OUTPUT}"
+            {
+              echo "all_changed_files<<EOF"
+              echo "${changed_files}"
+              echo "EOF"
+            } >> "${GITHUB_OUTPUT}"
+          else
+            echo "any_changed=false" >> "${GITHUB_OUTPUT}"
+            echo "all_changed_files=" >> "${GITHUB_OUTPUT}"
+          fi
 
       # Only proceed if a submission file was changed in the merged PR
       - name: Setup Python
@@ -45,8 +62,6 @@ jobs:
         if: steps.changed_files.outputs.any_changed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use the default token for read operations in the script
-          # Add any other secrets the script needs, e.g., API keys for currency
-          # SPECTRUM_API_KEY: ${{ secrets.SPECTRUM_API_KEY }}
         run: |
           python run.py
 
@@ -55,13 +70,10 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          # Check if there are changes to commit
-          if ! git diff --quiet --exit-code data/; then
-            git add data/*.md data/by_*/*.md
+          if ! git diff --quiet --exit-code data/ README.md docs/ongoing-programs.md; then
+            git add data/ README.md docs/ongoing-programs.md
             git commit -m "Automated update: Refresh bounty tables after reservation merge"
             git push
           else
             echo "No changes to commit in data/ directory."
           fi
-        # Continue even if commit fails (e.g., no changes)
-        continue-on-error: true
