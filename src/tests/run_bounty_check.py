@@ -41,6 +41,25 @@ MANUAL_BOUNTY_REQUIRED_FIELDS = {
     "status",
 }
 
+
+def count_bounty_table_rows(markdown_text: str) -> int:
+    """Count data rows in the primary bounty table."""
+    lines = markdown_text.splitlines()
+    in_table = False
+    rows = 0
+    for line in lines:
+        if line.startswith("|Organisation|Bounty|Value|"):
+            in_table = True
+            continue
+        if not in_table:
+            continue
+        if line.startswith("|---"):
+            continue
+        if not line.startswith("|"):
+            break
+        rows += 1
+    return rows
+
 logging.basicConfig(
     level=logging.INFO,
     format=(
@@ -167,6 +186,19 @@ def validate_output_files(bounties_dir: Path) -> bool:
                 overall_success = False
             else:
                 print_status("Checking README summary badges", True, "README matches summary totals.")
+
+        if total_match and all_bounties.exists():
+            all_count = count_bounty_table_rows(all_bounties.read_text(encoding="utf-8"))
+            summary_count = int(total_match.group(1))
+            if all_count != summary_count:
+                print_status(
+                    "Checking all-bounty row count",
+                    False,
+                    f"all.md has {all_count} rows, summary has {summary_count}.",
+                )
+                overall_success = False
+            else:
+                print_status("Checking all-bounty row count", True, "all.md matches summary total.")
 
     if high_value_file.exists() and README_PATH.exists():
         high_value_text = high_value_file.read_text(encoding="utf-8")

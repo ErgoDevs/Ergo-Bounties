@@ -6,10 +6,11 @@ This module defines a base class for API clients, providing common
 functionality such as session management, rate limiting, and error handling.
 """
 
-import requests
 import logging
 import time
-from typing import Optional, Tuple, Dict, Any
+from typing import Any, Dict, List, Optional, Tuple, Union
+
+import requests
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -37,7 +38,15 @@ class BaseClient:
         self.session = requests.Session()
         self.session.headers.update({"Content-Type": "application/json"})
 
-    def _make_request(self, url: str, method: str = "GET", headers: Optional[Dict[str, str]] = None, data: Optional[Dict[str, Any]] = None) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Dict[str, str]]]]:
+    JsonResponse = Union[Dict[str, Any], List[Any]]
+
+    def _make_json_request(
+        self,
+        url: str,
+        method: str = "GET",
+        headers: Optional[Dict[str, str]] = None,
+        data: Optional[Dict[str, Any]] = None,
+    ) -> Tuple[Optional[JsonResponse], Optional[Dict[str, Dict[str, str]]]]:
         """
         Make a request to the API with retry logic and rate limit handling.
 
@@ -48,7 +57,8 @@ class BaseClient:
             data: Optional data to send in the request body
 
         Returns:
-            Tuple of (response JSON data, pagination links)
+            Tuple of (response JSON data, pagination links). Non-JSON responses are
+            treated as invalid API responses instead of being passed downstream as text.
         """
         merged_headers = self.session.headers.copy()
         if headers:
@@ -78,8 +88,11 @@ class BaseClient:
                 response.raise_for_status()
                 try:
                     return response.json(), response.links
-                except ValueError:
-                    return response.text, response.links
+                except ValueError as exc:
+                    logger.error("Expected JSON response from URL: %s", url)
+                    raise requests.exceptions.RequestException(
+                        f"Expected JSON response from URL: {url}"
+                    ) from exc
 
             except requests.exceptions.RequestException as e:
                 logger.warning(f"Request failed (attempt {attempt+1}/{self.max_retries}): {e}")

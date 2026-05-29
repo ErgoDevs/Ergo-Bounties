@@ -63,7 +63,7 @@ class GitHubClient(BaseClient):
         logger.debug(f"Fetching paginated {item_type} starting with URL: {current_url}")
 
         while current_url:
-            data, links = self._make_request(current_url)
+            data, links = self._make_json_request(current_url)
             if data is None: # Check for None explicitly, as empty list is valid
                 logger.warning(f"Request failed or returned no data for {current_url}")
                 break # Stop pagination if request fails
@@ -111,8 +111,11 @@ class GitHubClient(BaseClient):
 
         logger.debug(f"Fetching languages for repository: {owner}/{repo}")
 
-        data, _ = self._make_request(url)
+        data, _ = self._make_json_request(url)
         if not data:
+            return []
+        if not isinstance(data, dict):
+            logger.error("Expected language mapping but got %s for %s/%s", type(data), owner, repo)
             return []
         # Sort languages by bytes of code and get top 2 (or all if fewer than 2)
         sorted_languages = sorted(data.items(), key=lambda x: x[1], reverse=True)[:2]

@@ -66,7 +66,7 @@
 - Browse: [all bounties](/data/all.md), [new](/data/new-bounties.md), [recently active](/data/recently-active.md), [stale](/data/stale-bounties.md), [starter-sized](/data/starter-bounties.md), [high value](/data/high-value-bounties.md)
 - Claim or reserve: open a PR adding one `submissions/*.json` file with `status: in-progress`
 - Request payment: update that submission PR to `status: awaiting-review` once the upstream work PR is merged
-- Maintainers: use [reviewer guide](/docs/reviewer-guide.md), [payment status](/submissions/payment_status.md), [payment queue](/submissions/payment_queue.md), and [triage dashboard](/submissions/triage.md)
+- Maintainers: use [maintainer runbook](/docs/maintainer-runbook.md), [reviewer guide](/docs/reviewer-guide.md), [payment status](/submissions/payment_status.md), [payment queue](/submissions/payment_queue.md), and [triage dashboard](/submissions/triage.md)
 - Automation details: [how it works](/docs/how-it-works.md)
 
 ## Source Files vs Generated Files
