@@ -1,9 +1,9 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-05-29 16:21:38 -->
+<!-- Generated on: 2026-05-31 16:11:33 -->
 
 # EF_DAO_LLC Bounties
 
-*Report generated: 2026-05-29 16:21:38 UTC*
+*Report generated: 2026-05-31 16:11:33 UTC*
 
 ![Total Bounties: 2](https://img.shields.io/badge/Total%20Bounties-2-blue)
 
@@ -15,8 +15,8 @@
 
 |Bounty|Value|Age|Updated|Comments|Primary Language|Reserve|
 |---|---|---|---|---|---|---|
-| [educational-rewards](https://github.com/EF_DAO_LLC/educational-rewards)/[Educational Reward Program](#-educational-reward-program) | Ongoing | - | - | 0 | [Various](../by_language/various.md) | [Details](/docs/ongoing-programs.md) |
-| [development-rewards](https://github.com/EF_DAO_LLC/development-rewards)/[Development Reward Program](#-development-reward-program) | Ongoing | - | - | 0 | [Various](../by_language/various.md) | [Details](/docs/ongoing-programs.md) |
+| [educational-rewards](https://github.com/EF_DAO_LLC/educational-rewards)/Educational Reward Program | Ongoing | - | - | 0 | [Various](../by_language/various.md) | [Details](/docs/ongoing-programs.md) |
+| [development-rewards](https://github.com/EF_DAO_LLC/development-rewards)/Development Reward Program | Ongoing | - | - | 0 | [Various](../by_language/various.md) | [Details](/docs/ongoing-programs.md) |
 
 
 ---

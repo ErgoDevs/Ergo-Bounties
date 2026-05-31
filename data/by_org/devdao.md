@@ -1,9 +1,9 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-05-29 16:21:38 -->
+<!-- Generated on: 2026-05-31 16:11:33 -->
 
 # DevDAO Bounties
 
-*Report generated: 2026-05-29 16:21:38 UTC*
+*Report generated: 2026-05-31 16:11:33 UTC*
 
 ![Total Bounties: 1](https://img.shields.io/badge/Total%20Bounties-1-blue) ![Total Value: 3000.00 ERG](https://img.shields.io/badge/Total%20Value-3000.00%20ERG-green)
 
@@ -15,7 +15,7 @@
 
 |Bounty|Value|Age|Updated|Comments|Primary Language|Reserve|
 |---|---|---|---|---|---|---|
-| [keystone-sdk-rust](https://github.com/DevDAO/keystone-sdk-rust)/[Keystone Wallet Integration](https://discord.com/channels/668903786361651200/669989266478202917/1344310506277830697) | Σ3000 | - | - | 0 | [Rust](../by_language/rust.md) | ![In Progress](https://img.shields.io/badge/-In%20Progress-orange?style=flat-square) |
+| [keystone-sdk-rust](https://github.com/DevDAO/keystone-sdk-rust)/Keystone Wallet Integration | Σ3000 | - | - | 0 | [Rust](../by_language/rust.md) | ![In Progress](https://img.shields.io/badge/-In%20Progress-orange?style=flat-square) |
 
 
 ---
