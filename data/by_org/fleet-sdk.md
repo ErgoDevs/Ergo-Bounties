@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-06-07 04:20:58 -->
+<!-- Generated on: 2026-06-07 14:04:34 -->
 
 # fleet-sdk Bounties
 
-*Report generated: 2026-06-07 04:20:58 UTC*
+*Report generated: 2026-06-07 14:04:34 UTC*
 
-![Total Bounties: 3](https://img.shields.io/badge/Total%20Bounties-3-blue) ![Total Value: 3778.65 ERG](https://img.shields.io/badge/Total%20Value-3778.65%20ERG-green)
+![Total Bounties: 3](https://img.shields.io/badge/Total%20Bounties-3-blue) ![Total Value: 3778.56 ERG](https://img.shields.io/badge/Total%20Value-3778.56%20ERG-green)
 
 ## Navigation
 
