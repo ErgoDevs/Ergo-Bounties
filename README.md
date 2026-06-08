@@ -2,8 +2,8 @@
   <h1>🏆 Ergo Ecosystem Bounties</h1>
   <p><em>The Central Hub for Discovering, Claiming, and Managing Ergo Bounties</em></p>
   <p>
-    <a href="/data/all.md"><img src="https://img.shields.io/badge/Open%20Bounties-108%2B-4CAF50" alt="Open Bounties"></a>
-    <a href="/data/summary.md"><img src="https://img.shields.io/badge/💰%20Total%20Value-109,230.50%20ERG-2196F3" alt="Total Value"></a>
+    <a href="/data/all.md"><img src="https://img.shields.io/badge/Open%20Bounties-107%2B-4CAF50" alt="Open Bounties"></a>
+    <a href="/data/summary.md"><img src="https://img.shields.io/badge/💰%20Total%20Value-133,141.71%20ERG-2196F3" alt="Total Value"></a>
     <a href="/data/high-value-bounties.md"><img src="https://img.shields.io/badge/🌟%20High%20Value-38%2B%20Over%201000%20ERG-FFC107" alt="High Value Bounties"></a>
     <a href="/docs/ongoing-programs.md"><img src="https://img.shields.io/badge/🔥%20Grants%20and%20Initiatives-9C27B0" alt="Featured Bounties"></a>
   </p>
@@ -24,7 +24,7 @@
     <a href="/data/by_language/typescript.md"><img src="https://img.shields.io/badge/TypeScript-7-3178C6"></a>
     <a href="/data/by_language/svelte.md"><img src="https://img.shields.io/badge/Svelte-2-DC322F"></a>
     <a href="/data/by_language/various.md"><img src="https://img.shields.io/badge/Various-3-DC322F"></a>
-    <a href="/data/by_language/java.md"><img src="https://img.shields.io/badge/Java-2-007396"></a>
+    <a href="/data/by_language/java.md"><img src="https://img.shields.io/badge/Java-1-007396"></a>
       <a href="/data/summary.md#languages">
         <img src="https://img.shields.io/badge/🌐%20All%20Languages-purple" alt="All Languages">
       </a>
@@ -77,4 +77,4 @@ Edit source inputs, not generated bounty pages.
 - Do not manually edit generated outputs: `data/*.md`, `data/by_language/*.md`, `data/by_currency/*.md`, `data/by_org/*.md`, `submissions/payment_status.md`, `submissions/payment_queue.md`, `submissions/paid.md`, or generated README badges.
 - Regenerate and validate locally with `./scripts/run_live_update.sh` or `./test.sh` after source changes.
 
-<!-- Latest Update: 2026-05-31 -->
+<!-- Latest Update: 2026-06-08 -->
