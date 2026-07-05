@@ -1,5 +1,5 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-07-04 02:24:40 -->
+<!-- Generated on: 2026-07-05 02:33:31 -->
 
 # Summary of Bounties
 
@@ -11,15 +11,15 @@
 
 | Project | Count | Value |
 |----------|-------|-------|
-| [ergoplatform](/data/by_org/ergoplatform.md) | 84 | 129,199.22 ERG |
-| [fleet-sdk](/data/by_org/fleet-sdk.md) | 3 | 4,063.87 ERG |
+| [ergoplatform](/data/by_org/ergoplatform.md) | 84 | 129,197.14 ERG |
+| [fleet-sdk](/data/by_org/fleet-sdk.md) | 3 | 4,063.79 ERG |
 | [DevDAO](/data/by_org/devdao.md) | 1 | 3,000.00 ERG |
-| [input-output-hk](/data/by_org/input-output-hk.md) | 1 | 2,557.34 ERG |
-| [StabilityNexus](/data/by_org/stabilitynexus.md) | 3 | 1,022.93 ERG |
-| [BetterMoneyLabs](/data/by_org/bettermoneylabs.md) | 9 | 166.72 ERG |
+| [input-output-hk](/data/by_org/input-output-hk.md) | 1 | 2,557.28 ERG |
+| [StabilityNexus](/data/by_org/stabilitynexus.md) | 3 | 1,022.91 ERG |
+| [BetterMoneyLabs](/data/by_org/bettermoneylabs.md) | 9 | 167.70 ERG |
 | [rosen-bridge](/data/by_org/rosen-bridge.md) | 3 | 33.90 ERG |
 | [EF_DAO_LLC](/data/by_org/ef_dao_llc.md) | 2 | 0.00 ERG |
-| **Total** | **106** | **140,043.99 ERG** |
+| **Total** | **106** | **140,042.72 ERG** |
 
 ## Currencies
 
@@ -28,10 +28,10 @@ Open bounties are updated daily with values shown in ERG equivalent. Some bounti
 [View current currency prices →](/data/currency_prices.md)
 | Currency | Count | Total Value (ERG) |
 |----------|-------|------------------|
-| [SigUSD ($1)](/data/by_currency/sigusd.md) | 50 | 127738.91 |
+| [SigUSD ($1)](/data/by_currency/sigusd.md) | 50 | 127736.29 |
 | [ERG](/data/by_currency/erg.md) | 33 | 11050.00 |
-| [BENE ($1)](/data/by_currency/bene.md) | 1 | 1022.93 |
-| [Gold (per gram)](/data/by_currency/gold.md) | 6 | 110.33 |
+| [BENE ($1)](/data/by_currency/bene.md) | 1 | 1022.91 |
+| [Gold (per gram)](/data/by_currency/gold.md) | 6 | 111.70 |
 | [GORT (Governance Token)](/data/by_currency/gort.md) | 5 | 87.91 |
 
 [View all currencies →](/data/by_currency/)
