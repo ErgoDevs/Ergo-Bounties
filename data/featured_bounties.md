@@ -1,24 +1,24 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-07-06 02:38:17 -->
+<!-- Generated on: 2026-07-07 02:33:58 -->
 
 # Featured Bounties
 
 ## Navigation
 
-[![All Bounties](https://img.shields.io/badge/All%20Bounties-106-blue)](all.md) [![By Language](https://img.shields.io/badge/By%20Language-7-green)](summary.md#languages) [![By Currency](https://img.shields.io/badge/By%20Currency-7-yellow)](summary.md#currencies) [![By Organization](https://img.shields.io/badge/By%20Organization-8-orange)](summary.md#projects) [![New](https://img.shields.io/badge/New-Recent-blueviolet)](new-bounties.md) [![Active](https://img.shields.io/badge/Recently%20Active-Updated-success)](recently-active.md) [![Starter](https://img.shields.io/badge/Starter-Friendly-brightgreen)](starter-bounties.md) [![Stale](https://img.shields.io/badge/Stale-180d%2B-lightgrey)](stale-bounties.md)
+[![All Bounties](https://img.shields.io/badge/All%20Bounties-107-blue)](all.md) [![By Language](https://img.shields.io/badge/By%20Language-7-green)](summary.md#languages) [![By Currency](https://img.shields.io/badge/By%20Currency-7-yellow)](summary.md#currencies) [![By Organization](https://img.shields.io/badge/By%20Organization-8-orange)](summary.md#projects) [![New](https://img.shields.io/badge/New-Recent-blueviolet)](new-bounties.md) [![Active](https://img.shields.io/badge/Recently%20Active-Updated-success)](recently-active.md) [![Starter](https://img.shields.io/badge/Starter-Friendly-brightgreen)](starter-bounties.md) [![Stale](https://img.shields.io/badge/Stale-180d%2B-lightgrey)](stale-bounties.md)
 
 ## Top Bounties by Value
 
 | Bounty | Organization | Value | Currency |
 |--------|--------------|-------|----------|
-| [Finish SigmaMap implementation](https://github.com/ergoplatform/sigmastate-interpreter/issues/1067) | [ergoplatform](by_org/ergoplatform.md) | 5114.64 ERG | [SigUSD ($1)](by_currency/sigusd.md) |
-| [Implement UTXO set scan](https://github.com/ergoplatform/ergo/issues/2034) | [ergoplatform](by_org/ergoplatform.md) | 5114.64 ERG | [SigUSD ($1)](by_currency/sigusd.md) |
+| [Finish SigmaMap implementation](https://github.com/ergoplatform/sigmastate-interpreter/issues/1067) | [ergoplatform](by_org/ergoplatform.md) | 5114.67 ERG | [SigUSD ($1)](by_currency/sigusd.md) |
+| [Implement UTXO set scan](https://github.com/ergoplatform/ergo/issues/2034) | [ergoplatform](by_org/ergoplatform.md) | 5114.67 ERG | [SigUSD ($1)](by_currency/sigusd.md) |
 
 ## Weekly Summary
 
 | Date | Open Bounties | Total Value |
 |------|--------------|-------------|
-| [Jul 06, 2026](/data/all.md#all-bounties) | 106 | 140,044.94 ERG |
+| [Jul 07, 2026](/data/all.md#all-bounties) | 107 | 140,249.84 ERG |
 
 
 
