@@ -1,0 +1,18 @@
+{
+  "contributor": "thenotespublisher",
+  "wallet_address": "9gK5J75qPh7u8qkozb8cGYYAR97zJqmPjfMGgbrx5YdEdkJ2L2H",
+  "contact_method": "@thenotespublisher (GitHub)",
+  "work_link": "https://github.com/thenotespublisher/ergo-fleet-toolkit",
+  "work_title": "[Educational] Fleet-Tutorial + Bounties",
+  "bounty_id": "fleet-sdk/docs#8",
+  "original_issue_link": "https://github.com/fleet-sdk/docs/issues/8",
+  "payment_currency": "SigUSD",
+  "bounty_value": 775.0,
+  "status": "submitted",
+  "submission_date": "2026-07-07",
+  "expected_completion": "2026-07-07",
+  "description": "Completed 4 working Fleet SDK tutorials with runnable verification tests (multi-recipient tx, token mint+transfer, contract lock/unlock using the ErgoScript compiler, and offline mnemonic signing), plus a CLAUDE.md AI agent reference guide documenting real integration gotchas.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
