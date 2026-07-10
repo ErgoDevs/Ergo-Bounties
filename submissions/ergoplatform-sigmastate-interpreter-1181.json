@@ -2,7 +2,7 @@
   "contributor": "smallboxlabs",
   "wallet_address": "9h1phdirE4Lve1nsD8VjjD2MabGuP2Zn8mwb5xCuZ1GtHhSmswT",
   "contact_method": "hello.smallbox@proton.me",
-  "work_link": "",
+  "work_link": "https://github.com/ergoplatform/sigmastate-interpreter/pull/1183",
   "work_title": "Example of \"Physical or digital gold: simple insurance on Ergo\"",
   "bounty_id": "ergoplatform/sigmastate-interpreter#1181",
   "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1181",
