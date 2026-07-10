@@ -1,0 +1,18 @@
+{
+  "contributor": "smallboxlabs",
+  "wallet_address": "9h1phdirE4Lve1nsD8VjjD2MabGuP2Zn8mwb5xCuZ1GtHhSmswT",
+  "contact_method": "hello.smallbox@proton.me",
+  "work_link": "",
+  "work_title": "Example of \"Physical or digital gold: simple insurance on Ergo\"",
+  "bounty_id": "ergoplatform/sigmastate-interpreter#1181",
+  "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1181",
+  "payment_currency": "ERG",
+  "bounty_value": 200.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2026-07-24",
+  "description": "Implementing the insurance contract from the forum post as an example spec in sc/.../utxo/examples: ErgoScript contract (NFT-redemption path before the deadline, vault reclaim after) plus prove/verify tests for both paths and the negative cases.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
