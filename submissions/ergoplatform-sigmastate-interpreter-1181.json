@@ -9,7 +9,7 @@
   "payment_currency": "ERG",
   "bounty_value": 200.0,
   "status": "in-progress",
-  "submission_date": "",
+  "submission_date": "2026-07-10",
   "expected_completion": "2026-07-24",
   "description": "Implementing the insurance contract from the forum post as an example spec in sc/.../utxo/examples: ErgoScript contract (NFT-redemption path before the deadline, vault reclaim after) plus prove/verify tests for both paths and the negative cases.",
   "review_notes": "",
