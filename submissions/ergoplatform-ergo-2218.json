@@ -1,0 +1,19 @@
+{
+  "contributor": "sherenkov",
+  "wallet_address": "9eevPcUEYzKF1mAjNKX946p1Dt24kbLYT3kTw2GJotSsCMnpTQD",
+  "contact_method": "Telegram: @sherenkov",
+  "work_link": "",
+  "work_title": "Add blockchain/box/unspent/byTemplateHash endpoint (template index)",
+  "bounty_id": "ergo#2218",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/2218",
+  "payment_currency": "SigUSD",
+  "bounty_value": 200,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2026-08-07",
+  "description": "Implement the ErgoTree template index and a new indexed-node REST endpoint blockchain/box/unspent/byTemplateHash/{templateHash} (blake2b256 of ergoTree.template, base16), skipping non-constant-segregated trees at indexing time, per the issue proposal.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": "",
+  "reviewer": ""
+}
