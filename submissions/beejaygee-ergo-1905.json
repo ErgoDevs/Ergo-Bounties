@@ -9,7 +9,7 @@
   "payment_currency": "SigUSD",
   "bounty_value": 500,
   "status": "in-progress",
-  "submission_date": "",
+  "submission_date": "2026-07-17",
   "expected_completion": "2026-07-24",
   "description": "Add regression coverage for custom-scan-only off-chain boxes and ensure automatic wallet payments select only boxes associated with the payments scan.",
   "review_notes": "",
