@@ -1,0 +1,18 @@
+{
+  "contributor": "beejaygee",
+  "wallet_address": "9hzMoWTagjUoEfFuZ2xHgmw4zvxhoi2ux8km4LPWJ4ZZ5RTQcL8",
+  "contact_method": "GitHub: @beejaygee",
+  "work_link": "",
+  "work_title": "Prevent wallet payment from spending custom-scan-only boxes",
+  "bounty_id": "ergoplatform/ergo#1905",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1905",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500,
+  "status": "in-progress",
+  "submission_date": "2026-07-17",
+  "expected_completion": "2026-07-24",
+  "description": "Add regression coverage for custom-scan-only off-chain boxes and ensure automatic wallet payments select only boxes associated with the payments scan.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
