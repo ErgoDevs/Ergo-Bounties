@@ -10,7 +10,7 @@
   "bounty_value": 500,
   "status": "in-progress",
   "submission_date": "2026-08-01",
-  "expected_completion": "2026-07-24",
+  "expected_completion": "2026-08-15",
   "description": "Restricted OffChainRegistry-derived wallet spending/box-listing to boxes tracked by the wallet's payments scan (new walletOffChainBoxes), so boxes belonging only to an external application scan can no longer be spent by wallet payments or leak into /wallet/boxes/unspent. Scan-specific APIs are unaffected. Regression coverage extended to three box cases (wallet-only, external-scan-only, shared) plus scan-visibility assertions; 14/14 tests passing.",
   "review_notes": "",
   "payment_tx_id": "",
