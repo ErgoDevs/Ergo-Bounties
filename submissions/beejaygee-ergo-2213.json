@@ -1,0 +1,18 @@
+{
+  "contributor": "beejaygee",
+  "wallet_address": "9hzMoWTagjUoEfFuZ2xHgmw4zvxhoi2ux8km4LPWJ4ZZ5RTQcL8",
+  "contact_method": "GitHub: @beejaygee",
+  "work_link": "",
+  "work_title": "Unite script/p2sAddress & script/p2shAddress",
+  "bounty_id": "ergoplatform/ergo#2213",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/2213",
+  "payment_currency": "SigUSD",
+  "bounty_value": 100,
+  "status": "in-progress",
+  "submission_date": "2026-08-01",
+  "expected_completion": "2026-08-01",
+  "description": "Extracted shared boilerplate from ScriptApiRoute's p2sAddressR and p2shAddressR into a single compiledAddressR(wrapAddress) helper parameterized by Pay2SAddress.apply/Pay2SHAddress.apply. Behavior-preserving refactor: all 10 existing tests in ScriptApiRouteSpec pass unchanged (verified in a sandboxed Docker build against upstream master).",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
