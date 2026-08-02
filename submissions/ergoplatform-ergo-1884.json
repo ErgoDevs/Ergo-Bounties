@@ -10,7 +10,7 @@
   "bounty_value": 500.0,
   "status": "in-progress",
   "submission_date": "2026-07-31",
-  "expected_completion": "2026-08-15",
+  "expected_completion": "2026-09-15",
   "description": "Work implemented and submitted upstream: https://github.com/ergoplatform/ergo/pull/2450 (open, awaiting review).",
   "review_notes": "",
   "payment_tx_id": "",
