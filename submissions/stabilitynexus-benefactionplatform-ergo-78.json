@@ -1,0 +1,18 @@
+{
+  "contributor": "Ergologica",
+  "wallet_address": "9g7wnNUa6tb69Rr3g6SHv8UxLHUjD2Sh4zwGEEdHWepv1EQftso",
+  "contact_method": "sullasoglia@proton.me",
+  "work_link": "https://github.com/StabilityNexus/BenefactionPlatform-Ergo/pull/174",
+  "work_title": "Find a bug in the contract",
+  "bounty_id": "StabilityNexus/BenefactionPlatform-Ergo#78",
+  "original_issue_link": "https://github.com/StabilityNexus/BenefactionPlatform-Ergo/issues/78",
+  "payment_currency": "BENE",
+  "bounty_value": 200.0,
+  "status": "in-progress",
+  "submission_date": "2026-08-11",
+  "expected_completion": "2026-09-30",
+  "description": "Bug found and reproduced: failing test in PR #174, fix in PR #175.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
