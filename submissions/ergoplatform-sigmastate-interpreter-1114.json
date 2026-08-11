@@ -8,10 +8,10 @@
   "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1114",
   "payment_currency": "ERG",
   "bounty_value": 500.0,
-  "status": "awaiting-review",
+  "status": "in-progress",
   "submission_date": "2026-07-30",
-  "expected_completion": "2026-07-30",
-  "description": "Done: PR merged on 2026-07-29. Example contract parsing a real Bitcoin transaction in ErgoScript + 10 tests.",
+  "expected_completion": "2026-09-15",
+  "description": "Correction (2026-08-11): this was previously marked awaiting-review with a description stating the upstream PR had been merged. That was wrong on my part - https://github.com/ergoplatform/sigmastate-interpreter/pull/1177 is still open and issue #1114 is still open. Reverting to in-progress until the PR is actually merged; I will set awaiting-review only after that. Work: an ErgoScript contract parsing a real Bitcoin transaction, plus 10 tests.",
   "review_notes": "",
   "payment_tx_id": "",
   "payment_date": ""
