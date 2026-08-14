@@ -1,0 +1,18 @@
+{
+  "contributor": "ElectronicUtility",
+  "wallet_address": "9hPwNfbkE4MDBvnPSDfKZBrkB9eTrViSjPrA12sq8gh3R9odJKt",
+  "contact_method": "GitHub: @ElectronicUtility",
+  "work_link": "",
+  "work_title": "Retry signed transaction broadcast across known nodes",
+  "bounty_id": "ergoplatform/ergo-wallet-app#186",
+  "original_issue_link": "https://github.com/ergoplatform/ergo-wallet-app/issues/186",
+  "payment_currency": "ERG",
+  "bounty_value": 300,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2026-08-18",
+  "description": "Broadcast the same already-signed transaction to an ordered, de-duplicated sequence of the preferred node followed by known nodes, stop on the first valid transaction ID, preserve useful failure information, and add focused JVM tests.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
