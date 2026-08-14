@@ -8,10 +8,10 @@
   "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1909",
   "payment_currency": "SigUSD",
   "bounty_value": 200.0,
-  "status": "in-progress",
+  "status": "awaiting-review",
   "submission_date": "2026-08-02",
-  "expected_completion": "2026-09-15",
-  "description": "Work implemented and submitted upstream: https://github.com/ergoplatform/ergo/pull/2456 (open, awaiting review).",
+  "expected_completion": "2026-08-10",
+  "description": "Done: PR ergoplatform/ergo#2456 approved by kushti and merged on 2026-08-10. Adds a logQueries directive in ErgoHttpService that logs method, relative URI, status and elapsed time at DEBUG, wrapping the route outside handleRejections so rejected requests are logged too, plus a commented-out logger in logback.xml and a spec asserting the emitted line via a logback ListAppender.",
   "review_notes": "",
   "payment_tx_id": "",
   "payment_date": ""
