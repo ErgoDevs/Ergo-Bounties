@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-08-15 09:16 UTC
+Generated: 2026-08-16 09:17 UTC
 
 ## Ready Review
 
@@ -18,7 +18,7 @@ None.
 
 ## Stale
 
-- [#53](https://github.com/ErgoDevs/Ergo-Bounties/pull/53) Reserve ergoplatform/ergo#2213 - unite p2sAddress and p2shAddress (stale-reservation)
+- [#52](https://github.com/ErgoDevs/Ergo-Bounties/pull/52) Update ergoplatform/ergo#1905 submission — awaiting review (PR #2453) (stale-reservation)
 
 ## Invalid
 
