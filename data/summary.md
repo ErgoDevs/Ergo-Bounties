@@ -1,25 +1,25 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-08-21 00:57:59 -->
+<!-- Generated on: 2026-08-22 00:54:29 -->
 
 # Summary of Bounties
 
 ## Navigation
 
-[![All Bounties](https://img.shields.io/badge/All%20Bounties-105-blue)](/data/all.md) [![By Language](https://img.shields.io/badge/By%20Language-7-green)](/data/summary.md#languages) [![By Currency](https://img.shields.io/badge/By%20Currency-7-yellow)](/data/summary.md#currencies) [![By Organization](https://img.shields.io/badge/By%20Organization-8-orange)](/data/summary.md#projects) [![New](https://img.shields.io/badge/New-Recent-blueviolet)](/data/new-bounties.md) [![Active](https://img.shields.io/badge/Recently%20Active-Updated-success)](/data/recently-active.md) [![Starter](https://img.shields.io/badge/Starter-Friendly-brightgreen)](/data/starter-bounties.md) [![Stale](https://img.shields.io/badge/Stale-180d%2B-lightgrey)](/data/stale-bounties.md)
+[![All Bounties](https://img.shields.io/badge/All%20Bounties-104-blue)](/data/all.md) [![By Language](https://img.shields.io/badge/By%20Language-7-green)](/data/summary.md#languages) [![By Currency](https://img.shields.io/badge/By%20Currency-7-yellow)](/data/summary.md#currencies) [![By Organization](https://img.shields.io/badge/By%20Organization-8-orange)](/data/summary.md#projects) [![New](https://img.shields.io/badge/New-Recent-blueviolet)](/data/new-bounties.md) [![Active](https://img.shields.io/badge/Recently%20Active-Updated-success)](/data/recently-active.md) [![Starter](https://img.shields.io/badge/Starter-Friendly-brightgreen)](/data/starter-bounties.md) [![Stale](https://img.shields.io/badge/Stale-180d%2B-lightgrey)](/data/stale-bounties.md)
 
 ## Projects
 
 | Project | Count | Value |
 |----------|-------|-------|
-| [ergoplatform](/data/by_org/ergoplatform.md) | 81 | 112,420.85 ERG |
-| [StabilityNexus](/data/by_org/stabilitynexus.md) | 5 | 4,421.79 ERG |
-| [fleet-sdk](/data/by_org/fleet-sdk.md) | 3 | 3,526.88 ERG |
+| [ergoplatform](/data/by_org/ergoplatform.md) | 80 | 110,498.07 ERG |
+| [StabilityNexus](/data/by_org/stabilitynexus.md) | 5 | 4,361.44 ERG |
+| [fleet-sdk](/data/by_org/fleet-sdk.md) | 3 | 3,480.12 ERG |
 | [DevDAO](/data/by_org/devdao.md) | 1 | 3,000.00 ERG |
-| [input-output-hk](/data/by_org/input-output-hk.md) | 1 | 2,210.89 ERG |
-| [BetterMoneyLabs](/data/by_org/bettermoneylabs.md) | 9 | 177.73 ERG |
-| [rosen-bridge](/data/by_org/rosen-bridge.md) | 3 | 39.55 ERG |
+| [input-output-hk](/data/by_org/input-output-hk.md) | 1 | 2,180.72 ERG |
+| [BetterMoneyLabs](/data/by_org/bettermoneylabs.md) | 9 | 183.83 ERG |
+| [rosen-bridge](/data/by_org/rosen-bridge.md) | 3 | 39.54 ERG |
 | [EF_DAO_LLC](/data/by_org/ef_dao_llc.md) | 2 | 0.00 ERG |
-| **Total** | **105** | **125,797.69 ERG** |
+| **Total** | **104** | **123,743.73 ERG** |
 
 ## Currencies
 
@@ -28,11 +28,11 @@ Open bounties are updated daily with values shown in ERG equivalent. Some bounti
 [View current currency prices →](/data/currency_prices.md)
 | Currency | Count | Total Value (ERG) |
 |----------|-------|------------------|
-| [SigUSD ($1)](/data/by_currency/sigusd.md) | 49 | 109991.91 |
-| [ERG](/data/by_currency/erg.md) | 32 | 11150.00 |
-| [BENE ($1)](/data/by_currency/bene.md) | 3 | 4421.79 |
-| [Gold (per gram)](/data/by_currency/gold.md) | 5 | 100.31 |
-| [GORT (Governance Token)](/data/by_currency/gort.md) | 5 | 94.14 |
+| [SigUSD ($1)](/data/by_currency/sigusd.md) | 49 | 108490.85 |
+| [ERG](/data/by_currency/erg.md) | 31 | 10650.00 |
+| [BENE ($1)](/data/by_currency/bene.md) | 3 | 4361.44 |
+| [Gold (per gram)](/data/by_currency/gold.md) | 5 | 108.34 |
+| [GORT (Governance Token)](/data/by_currency/gort.md) | 5 | 93.55 |
 
 [View all currencies →](/data/by_currency/)
 
@@ -40,9 +40,9 @@ Open bounties are updated daily with values shown in ERG equivalent. Some bounti
 
 | Language | Count | Percentage |
 |----------|-------|------------|
-| [Scala](/data/by_language/scala.md) | 72 | 68.6% |
-| [Rust](/data/by_language/rust.md) | 14 | 13.3% |
-| [TypeScript](/data/by_language/typescript.md) | 9 | 8.6% |
+| [Scala](/data/by_language/scala.md) | 71 | 68.3% |
+| [Rust](/data/by_language/rust.md) | 14 | 13.5% |
+| [TypeScript](/data/by_language/typescript.md) | 9 | 8.7% |
 | [Kotlin](/data/by_language/kotlin.md) | 4 | 3.8% |
 | [Various](/data/by_language/various.md) | 3 | 2.9% |
 
