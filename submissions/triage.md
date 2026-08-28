@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-08-27 19:19 UTC
+Generated: 2026-08-28 20:29 UTC
 
 ## Ready Review
 
@@ -23,4 +23,4 @@ None.
 
 ## Invalid
 
-None.
+- [#57](https://github.com/ErgoDevs/Ergo-Bounties/pull/57) Create ergoplatform-ergo-1870.json (reservation, 500 SigUSD) (invalid-json, invalid-submission)
