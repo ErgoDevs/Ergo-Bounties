@@ -1,0 +1,18 @@
+{
+  "contributor": "Ergologica",
+  "wallet_address": "9g7wnNUa6tb69Rr3g6SHv8UxLHUjD2Sh4zwGEEdHWepv1EQftso",
+  "contact_method": "sullasoglia@proton.me",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2459",
+  "work_title": "Document interlinksProof in the PopowHeader schema",
+  "bounty_id": "ergoplatform/ergo#1384",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1384",
+  "payment_currency": "SigUSD",
+  "bounty_value": 1000.0,
+  "status": "awaiting-review",
+  "submission_date": "2026-08-29",
+  "expected_completion": "2026-08-29",
+  "description": "PR ergoplatform/ergo#2459 (merged 2026-08-11, on master) closes the remaining gap of this issue: the interlinksProof field of PopowHeader is now documented in openapi.yaml. Full transparency for the reviewer: the substantive batch-proof implementation largely predates this and lives in PR #1526 by ApexTheory (open since 2021). I defer to the issue author on sizing the award - partial or zero is a legitimate outcome if the substantive work is credited elsewhere.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
