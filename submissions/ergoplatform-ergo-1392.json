@@ -1,0 +1,18 @@
+{
+  "contributor": "Ergologica",
+  "wallet_address": "9g7wnNUa6tb69Rr3g6SHv8UxLHUjD2Sh4zwGEEdHWepv1EQftso",
+  "contact_method": "sullasoglia@proton.me",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2467",
+  "work_title": "Sign a custom message [Feature request]",
+  "bounty_id": "ergoplatform/ergo#1392",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1392",
+  "payment_currency": "SigUSD",
+  "bounty_value": 1000.0,
+  "status": "in-progress",
+  "submission_date": "2026-08-13",
+  "expected_completion": "2026-09-30",
+  "description": "Work implemented and submitted upstream: https://github.com/ergoplatform/ergo/pull/2467 (open, awaiting review). Adds POST /wallet/signMessage and POST /utils/verifyMessage, using the sigma protocol the node already uses for transaction proofs, with EIP-0028 style message wrapping so a message signature can not be turned into a transaction proof.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
