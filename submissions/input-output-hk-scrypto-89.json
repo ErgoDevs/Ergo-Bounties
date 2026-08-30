@@ -1,0 +1,18 @@
+{
+  "contributor": "Ergologica",
+  "wallet_address": "9g7wnNUa6tb69Rr3g6SHv8UxLHUjD2Sh4zwGEEdHWepv1EQftso",
+  "contact_method": "sullasoglia@proton.me",
+  "work_link": "https://github.com/ergoplatform/scrypto/pull/3",
+  "work_title": "Check or restore keys during sliced tree recovery",
+  "bounty_id": "input-output-hk/scrypto#89",
+  "original_issue_link": "https://github.com/input-output-hk/scrypto/issues/89",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500.0,
+  "status": "in-progress",
+  "submission_date": "2026-08-02",
+  "expected_completion": "2026-09-30",
+  "description": "Work rebased onto the Ergo fork and submitted as https://github.com/ergoplatform/scrypto/pull/3 (open, awaiting review). The original PR against input-output-hk/scrypto was closed on kushti's instruction: that master is protected and the repo has not moved since 2025-03. The bounty issue itself still lives on the IOHK repo, so the bounty_id is unchanged.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
