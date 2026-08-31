@@ -1,5 +1,5 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-08-30 03:03:47 -->
+<!-- Generated on: 2026-08-31 02:57:51 -->
 
 # Summary of Bounties
 
@@ -11,15 +11,15 @@
 
 | Project | Count | Value |
 |----------|-------|-------|
-| [ergoplatform](/data/by_org/ergoplatform.md) | 80 | 113,494.04 ERG |
-| [StabilityNexus](/data/by_org/stabilitynexus.md) | 5 | 4,488.41 ERG |
-| [fleet-sdk](/data/by_org/fleet-sdk.md) | 3 | 3,578.52 ERG |
+| [ergoplatform](/data/by_org/ergoplatform.md) | 80 | 113,572.28 ERG |
+| [StabilityNexus](/data/by_org/stabilitynexus.md) | 5 | 4,491.74 ERG |
+| [fleet-sdk](/data/by_org/fleet-sdk.md) | 3 | 3,581.10 ERG |
 | [DevDAO](/data/by_org/devdao.md) | 1 | 3,000.00 ERG |
-| [input-output-hk](/data/by_org/input-output-hk.md) | 1 | 2,244.21 ERG |
-| [BetterMoneyLabs](/data/by_org/bettermoneylabs.md) | 9 | 171.64 ERG |
-| [rosen-bridge](/data/by_org/rosen-bridge.md) | 3 | 39.75 ERG |
+| [input-output-hk](/data/by_org/input-output-hk.md) | 1 | 2,245.87 ERG |
+| [BetterMoneyLabs](/data/by_org/bettermoneylabs.md) | 9 | 170.30 ERG |
+| [rosen-bridge](/data/by_org/rosen-bridge.md) | 3 | 39.73 ERG |
 | [EF_DAO_LLC](/data/by_org/ef_dao_llc.md) | 2 | 0.00 ERG |
-| **Total** | **104** | **127,016.57 ERG** |
+| **Total** | **104** | **127,101.01 ERG** |
 
 ## Currencies
 
@@ -28,10 +28,10 @@ Open bounties are updated daily with values shown in ERG equivalent. Some bounti
 [View current currency prices →](/data/currency_prices.md)
 | Currency | Count | Total Value (ERG) |
 |----------|-------|------------------|
-| [SigUSD ($1)](/data/by_currency/sigusd.md) | 49 | 111649.22 |
+| [SigUSD ($1)](/data/by_currency/sigusd.md) | 49 | 111731.97 |
 | [ERG](/data/by_currency/erg.md) | 31 | 10650.00 |
-| [BENE ($1)](/data/by_currency/bene.md) | 3 | 4488.41 |
-| [Gold (per gram)](/data/by_currency/gold.md) | 5 | 105.27 |
+| [BENE ($1)](/data/by_currency/bene.md) | 3 | 4491.74 |
+| [Gold (per gram)](/data/by_currency/gold.md) | 5 | 103.65 |
 | [GORT (Governance Token)](/data/by_currency/gort.md) | 5 | 83.92 |
 
 [View all currencies →](/data/by_currency/)
