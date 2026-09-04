@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-09-03 13:06 UTC
+Generated: 2026-09-04 13:00 UTC
 
 ## Ready Review
 
@@ -20,7 +20,7 @@ None.
 
 ## Stale
 
-None.
+- [#69](https://github.com/ErgoDevs/Ergo-Bounties/pull/69) \[WIP\] Bounty ergoplatform/ergo-wallet-app#186 - Retry signed transaction broadcast (stale-reservation)
 
 ## Invalid
 
