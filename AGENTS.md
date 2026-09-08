@@ -49,6 +49,7 @@ python3 -m py_compile scripts/triage_submission_prs.py
 python3 -m json.tool .github/submission.schema.json >/dev/null
 GITHUB_TOKEN="$GITHUB_TOKEN" python3 scripts/triage_submission_prs.py --write-dashboard /tmp/ergo-triage.md
 GITHUB_TOKEN="$GITHUB_TOKEN" python3 scripts/update_ops_issue.py --dry-run
+GITHUB_TOKEN="$GITHUB_TOKEN" python3 scripts/detect_contested_bounties.py --write-dashboard /tmp/ergo-contested.md --limit 20
 python3 -m src.tests.run_bounty_check
 ./test.sh
 ```
