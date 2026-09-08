@@ -1,0 +1,18 @@
+{
+  "contributor": "Ergologica",
+  "wallet_address": "9g7wnNUa6tb69Rr3g6SHv8UxLHUjD2Sh4zwGEEdHWepv1EQftso",
+  "contact_method": "sullasoglia@proton.me",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2450",
+  "work_title": "Fee estimation APIs getExpectedWaitTime/getRecommendedFee return invalid values",
+  "bounty_id": "ergoplatform/ergo#1884",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1884",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500.0,
+  "status": "in-progress",
+  "submission_date": "2026-07-31",
+  "expected_completion": "2026-09-15",
+  "description": "Work implemented and submitted upstream: https://github.com/ergoplatform/ergo/pull/2450 (open, awaiting review).",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
