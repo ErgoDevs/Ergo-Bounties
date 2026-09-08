@@ -1,0 +1,18 @@
+{
+  "contributor": "Ergologica",
+  "wallet_address": "9g7wnNUa6tb69Rr3g6SHv8UxLHUjD2Sh4zwGEEdHWepv1EQftso",
+  "contact_method": "sullasoglia@proton.me",
+  "work_link": "https://github.com/ergoplatform/explorer-backend/pull/287",
+  "work_title": "Incompatible doc",
+  "bounty_id": "ergoplatform/explorer-backend#258",
+  "original_issue_link": "https://github.com/ergoplatform/explorer-backend/issues/258",
+  "payment_currency": "ERG",
+  "bounty_value": 100.0,
+  "status": "in-progress",
+  "submission_date": "2026-08-13",
+  "expected_completion": "2026-09-30",
+  "description": "Work implemented and submitted upstream: https://github.com/ergoplatform/explorer-backend/pull/287 (open, awaiting review). The v1 API documents additionalRegisters as a plain string per register while it returns an object; the eight v1 response models now describe the expanded form, with a test on the generated OpenAPI document.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
