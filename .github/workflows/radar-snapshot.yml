@@ -1,0 +1,54 @@
+name: Bounty Radar Snapshot
+
+on:
+  schedule:
+    # 02:00 UTC. The board regenerates at 00:00 and the submission triage
+    # dashboard is written at 09:00, so this window is clear of both.
+    - cron: '0 2 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  radar-snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Archive today's board and refresh the Radar
+        env:
+          # Read-only: lets the contention and repo-throughput sweeps query
+          # linked PRs on public ecosystem repos without hitting the
+          # anonymous rate limit. Both degrade to keeping the previous data
+          # if the token is missing or the sweep fails.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node radar/scripts/archive.js
+
+      - name: Commit the refreshed Radar
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # Scoped to radar/ on purpose: this job must never pick up unrelated
+          # working-tree changes from other automation in this repo.
+          git add radar/
+          if git diff --cached --quiet; then
+            echo "No Radar changes."
+            exit 0
+          fi
+          git commit -m "Update Bounty Radar snapshot"
+          # update-bounties, update-on-merge and the triage dashboard all push
+          # to main too; rebase rather than fail the run.
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push rejected (attempt ${attempt}), rebasing on origin/main."
+            git pull --rebase origin main
+          done
+          echo "Could not push after 3 attempts." >&2
+          exit 1
