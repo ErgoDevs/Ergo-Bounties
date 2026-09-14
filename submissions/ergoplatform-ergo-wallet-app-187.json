@@ -1,0 +1,18 @@
+{
+  "contributor": "YOUR_GITHUB_USERNAME",
+  "wallet_address": "YOUR_WALLET_ADDRESS",
+  "contact_method": "YOUR_CONTACT_INFO",
+  "work_link": "",
+  "work_title": "Update target SDK to Android 15",
+  "bounty_id": "ergoplatform/ergo-wallet-app#187",
+  "original_issue_link": "https://github.com/ergoplatform/ergo-wallet-app/issues/187",
+  "payment_currency": "ERG",
+  "bounty_value": 300.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2026-09-17",
+  "description": "I am working on this bounty",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
