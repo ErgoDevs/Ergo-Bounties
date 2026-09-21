@@ -1,0 +1,18 @@
+{
+  "contributor": "kepler-ops-maker",
+  "wallet_address": "9gjtk59F6MuH34hHacxAc7uN263dJUSTTDJHnS9mF7xB8qioqvw",
+  "contact_method": "pn@mail.instinct.com",
+  "work_link": "",
+  "work_title": "[Educational] Fleet-Tutorial + Bounties (milestones 1-3)",
+  "bounty_id": "fleet-sdk/docs#8",
+  "original_issue_link": "https://github.com/fleet-sdk/docs/issues/8",
+  "payment_currency": "SigUSD",
+  "bounty_value": 150.0,
+  "status": "in-progress",
+  "submission_date": "2026-09-21",
+  "expected_completion": "2026-09-28",
+  "description": "Reserving milestones 1-3 (50 SigUSD each, 150 SigUSD total) of the Fleet-SDK tutorial: send transactions, mint tokens, burn tokens. Code examples will be tested before submission.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
