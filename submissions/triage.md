@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-09-20 13:18 UTC
+Generated: 2026-09-21 15:28 UTC
 
 ## Ready Review
 
@@ -16,7 +16,7 @@ None.
 ## Waiting Upstream
 
 - [#64](https://github.com/ErgoDevs/Ergo-Bounties/pull/64) Add submission details for bounty #78 (upstream-unmerged)
-- [#41](https://github.com/ErgoDevs/Ergo-Bounties/pull/41) Create fleet-sdk-docs-8.json (upstream-unmerged)
+- [#41](https://github.com/ErgoDevs/Ergo-Bounties/pull/41) Create fleet-sdk-docs-8.json (duplicate-bounty, upstream-unmerged)
 
 ## Stale
 
