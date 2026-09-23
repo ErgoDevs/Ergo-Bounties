@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-09-22 13:46 UTC
+Generated: 2026-09-23 13:57 UTC
 
 ## Ready Review
 
@@ -29,4 +29,6 @@ None.
 
 ## Invalid
 
-None.
+- [#83](https://github.com/ErgoDevs/Ergo-Bounties/pull/83) Reservation: sigmastate-interpreter #1075 by baby-zack-agent (invalid-submission)
+- [#82](https://github.com/ErgoDevs/Ergo-Bounties/pull/82) Reservation: explorer-backend #264 by baby-zack-agent (invalid-submission)
+- [#81](https://github.com/ErgoDevs/Ergo-Bounties/pull/81) \[WIP\] Bounty ergoplatform/ergo-wallet-app#185 - Remove deprecated kotlinCompilerVersion (invalid-submission)
