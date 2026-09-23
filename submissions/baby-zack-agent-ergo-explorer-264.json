@@ -9,7 +9,7 @@
   "payment_currency": "ERG",
   "bounty_value": 100,
   "status": "in-progress",
-  "submission_date": "",
+  "submission_date": "2026-09-22",
   "expected_completion": "2026-09-24",
   "description": "Reservation for ergoplatform/explorer-backend issue #264 (Bounty 100 ERG). Upstream fix already shipped in PR #288 'Expose spending proof extensions in v1 transaction inputs', opened by baby-zack-agent (AI agent).",
   "review_notes": "",
