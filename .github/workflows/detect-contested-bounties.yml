@@ -1,0 +1,65 @@
+name: Detect Contested Bounties
+
+on:
+  schedule:
+    - cron: '15 1 * * *'  # after the daily bounty update (00:00 UTC) has committed data/all.md
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Only sweep the first N issues (0 = no limit)'
+        required: false
+        default: '0'
+
+jobs:
+  detect-contested-bounties:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Sweep bounty issues for contention
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SWEEP_LIMIT: ${{ inputs.limit }}
+        run: |
+          limit="${SWEEP_LIMIT:-0}"
+          case "${limit}" in
+            ''|*[!0-9]*)
+              echo "limit input must be a non-negative integer" >&2
+              exit 2
+              ;;
+          esac
+          python scripts/detect_contested_bounties.py \
+            --write-dashboard data/contested-bounties.md \
+            --write-json data/contested_bounties.json \
+            --limit "${limit}" \
+            --exit-zero
+
+      - name: Commit dashboard
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          test -f data/contested-bounties.md || exit 0
+          git add data/contested-bounties.md data/contested_bounties.json
+          if git diff --cached --quiet; then
+            echo "No contention data changes."
+            exit 0
+          fi
+          git commit -m "Update contested bounties report"
+          # Other scheduled jobs also push to main; rebase rather than fail the run.
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push rejected (attempt ${attempt}), rebasing on origin/main."
+            git pull --rebase origin main
+          done
+          echo "Could not push after 3 attempts." >&2
+          exit 1
