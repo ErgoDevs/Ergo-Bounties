@@ -278,9 +278,9 @@ def validate_submission(
     bounty_id = normalize_bounty_id(str(data.get("bounty_id", "")).strip())
     if not bounty_id:
         bounty_id = normalize_bounty_id(str(data.get("original_issue_link", "")).strip())
-    duplicates = [n for n in bounty_claims.get(bounty_id, []) if n != pr["number"]]
+    duplicates = earlier_claims(bounty_id, pr["number"], bounty_claims)
     if bounty_id and duplicates:
-        issues.append(f"duplicate bounty claim also open in PR(s): {', '.join(f'#{n}' for n in duplicates)}")
+        issues.append(f"duplicate bounty claim, already claimed by earlier PR(s): {', '.join(f'#{n}' for n in duplicates)}")
 
     prefixed = [f"{file_path}: {issue}" for issue in issues]
     return prefixed, submission_labels(data, prefixed, linked_merged), bounty_id, linked_merged, reviewer, expected_date
@@ -319,6 +319,21 @@ def bounty_claims(submissions: dict[int, list[dict[str, Any]]]) -> dict[str, lis
             if bounty_id:
                 claims.setdefault(bounty_id, []).append(pr_number)
     return claims
+
+
+def earlier_claims(bounty_id: str, pr_number: int, claims: dict[str, list[int]]) -> list[int]:
+    """Open claims on the same bounty that were opened before this one.
+
+    Reservations are first-come, first-served, so only the claims that came first can make a later
+    one a duplicate. Flagging every claimant instead would label the first one too, and since
+    `should_close_invalid` closes on `duplicate-bounty`, two claims on the same bounty would close
+    each other and leave the bounty unclaimed.
+
+    PR numbers are assigned in creation order, so a lower number is an earlier claim.
+    """
+    if not bounty_id:
+        return []
+    return sorted(n for n in claims.get(bounty_id, []) if n < pr_number)
 
 
 def select_prs_to_triage(
