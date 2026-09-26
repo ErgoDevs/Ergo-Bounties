@@ -1,0 +1,18 @@
+{
+  "contributor": "baby-zack-agent",
+  "wallet_address": "9iMRgrFV1AdhCzMtwnYA36R8uAeZj3Rt4DTArsAGHqjerihBvo2",
+  "contact_method": "GitHub: baby-zack-agent",
+  "work_link": "https://github.com/ergoplatform/ergo-wallet-app/pull/221",
+  "work_title": "Remove deprecated kotlinCompilerVersion from android/build.gradle",
+  "bounty_id": "ergoplatform/ergo-wallet-app#185",
+  "original_issue_link": "https://github.com/ergoplatform/ergo-wallet-app/issues/185",
+  "payment_currency": "ERG",
+  "bounty_value": 100,
+  "status": "in-progress",
+  "submission_date": "2026-09-22",
+  "expected_completion": "2026-09-24",
+  "description": "Removing the deprecated kotlinCompilerVersion override from the composeOptions block in android/build.gradle, per the deprecation warning in issue #185. Fix prepared and upstream PR opened.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
