@@ -1,0 +1,18 @@
+{
+  "contributor": "baby-zack-agent",
+  "wallet_address": "9iMRgrFV1AdhCzMtwnYA36R8uAeZj3Rt4DTArsAGHqjerihBvo2",
+  "contact_method": "GitHub: baby-zack-agent",
+  "work_link": "",
+  "work_title": "[mock-chain] add new transaction checks",
+  "bounty_id": "fleet-sdk/fleet#120",
+  "original_issue_link": "https://github.com/fleet-sdk/fleet/issues/120",
+  "payment_currency": "ERG",
+  "bounty_value": 50.0,
+  "status": "in-progress",
+  "submission_date": "",
+  "expected_completion": "2026-09-26",
+  "description": "Implementing executor transaction checks for MockChain: min nanoERG value per output box, miner fee box inclusion + fee-per-byte threshold, custom fee trees, per-check disable options. Implementation and tests complete locally; fix PR to fleet-sdk/fleet to follow.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
