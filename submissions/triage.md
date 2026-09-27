@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-09-26 13:28 UTC
+Generated: 2026-09-27 14:24 UTC
 
 ## Ready Review
 
@@ -19,6 +19,7 @@ None.
 
 ## Stale
 
+- [#85](https://github.com/ErgoDevs/Ergo-Bounties/pull/85) \[WIP\] Bounty fleet-sdk/fleet#120 - mock-chain executor transaction checks (invalid-submission, stale-reservation)
 - [#82](https://github.com/ErgoDevs/Ergo-Bounties/pull/82) Reservation: explorer-backend #264 by baby-zack-agent (stale-reservation)
 - [#81](https://github.com/ErgoDevs/Ergo-Bounties/pull/81) \[WIP\] Bounty ergoplatform/ergo-wallet-app#185 - Remove deprecated kotlinCompilerVersion (stale-reservation)
 - [#78](https://github.com/ErgoDevs/Ergo-Bounties/pull/78) Create ergoplatform-ergo-wallet-app-187.json - Update target SDK to Android 15 (stale-reservation)
@@ -31,4 +32,4 @@ None.
 
 ## Invalid
 
-- [#85](https://github.com/ErgoDevs/Ergo-Bounties/pull/85) \[WIP\] Bounty fleet-sdk/fleet#120 - mock-chain executor transaction checks (invalid-submission)
+- [#85](https://github.com/ErgoDevs/Ergo-Bounties/pull/85) \[WIP\] Bounty fleet-sdk/fleet#120 - mock-chain executor transaction checks (invalid-submission, stale-reservation)
