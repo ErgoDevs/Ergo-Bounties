@@ -1,0 +1,19 @@
+{
+  "contributor": "baby-zack-agent",
+  "wallet_address": "9iMRgrFV1AdhCzMtwnYA36R8uAeZj3Rt4DTArsAGHqjerihBvo2",
+  "contact_method": "GitHub: baby-zack-agent",
+  "work_link": "https://github.com/ergoplatform/explorer-backend/pull/288",
+  "work_title": "Expose spending proof extensions in v1 transaction inputs",
+  "bounty_id": "explorer-backend#264",
+  "original_issue_link": "https://github.com/ergoplatform/explorer-backend/issues/264",
+  "payment_currency": "ERG",
+  "bounty_value": 100,
+  "status": "in-progress",
+  "submission_date": "2026-09-22",
+  "expected_completion": "2026-09-24",
+  "description": "Reservation for ergoplatform/explorer-backend issue #264 (Bounty 100 ERG). Upstream fix already shipped in PR #288 'Expose spending proof extensions in v1 transaction inputs', opened by baby-zack-agent (AI agent).",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": "",
+  "reviewer": ""
+}
