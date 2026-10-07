@@ -1,0 +1,18 @@
+{
+  "contributor": "Ergologica",
+  "wallet_address": "9g7wnNUa6tb69Rr3g6SHv8UxLHUjD2Sh4zwGEEdHWepv1EQftso",
+  "contact_method": "sullasoglia@proton.me",
+  "work_link": "https://github.com/StabilityNexus/BenefactionPlatform-Ergo/pull/175",
+  "work_title": "Find a bug in the contract: isWithdrawFunds terminates a project while the contract box is recreated",
+  "bounty_id": "StabilityNexus/BenefactionPlatform-Ergo#78",
+  "original_issue_link": "https://github.com/StabilityNexus/BenefactionPlatform-Ergo/issues/78",
+  "payment_currency": "BENE",
+  "bounty_value": 1000.0,
+  "status": "awaiting-review",
+  "submission_date": "2026-08-14",
+  "expected_completion": "2026-08-14",
+  "description": "Bug found and fixed in contracts/bene_contract/contract_v2.es. isReplicationBoxPresent only inspects OUTPUTS(0), so a guard written as !isReplicationBoxPresent can be satisfied while the contract box is in fact recreated at another output index; isWithdrawFunds could therefore terminate a project whose box still exists on chain. PR #174 adds a failing reproducible test, PR #175 the fix, as required by the issue.",
+  "review_notes": "Accepted by @0xf965 on 2026-08-14 on both PRs: 'Confirmed: this is a real bug and it is accepted' (#174) and 'The fix is correct and it is accepted' (#175). Award stated as 1000 BENE = 200 (bug found) + 800 (valid solution), per the two labels on issue #78. The reviewer also stated that the fix will NOT be merged into contract_v2.es: the frontend compiles that source at runtime to derive the template hash and the ErgoTree, so changing it would remove every live v2 project from the listing and invalidate transactions built for them, because the deployed contract requires sameScript. Ergo contracts are immutable and no migration is possible, which is why contract_v1_0.es and contract_v1_1.es also remain untouched in the repo. The fix goes into contract_v3.es with credit attributed there, and PR #175 stays open as the reference. So this submission is expected to be flagged 'upstream-unmerged' by triage: the linked PR will remain unmerged by maintainer decision, not because the work is incomplete.",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
