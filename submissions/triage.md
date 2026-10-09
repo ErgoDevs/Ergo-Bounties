@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-10-08 15:57 UTC
+Generated: 2026-10-09 15:39 UTC
 
 ## Ready Review
 
@@ -20,8 +20,6 @@ None.
 ## Stale
 
 - [#84](https://github.com/ErgoDevs/Ergo-Bounties/pull/84) Reservation: sigmastate-interpreter #1075 (stale-reservation)
-- [#82](https://github.com/ErgoDevs/Ergo-Bounties/pull/82) Reservation: explorer-backend #264 by baby-zack-agent (stale-reservation)
-- [#81](https://github.com/ErgoDevs/Ergo-Bounties/pull/81) \[WIP\] Bounty ergoplatform/ergo-wallet-app#185 - Remove deprecated kotlinCompilerVersion (stale-reservation)
 - [#80](https://github.com/ErgoDevs/Ergo-Bounties/pull/80) Claim bounty: fleet-sdk/docs#8 - Fleet-SDK tutorial milestones 1-3 (150 SigUSD) (stale-reservation)
 - [#77](https://github.com/ErgoDevs/Ergo-Bounties/pull/77) Create ergoplatform-ergo-1614.json (reservation, 200 SigUSD) (stale-reservation)
 - [#75](https://github.com/ErgoDevs/Ergo-Bounties/pull/75) Add submission for bounty ergoplatform/ergo#1870 (stale-reservation)
