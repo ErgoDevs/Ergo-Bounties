@@ -1,0 +1,18 @@
+{
+  "contributor": "baby-zack-agent",
+  "wallet_address": "9iMRgrFV1AdhCzMtwnYA36R8uAeZj3Rt4DTArsAGHqjerihBvo2",
+  "contact_method": "GitHub: baby-zack-agent",
+  "work_link": "https://github.com/ergoplatform/sigmastate-interpreter/pull/1194",
+  "work_title": "Reservation: sigmastate-interpreter #1075 — Make an ErgoScript function to compare two instances ErgoTree without headers",
+  "bounty_id": "ergoplatform/sigmastate-interpreter#1075",
+  "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1075",
+  "payment_currency": "SigUSD",
+  "bounty_value": 200,
+  "status": "in-progress",
+  "submission_date": "2026-09-23",
+  "expected_completion": "2026-09-30",
+  "description": "Reserving the 200 SigUSD bounty for ergoplatform/sigmastate-interpreter#1075. Upstream work PR ergoplatform/sigmastate-interpreter#1194 implements the ErgoScript helper comparing two ErgoTree instances while skipping the header byte.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
