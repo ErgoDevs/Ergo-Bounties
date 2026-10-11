@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-10-10 14:55 UTC
+Generated: 2026-10-11 15:11 UTC
 
 ## Ready Review
 
@@ -19,6 +19,7 @@ None.
 
 ## Stale
 
+- [#86](https://github.com/ErgoDevs/Ergo-Bounties/pull/86) Bounty reservation: ergoplatform/ergo#2213 (B-100 Erg) (stale-reservation)
 - [#84](https://github.com/ErgoDevs/Ergo-Bounties/pull/84) Reservation: sigmastate-interpreter #1075 (stale-reservation)
 - [#80](https://github.com/ErgoDevs/Ergo-Bounties/pull/80) Claim bounty: fleet-sdk/docs#8 - Fleet-SDK tutorial milestones 1-3 (150 SigUSD) (stale-reservation)
 - [#77](https://github.com/ErgoDevs/Ergo-Bounties/pull/77) Create ergoplatform-ergo-1614.json (reservation, 200 SigUSD) (stale-reservation)
