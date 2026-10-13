@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-10-12 18:21 UTC
+Generated: 2026-10-13 16:34 UTC
 
 ## Ready Review
 
@@ -25,7 +25,6 @@ None.
 - [#86](https://github.com/ErgoDevs/Ergo-Bounties/pull/86) Bounty reservation: ergoplatform/ergo#2213 (B-100 Erg) (stale-reservation)
 - [#85](https://github.com/ErgoDevs/Ergo-Bounties/pull/85) \[WIP\] Bounty fleet-sdk/fleet#120 - mock-chain executor transaction checks (stale-reservation)
 - [#84](https://github.com/ErgoDevs/Ergo-Bounties/pull/84) Reservation: sigmastate-interpreter #1075 (stale-reservation)
-- [#80](https://github.com/ErgoDevs/Ergo-Bounties/pull/80) Claim bounty: fleet-sdk/docs#8 - Fleet-SDK tutorial milestones 1-3 (150 SigUSD) (stale-reservation)
 - [#77](https://github.com/ErgoDevs/Ergo-Bounties/pull/77) Create ergoplatform-ergo-1614.json (reservation, 200 SigUSD) (stale-reservation)
 - [#75](https://github.com/ErgoDevs/Ergo-Bounties/pull/75) Add submission for bounty ergoplatform/ergo#1870 (stale-reservation)
 - [#68](https://github.com/ErgoDevs/Ergo-Bounties/pull/68) Add submission for bounty ID BetterMoneyLabs/chaincash-rs#58 (stale-reservation)
