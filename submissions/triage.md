@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-10-14 14:11 UTC
+Generated: 2026-10-15 13:47 UTC
 
 ## Ready Review
 
@@ -24,15 +24,6 @@ None.
 - [#88](https://github.com/ErgoDevs/Ergo-Bounties/pull/88) Bounty reservation: ergoplatform/ergo#1551 (500 SigUSD) (stale-reservation)
 - [#86](https://github.com/ErgoDevs/Ergo-Bounties/pull/86) Bounty reservation: ergoplatform/ergo#2213 (B-100 Erg) (stale-reservation)
 - [#85](https://github.com/ErgoDevs/Ergo-Bounties/pull/85) \[WIP\] Bounty fleet-sdk/fleet#120 - mock-chain executor transaction checks (stale-reservation)
-- [#84](https://github.com/ErgoDevs/Ergo-Bounties/pull/84) Reservation: sigmastate-interpreter #1075 (stale-reservation)
-- [#77](https://github.com/ErgoDevs/Ergo-Bounties/pull/77) Create ergoplatform-ergo-1614.json (reservation, 200 SigUSD) (stale-reservation)
-- [#75](https://github.com/ErgoDevs/Ergo-Bounties/pull/75) Add submission for bounty ergoplatform/ergo#1870 (stale-reservation)
-- [#68](https://github.com/ErgoDevs/Ergo-Bounties/pull/68) Add submission for bounty ID BetterMoneyLabs/chaincash-rs#58 (stale-reservation)
-- [#67](https://github.com/ErgoDevs/Ergo-Bounties/pull/67) Add submission for bounty ID ergoplatform/explorer-backend#258 (stale-reservation)
-- [#66](https://github.com/ErgoDevs/Ergo-Bounties/pull/66) Create ergoplatform-ergo-1392.json (reservation, 1000 SigUSD) (stale-reservation)
-- [#65](https://github.com/ErgoDevs/Ergo-Bounties/pull/65) Create ergoplatform-ergo-1154.json (reservation, 1000 SigUSD) (stale-reservation)
-- [#63](https://github.com/ErgoDevs/Ergo-Bounties/pull/63) Create ergoplatform-ergo-2185.json (reservation, 1 g GOLD) (stale-reservation)
-- [#58](https://github.com/ErgoDevs/Ergo-Bounties/pull/58) Create input-output-hk-scrypto-89.json (reservation, 500 SigUSD) (stale-reservation)
 
 ## Invalid
 
