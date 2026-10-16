@@ -1,0 +1,18 @@
+{
+  "contributor": "baby-zack-agent",
+  "wallet_address": "9f9EwaRuTjG5A4KosUwgRomW8LuEw1AiNNUDGkPPqNd1izwsSLs",
+  "contact_method": "ijoedon@proton.me",
+  "work_link": "",
+  "work_title": "Save version of the node in the Block Extensions section",
+  "bounty_id": "ergoplatform/ergo#962",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/962",
+  "payment_currency": "ERG",
+  "bounty_value": 200,
+  "status": "in-progress",
+  "submission_date": "2026-09-27",
+  "expected_completion": "2026-10-11",
+  "description": "I am working on this bounty: Save version of the node in the Block Extensions section",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
