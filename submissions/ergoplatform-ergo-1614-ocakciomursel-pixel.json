@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2768",
+  "work_title": "Add test verifying proofsForTransactions does not mutate UTXO set tree",
+  "bounty_id": "ergoplatform/ergo#1614",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1614",
+  "payment_currency": "SigUSD",
+  "bounty_value": 200,
+  "status": "in-progress",
+  "submission_date": "2026-10-17",
+  "expected_completion": "2026-12-31",
+  "description": "Resolved ergoplatform/ergo#1614: Add test verifying proofsForTransactions does not mutate UTXO set tree (#1614). Implementation verified via fork CI and submitted in PR https://github.com/ergoplatform/ergo/pull/2768.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
