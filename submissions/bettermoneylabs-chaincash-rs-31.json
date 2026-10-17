@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/BetterMoneyLabs/chaincash-rs/pull/65",
+  "work_title": "Unlock nodes wallet if locked",
+  "bounty_id": "BetterMoneyLabs/chaincash-rs#31",
+  "original_issue_link": "https://github.com/BetterMoneyLabs/chaincash-rs/issues/31",
+  "payment_currency": "GORT",
+  "bounty_value": 50,
+  "status": "in-progress",
+  "submission_date": "2026-10-12",
+  "expected_completion": "2026-12-31",
+  "description": "Added wallet status check and automatic unlock when node wallet is locked in PR BetterMoneyLabs/chaincash-rs#65.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
