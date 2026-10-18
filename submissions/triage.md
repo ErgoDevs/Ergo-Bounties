@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-10-17 12:34 UTC
+Generated: 2026-10-18 12:53 UTC
 
 ## Ready Review
 
@@ -19,9 +19,9 @@ None.
 
 ## Stale
 
-- [#90](https://github.com/ErgoDevs/Ergo-Bounties/pull/90) Bounty reservation: ergoplatform/ergo#962 (200 ERG) (stale-reservation)
+- [#90](https://github.com/ErgoDevs/Ergo-Bounties/pull/90) Bounty reservation: ergoplatform/ergo#962 (200 ERG) (duplicate-bounty, stale-reservation)
 - [#89](https://github.com/ErgoDevs/Ergo-Bounties/pull/89) Bounty reservation: ergoplatform/sigmastate-interpreter#675 (200 SigUSD) (stale-reservation)
-- [#88](https://github.com/ErgoDevs/Ergo-Bounties/pull/88) Bounty reservation: ergoplatform/ergo#1551 (500 SigUSD) (stale-reservation)
+- [#88](https://github.com/ErgoDevs/Ergo-Bounties/pull/88) Bounty reservation: ergoplatform/ergo#1551 (500 SigUSD) (duplicate-bounty, stale-reservation)
 - [#86](https://github.com/ErgoDevs/Ergo-Bounties/pull/86) Bounty reservation: ergoplatform/ergo#2213 (B-100 Erg) (stale-reservation)
 - [#85](https://github.com/ErgoDevs/Ergo-Bounties/pull/85) \[WIP\] Bounty fleet-sdk/fleet#120 - mock-chain executor transaction checks (stale-reservation)
 
