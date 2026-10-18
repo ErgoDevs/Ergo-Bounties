@@ -8,7 +8,7 @@
   "original_issue_link": "https://github.com/ergoplatform/ergo/issues/2185",
   "payment_currency": "GOLD",
   "bounty_value": 1,
-  "status": "in-review",
+  "status": "awaiting-review",
   "submission_date": "2026-10-18",
   "expected_completion": "2026-10-18",
   "description": "Implemented chunked mining fee reward collection (MaxFeeBoxesPerTransaction = 100) across collectRewards, collectFees, and collectTxs with property tests in https://github.com/ergoplatform/ergo/pull/2781.",
