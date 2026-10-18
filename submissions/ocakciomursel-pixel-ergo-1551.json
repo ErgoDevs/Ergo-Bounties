@@ -8,7 +8,7 @@
   "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1551",
   "payment_currency": "SigUSD",
   "bounty_value": 500,
-  "status": "awaiting-review",
+  "status": "in-progress",
   "submission_date": "2026-10-18",
   "expected_completion": "2026-10-31",
   "description": "Replaced lazy Stream collections from mempool with strict IndexedSeq in CandidateGenerator and NodeViewSynchronizer to prevent memory bloat and lazy evaluation bottlenecks (ergoplatform/ergo#1551). Implementation submitted in upstream PR https://github.com/ergoplatform/ergo/pull/2754.",
