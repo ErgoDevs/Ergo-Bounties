@@ -8,7 +8,7 @@
   "original_issue_link": "https://github.com/ergoplatform/ergo/issues/962",
   "payment_currency": "ERG",
   "bounty_value": 200,
-  "status": "in-review",
+  "status": "awaiting-review",
   "submission_date": "2026-10-18",
   "expected_completion": "2026-10-31",
   "description": "Saved node version in Block Extension system parameters when generating block candidates (ergoplatform/ergo#962). Implementation submitted in upstream PR https://github.com/ergoplatform/ergo/pull/2775.",
