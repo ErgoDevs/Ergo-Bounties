@@ -8,7 +8,7 @@
   "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1075",
   "payment_currency": "SigUSD",
   "bounty_value": 200,
-  "status": "awaiting-review",
+  "status": "in-progress",
   "submission_date": "2026-10-18",
   "expected_completion": "2026-10-18",
   "description": "Added stripErgoTreeHeader and ergoTreeEqualNoHeader frontend predefined functions in SigmaPredef, documented in LangSpec.md, and tested in BasicOpsSpecification in https://github.com/ergoplatform/sigmastate-interpreter/pull/1203.",
