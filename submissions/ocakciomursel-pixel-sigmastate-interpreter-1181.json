@@ -10,7 +10,7 @@
   "bounty_value": 200,
   "status": "in-progress",
   "submission_date": "2026-10-18",
-  "expected_completion": "2026-10-18",
+  "expected_completion": "2026-12-31",
   "description": "Added GoldInsuranceExampleSpecification demonstrating the Physical or digital gold simple insurance contract on Ergo and incorporating all maintainer review improvements in https://github.com/ergoplatform/sigmastate-interpreter/pull/1202.",
   "review_notes": "",
   "payment_tx_id": "",
