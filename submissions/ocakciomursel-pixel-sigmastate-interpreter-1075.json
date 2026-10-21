@@ -10,7 +10,7 @@
   "bounty_value": 200,
   "status": "in-progress",
   "submission_date": "2026-10-18",
-  "expected_completion": "2026-10-18",
+  "expected_completion": "2026-12-31",
   "description": "Added stripErgoTreeHeader and ergoTreeEqualNoHeader frontend predefined functions in SigmaPredef, documented in LangSpec.md, and tested in BasicOpsSpecification in https://github.com/ergoplatform/sigmastate-interpreter/pull/1203.",
   "review_notes": "",
   "payment_tx_id": "",
