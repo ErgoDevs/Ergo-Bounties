@@ -10,7 +10,7 @@
   "bounty_value": 1,
   "status": "in-progress",
   "submission_date": "2026-10-18",
-  "expected_completion": "2026-10-18",
+  "expected_completion": "2026-12-31",
   "description": "Implemented chunked mining fee reward collection (MaxFeeBoxesPerTransaction = 100) across collectRewards, collectFees, and collectTxs with property tests in https://github.com/ergoplatform/ergo/pull/2781.",
   "review_notes": "",
   "payment_tx_id": "",
