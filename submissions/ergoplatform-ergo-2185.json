@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2781",
+  "work_title": "Split mining fee inputs into multiple transactions when too many of them (#2185)",
+  "bounty_id": "ergoplatform/ergo#2185",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/2185",
+  "payment_currency": "GOLD",
+  "bounty_value": 1,
+  "status": "in-progress",
+  "submission_date": "2026-10-18",
+  "expected_completion": "2026-12-31",
+  "description": "Implemented chunked mining fee reward collection (MaxFeeBoxesPerTransaction = 100) across collectRewards, collectFees, and collectTxs with property tests in https://github.com/ergoplatform/ergo/pull/2781.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
