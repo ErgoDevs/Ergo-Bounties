@@ -1,0 +1,18 @@
+{
+  "contributor": "Ergologica",
+  "wallet_address": "9g7wnNUa6tb69Rr3g6SHv8UxLHUjD2Sh4zwGEEdHWepv1EQftso",
+  "contact_method": "sullasoglia@proton.me",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2493",
+  "work_title": "Make a test that the UTXO set tree is not modified as a result of proofsForTransactions call",
+  "bounty_id": "ergoplatform/ergo#1614",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1614",
+  "payment_currency": "SigUSD",
+  "bounty_value": 200.0,
+  "status": "awaiting-review",
+  "submission_date": "2026-10-25",
+  "expected_completion": "",
+  "description": "Merged upstream: ergoplatform/ergo#2493, merged by kushti on 2026-09-01 (8b7d974). Adds the chain-level invariant the existing tests lack: at every height of a growing chain, proofsForTransactions() leaves the tree root untouched, is repeatable, and the block built from its proofs applies and lands on the promised digest. This replaces #77, the reservation for the same work, which was closed as a stale reservation on 2026-10-14 although the work had been merged on 2026-09-01.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
