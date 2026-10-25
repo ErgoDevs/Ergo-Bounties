@@ -1,0 +1,18 @@
+{
+  "contributor": "Ergologica",
+  "wallet_address": "9g7wnNUa6tb69Rr3g6SHv8UxLHUjD2Sh4zwGEEdHWepv1EQftso",
+  "contact_method": "sullasoglia@proton.me",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2462",
+  "work_title": "Put mining fee inputs into multiple transactions when too many of them",
+  "bounty_id": "ergoplatform/ergo#2185",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/2185",
+  "payment_currency": "g GOLD",
+  "bounty_value": 1.0,
+  "status": "in-progress",
+  "submission_date": "2026-10-25",
+  "expected_completion": "2026-12-31",
+  "description": "Work submitted upstream and under active review: ergoplatform/ergo#2462 splits fee inputs into chunks in collectRewards. Approved by cafebedouin; rebased onto the v6.0.10 release branch on 2026-10-24, and jozanek's comments are addressed pending kushti's answer in #2185. Renews #63, closed as a stale reservation on 2026-10-14 while the PR was still in review.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
