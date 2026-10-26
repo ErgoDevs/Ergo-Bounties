@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-10-25 13:28 UTC
+Generated: 2026-10-26 15:37 UTC
 
 ## Ready Review
 
@@ -19,8 +19,7 @@ None.
 
 ## Stale
 
-- [#89](https://github.com/ErgoDevs/Ergo-Bounties/pull/89) Bounty reservation: ergoplatform/sigmastate-interpreter#675 (200 SigUSD) (stale-reservation)
-- [#85](https://github.com/ErgoDevs/Ergo-Bounties/pull/85) \[WIP\] Bounty fleet-sdk/fleet#120 - mock-chain executor transaction checks (stale-reservation)
+None.
 
 ## Invalid
 
