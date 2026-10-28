@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2752",
+  "work_title": "Do not wallet-rescan blockchain from height 0 after wallet initialization",
+  "bounty_id": "ergoplatform/ergo#1722",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1722",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500,
+  "status": "in-progress",
+  "submission_date": "2026-10-12",
+  "expected_completion": "2026-12-31",
+  "description": "Updated initWallet and recreateStorage to initialize wallet height to state.fullHeight and preserve stateContext, avoiding historical rescan from height 0 on new wallet initialization while keeping restoreWallet rescan from height 0 (https://github.com/ergoplatform/ergo/pull/2752).",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
