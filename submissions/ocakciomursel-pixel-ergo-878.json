@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2870",
+  "work_title": "Wallet API and Exchange Integration Documentation (#878)",
+  "bounty_id": "ergoplatform/ergo#878",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/878",
+  "payment_currency": "ERG",
+  "bounty_value": 200,
+  "status": "in-progress",
+  "submission_date": "2026-10-30",
+  "expected_completion": "2026-12-31",
+  "description": "Added comprehensive Wallet REST API and Exchange Integration Documentation grounded in the v6.0 reference client source code, covering all /wallet/* and /scan/* routes, mining reward withdrawals, hardened production configuration, and a complete Exchange Integration Reference Architecture (ergoplatform/ergo#878). Implementation submitted in upstream PR https://github.com/ergoplatform/ergo/pull/2870.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
