@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2874",
+  "work_title": "Make paired HistoryStorage updates atomic across objectsStore, indexStore, and caches (#1443)",
+  "bounty_id": "ergoplatform/ergo#1443",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1443",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500,
+  "status": "in-progress",
+  "submission_date": "2026-10-31",
+  "expected_completion": "2026-12-31",
+  "description": "Fixed non-atomic paired updates in HistoryStorage across objectsStore, indexStore, and in-memory caches using upfront serialization, in-process rollback on indexStore failure, deferred cache updates, a CRC32-verified disk undo journal (pending-batch.journal) replayed automatically on startup, and reader/writer lock isolation, with regression tests in HistoryStorageSpec (ergoplatform/ergo#1443). Upstream PR: https://github.com/ergoplatform/ergo/pull/2874.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
