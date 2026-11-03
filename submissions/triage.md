@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-11-02 18:59 UTC
+Generated: 2026-11-03 16:44 UTC
 
 ## Ready Review
 
@@ -22,7 +22,7 @@ None.
 
 ## Stale
 
-None.
+- [#91](https://github.com/ErgoDevs/Ergo-Bounties/pull/91) Re-file reservation: fleet-sdk/docs#8 milestones 1-3 (150 SigUSD) (stale-reservation)
 
 ## Invalid
 
