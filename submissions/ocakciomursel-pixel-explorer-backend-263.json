@@ -1,0 +1,17 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/explorer-backend/pull/290",
+  "work_title": "Fix sortDirection and deterministic global_index ordering for v1 boxes byAddress / byErgoTree (#263)",
+  "bounty_id": "ergoplatform/explorer-backend#263",
+  "original_issue_link": "https://github.com/ergoplatform/explorer-backend/issues/263",
+  "payment_currency": "ERG",
+  "bounty_value": 100.0,
+  "status": "awaiting-review",
+  "submission_date": "2026-11-01",
+  "description": "Wired sortDirection (defaulting to desc) into v1 BoxesEndpointDefs (getOutputsByAddressDef / getApiV1BoxesByaddressP1 and getOutputsByErgoTreeDef / getApiV1BoxesByergotreeP1), BoxesRoutes, Boxes, OutputRepo.streamAllByErgoTree, v0 BoxesService, and TestOutputRepo, and added deterministic global_index ordering with bounded Top-N pagination + LEFT JOIN LATERAL in OutputQuerySet.getMainByErgoTree, verified with multi-page and multi-chunk PostgreSQL/Redis Testcontainers tests in OutputRepoSpec and BoxSpec.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
