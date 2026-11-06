@@ -1,0 +1,17 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/ergo-wallet-app/pull/225",
+  "work_title": "Upgrade iOS runtime to MobiVM 3.0.0 and Ergo AppKit 6.0.1 (Scala 2.12) (#189)",
+  "bounty_id": "ergoplatform/ergo-wallet-app#189",
+  "original_issue_link": "https://github.com/ergoplatform/ergo-wallet-app/issues/189",
+  "payment_currency": "ERG",
+  "bounty_value": 1000.0,
+  "status": "awaiting-review",
+  "submission_date": "2026-11-01",
+  "description": "Upgraded the iOS runtime from RoboVM 2.3.19 (Scala 2.11) to MobiVM 3.0.0 and Ergo AppKit 6.0.1 (Scala 2.12.21 / sigma-state 6.0.6), removed obsolete JRE7 java.time/java.util.function stubs, added isolated bootCompat shims for java.lang.ClassValue and scala.collection.immutable.VM on MobiVM libcore, and verified end-to-end across Ubuntu (JVM/Android/Desktop) and macOS MobiVM AOT builds (arm64 device, arm64-simulator, and native runtime smoke test).",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
