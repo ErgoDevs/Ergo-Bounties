@@ -1,5 +1,5 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-11-06 04:43:09 -->
+<!-- Generated on: 2026-11-07 04:09:23 -->
 
 # Featured Bounties
 
@@ -18,7 +18,7 @@
 
 | Date | Open Bounties | Total Value |
 |------|--------------|-------------|
-| [Nov 06, 2026](/data/all.md#all-bounties) | 104 | 97,210.64 ERG |
+| [Nov 07, 2026](/data/all.md#all-bounties) | 104 | 97,181.95 ERG |
 
 
 
