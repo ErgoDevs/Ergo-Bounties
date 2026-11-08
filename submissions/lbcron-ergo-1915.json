@@ -1,0 +1,18 @@
+{
+  "contributor": "LBCron",
+  "wallet_address": "9hvHyUAX2xxoshTZKNdECgtV7w2d8iUsSxgjHFiRb2mLd82JL1t",
+  "contact_method": "https://github.com/LBCron",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2927",
+  "work_title": "Consider peer stored headers and full-blocks ranges when requesting modifiers (#1915)",
+  "bounty_id": "ergoplatform/ergo#1915",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1915",
+  "payment_currency": "SigUSD",
+  "bounty_value": 1000,
+  "status": "in-progress",
+  "submission_date": "2026-11-08",
+  "expected_completion": "2026-12-31",
+  "description": "Fixes ergoplatform/ergo#1915: Consider headers and full-blocks a peer has when requesting them . Upstream PR: https://github.com/ergoplatform/ergo/pull/2927",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
