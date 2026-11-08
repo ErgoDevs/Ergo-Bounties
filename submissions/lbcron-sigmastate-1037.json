@@ -1,0 +1,18 @@
+{
+  "contributor": "LBCron",
+  "wallet_address": "9hvHyUAX2xxoshTZKNdECgtV7w2d8iUsSxgjHFiRb2mLd82JL1t",
+  "contact_method": "https://github.com/LBCron",
+  "work_link": "https://github.com/ergoplatform/sigmastate-interpreter/pull/1218",
+  "work_title": "Add compiler-level box verification util functions (closes #1037)",
+  "bounty_id": "ergoplatform/sigmastate-interpreter#1037",
+  "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1037",
+  "payment_currency": "ERG",
+  "bounty_value": 200,
+  "status": "in-progress",
+  "submission_date": "2026-11-08",
+  "expected_completion": "2026-12-31",
+  "description": "Fixes ergoplatform/sigmastate-interpreter#1037: Add compiler-level box verification util functions. Upstream PR: https://github.com/ergoplatform/sigmastate-interpreter/pull/1218",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
