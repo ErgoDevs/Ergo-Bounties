@@ -7,11 +7,12 @@
   "bounty_id": "rosen-bridge/ui#13",
   "original_issue_link": "https://github.com/rosen-bridge/ui/issues/13",
   "payment_currency": "RSN",
-  "bounty_value": 500.0,
-  "status": "awaiting-review",
+  "bounty_value": 500,
+  "status": "in-progress",
   "submission_date": "2026-11-01",
   "description": "Validated Ergo withdrawal addresses in @rosen-bridge/watcher-app via the Watcher backend GET /address/validate/:address endpoint with trimmed/URL-encoded input, async loading/error UX guards in the withdrawal form, 6 Vitest unit tests, and a patch changeset.",
   "review_notes": "",
   "payment_tx_id": "",
-  "payment_date": ""
+  "payment_date": "",
+  "expected_completion": "2026-12-31"
 }
