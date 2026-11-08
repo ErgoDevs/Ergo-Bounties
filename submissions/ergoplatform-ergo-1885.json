@@ -1,0 +1,18 @@
+{
+  "contributor": "cocvn157",
+  "wallet_address": "9fKN3mmwCKKVx2Z4rgJ7eVdm33n7yK7TeLXpntRqWzobbCBbYR2",
+  "contact_method": "https://github.com/cocvn157",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2930",
+  "work_title": "Fix /wallet/payment/send timeout on large wallets (#1885)",
+  "bounty_id": "ergoplatform/ergo#1885",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1885",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500.0,
+  "status": "in-progress",
+  "submission_date": "2026-11-08",
+  "expected_completion": "2026-11-08",
+  "description": "Completed in https://github.com/ergoplatform/ergo/pull/2930: eliminated O(M * N) linear secret scanning and 27,000 redundant secp256k1 point multiplications in ErgoProvingInterpreter, added O(1) public-key lookup in WalletVars.ownsAddress and O(1) Set lookup in OffChainRegistry / ErgoWalletState.walletFilter, and added regression tests for large HD wallets.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
