@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "bounty_id": "ergoplatform/ergo#2092",
+  "Project": "[ergo#2092] Skip script execution in CleanupWorker for context-free transactions",
+  "Issue Link": "https://github.com/ergoplatform/ergo/issues/2092",
+  "Curator": "kushti",
+  "Hunter": "LBCron",
+  "Status": "In Progress",
+  "Value": "500 SigUSD",
+  "Submission Link": "https://github.com/ergoplatform/ergo/pull/2928",
+  "Work Branch": "https://github.com/LBCron/ergo/tree/fix/issue-2092-context-free-mempool-v6011",
+  "Wallet Address": "9hvHyUAX2xxoshTZKNdECgtV7w2d8iUsSxgjHFiRb2mLd82JL1t",
+  "Notes": "Skips script re-execution in CleanupWorker.validatePool for context-free unconfirmed transactions while verifying input/dataInput existence and tracking invalidated in-pool ancestor outputs on v6.0.11."
+}
