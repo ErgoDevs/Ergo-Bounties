@@ -8,7 +8,7 @@
   "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1598",
   "payment_currency": "SigUSD",
   "bounty_value": 500.0,
-  "status": "completed",
+  "status": "awaiting-review",
   "submission_date": "2026-11-08",
   "expected_completion": "2026-11-08",
   "description": "Completed in https://github.com/ergoplatform/ergo/pull/2921: optimized VersionedLDBAVLStorage.serializedVisitedNodes, VersionedLDBAVLStorage.update, and ProverNodeSerializer.toBytes (using pre-sized Array[Byte] + System.arraycopy to avoid Scala 2.12 ArrayBuilder.ofByte.++= boxing overhead), and added StoredNodeBytesSpecification verifying SHA-256 byte-for-byte equivalence against v6.0.11.",
