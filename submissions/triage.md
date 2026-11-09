@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-11-08 15:42 UTC
+Generated: 2026-11-09 19:20 UTC
 
 ## Ready Review
 
@@ -15,13 +15,11 @@ None.
 
 ## Waiting Upstream
 
-- [#148](https://github.com/ErgoDevs/Ergo-Bounties/pull/148) Claim Bounty ergoplatform/ergo-wallet-app#189 (1000 ERG) (upstream-unmerged)
-- [#147](https://github.com/ErgoDevs/Ergo-Bounties/pull/147) Claim Bounty rosen-bridge/ui#13 (500 RSN) (upstream-unmerged)
-- [#146](https://github.com/ErgoDevs/Ergo-Bounties/pull/146) Claim Bounty ergoplatform/explorer-backend#263 (100 ERG) (upstream-unmerged)
 - [#64](https://github.com/ErgoDevs/Ergo-Bounties/pull/64) Add submission details for bounty #78 (upstream-unmerged)
 
 ## Stale
 
+- [#170](https://github.com/ErgoDevs/Ergo-Bounties/pull/170) Claim bounty for ergoplatform/ergo#1885 (500 SigUSD) (stale-reservation)
 - [#91](https://github.com/ErgoDevs/Ergo-Bounties/pull/91) Re-file reservation: fleet-sdk/docs#8 milestones 1-3 (150 SigUSD) (stale-reservation)
 
 ## Invalid
