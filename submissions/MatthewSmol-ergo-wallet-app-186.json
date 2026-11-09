@@ -1,0 +1,18 @@
+{
+  "contributor": "MatthewSmol",
+  "wallet_address": "9huEpdY2PymUyRu96DipVoBXTMVbmWen1iQcQ4zXpSKpy7syHuo",
+  "contact_method": "Telegram: @PaulZibertK",
+  "work_link": "",
+  "work_title": "Node failover for signed transaction broadcast (#186)",
+  "bounty_id": "ergoplatform/ergo-wallet-app#186",
+  "original_issue_link": "https://github.com/ergoplatform/ergo-wallet-app/issues/186",
+  "payment_currency": "ERG",
+  "bounty_value": 300.0,
+  "status": "in-progress",
+  "submission_date": "2026-11-09",
+  "expected_completion": "2026-11-23",
+  "description": "Broadcast the already signed transaction over the preferred node and the known node list, stopping on the first accepted node and keeping the last error otherwise. Unit tests cover node ordering, de-duplication, failover and total failure.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
