@@ -10,7 +10,7 @@
   "bounty_value": 500.0,
   "status": "in-progress",
   "submission_date": "2026-11-08",
-  "expected_completion": "2026-11-08",
+  "expected_completion": "2026-12-31",
   "description": "Completed in https://github.com/ergoplatform/ergo/pull/2930: eliminated O(M * N) linear secret scanning and 27,000 redundant secp256k1 point multiplications in ErgoProvingInterpreter, added O(1) public-key lookup in WalletVars.ownsAddress and O(1) Set lookup in OffChainRegistry / ErgoWalletState.walletFilter, and added regression tests for large HD wallets.",
   "review_notes": "",
   "payment_tx_id": "",
