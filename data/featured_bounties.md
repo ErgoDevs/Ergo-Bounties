@@ -1,11 +1,11 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-11-09 04:06:56 -->
+<!-- Generated on: 2026-11-10 05:38:52 -->
 
 # Featured Bounties
 
 ## Navigation
 
-[![All Bounties](https://img.shields.io/badge/All%20Bounties-104-blue)](all.md) [![By Language](https://img.shields.io/badge/By%20Language-7-green)](summary.md#languages) [![By Currency](https://img.shields.io/badge/By%20Currency-7-yellow)](summary.md#currencies) [![By Organization](https://img.shields.io/badge/By%20Organization-8-orange)](summary.md#projects) [![New](https://img.shields.io/badge/New-Recent-blueviolet)](new-bounties.md) [![Active](https://img.shields.io/badge/Recently%20Active-Updated-success)](recently-active.md) [![Starter](https://img.shields.io/badge/Starter-Friendly-brightgreen)](starter-bounties.md) [![Stale](https://img.shields.io/badge/Stale-180d%2B-lightgrey)](stale-bounties.md)
+[![All Bounties](https://img.shields.io/badge/All%20Bounties-108-blue)](all.md) [![By Language](https://img.shields.io/badge/By%20Language-7-green)](summary.md#languages) [![By Currency](https://img.shields.io/badge/By%20Currency-7-yellow)](summary.md#currencies) [![By Organization](https://img.shields.io/badge/By%20Organization-8-orange)](summary.md#projects) [![New](https://img.shields.io/badge/New-Recent-blueviolet)](new-bounties.md) [![Active](https://img.shields.io/badge/Recently%20Active-Updated-success)](recently-active.md) [![Starter](https://img.shields.io/badge/Starter-Friendly-brightgreen)](starter-bounties.md) [![Stale](https://img.shields.io/badge/Stale-180d%2B-lightgrey)](stale-bounties.md)
 
 ## Top Bounties by Value
 
@@ -18,7 +18,7 @@
 
 | Date | Open Bounties | Total Value |
 |------|--------------|-------------|
-| [Nov 09, 2026](/data/all.md#all-bounties) | 104 | 97,181.55 ERG |
+| [Nov 10, 2026](/data/all.md#all-bounties) | 108 | 97,176.39 ERG |
 
 
 
