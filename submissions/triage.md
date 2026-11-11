@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-11-09 19:20 UTC
+Generated: 2026-11-11 16:47 UTC
 
 ## Ready Review
 
@@ -19,7 +19,6 @@ None.
 
 ## Stale
 
-- [#170](https://github.com/ErgoDevs/Ergo-Bounties/pull/170) Claim bounty for ergoplatform/ergo#1885 (500 SigUSD) (stale-reservation)
 - [#91](https://github.com/ErgoDevs/Ergo-Bounties/pull/91) Re-file reservation: fleet-sdk/docs#8 milestones 1-3 (150 SigUSD) (stale-reservation)
 
 ## Invalid
