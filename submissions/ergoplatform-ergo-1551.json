@@ -1,0 +1,18 @@
+{
+  "contributor": "cocvn157",
+  "wallet_address": "9fKN3mmwCKKVx2Z4rgJ7eVdm33n7yK7TeLXpntRqWzobbCBbYR2",
+  "contact_method": "https://github.com/cocvn157",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2941",
+  "work_title": "Return strict Seq/Vector from mempool readers instead of lazy Stream (#1551)",
+  "bounty_id": "ergoplatform/ergo#1551",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1551",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500.0,
+  "status": "in-progress",
+  "submission_date": "2026-11-11",
+  "expected_completion": "2026-12-31",
+  "description": "Completed in https://github.com/ergoplatform/ergo/pull/2941 (targeting v6.0.11): replaced lazy Stream collections returned from ErgoMemPoolReader, OrderedTxPool, and ErgoMemPool with strict Seq/Vector, removed redundant .toSeq conversions in CleanupWorker and CandidateGenerator, and updated ErgoReadersHolderSpec.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
