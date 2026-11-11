@@ -1,0 +1,18 @@
+{
+  "contributor": "cocvn157",
+  "wallet_address": "9fKN3mmwCKKVx2Z4rgJ7eVdm33n7yK7TeLXpntRqWzobbCBbYR2",
+  "contact_method": "https://github.com/cocvn157",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2940",
+  "work_title": "Take into account dataInputs during mempool updateFamily (#1156)",
+  "bounty_id": "ergoplatform/ergo#1156",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1156",
+  "payment_currency": "ERG",
+  "bounty_value": 200.0,
+  "status": "in-progress",
+  "submission_date": "2026-11-11",
+  "expected_completion": "2026-12-31",
+  "description": "Completed in https://github.com/ergoplatform/ergo/pull/2940 (targeting v6.0.11): updated OrderedTxPool.updateFamily to propagate transaction weight to unconfirmed parent transactions referenced via tx.dataInputs in addition to tx.inputs while preserving Set[WeightedTxId] deduplication, and added unit tests in ErgoMemPoolSpec.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
