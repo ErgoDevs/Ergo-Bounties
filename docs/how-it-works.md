@@ -9,6 +9,7 @@ The repository uses GitHub Actions to automatically track and update the list of
 ### Automation Schedule
 
 - **Daily Updates**: The bounty list is refreshed every day at midnight UTC
+- **Contested Bounty Sweep**: Open bounty issues are checked for stalled pull requests daily at 01:15 UTC, after the bounty list has refreshed
 - **Submission PR Triage**: Submission PRs are triaged when opened/updated and again daily at 09:00 UTC
 - **Ops Status**: A weekly ops issue is updated every Monday at 09:30 UTC
 - **Manual Trigger**: Maintainers can manually run the workflow when needed
@@ -56,6 +57,7 @@ Generated outputs:
 - `data/all.md`, `data/summary.md`, `data/featured_bounties.md`, `data/high-value-bounties.md`
 - `data/new-bounties.md`, `data/recently-active.md`, `data/stale-bounties.md`, `data/starter-bounties.md`
 - `data/by_language/*.md`, `data/by_currency/*.md`, `data/by_org/*.md`
+- `data/contested-bounties.md`, `data/contested_bounties.json`
 - `submissions/payment_status.md`, `submissions/payment_queue.md`, `submissions/paid.md`, `submissions/triage.md`
 - README badges and latest-update marker
 
@@ -143,6 +145,31 @@ The weekly ops workflow (`.github/workflows/ops-status.yml`) updates a GitHub is
 
 Maintainer operating steps live in the [maintainer runbook](maintainer-runbook.md).
 
+## Contested Bounty Detection
+
+Some bounties look ideal from the listing alone -- clear scope, fair reward -- and are traps anyway: contributor after contributor opens a pull request, none of them is ever merged, and the issue stays open forever because nothing ever closes it. Comment count does not catch this; linked pull requests do.
+
+The main automation is `.github/workflows/detect-contested-bounties.yml`, backed by `scripts/detect_contested_bounties.py`. It runs after the daily bounty update, reads every open bounty from `data/all.md`, and for each one walks the issue's GitHub timeline to find pull requests that reference it. An issue with two or more open pull requests and no pull request merged in the last 180 days is flagged as contested. Both thresholds are flags (`--min-open-prs`, `--merge-window-days`).
+
+The merge window matters: a `cross-referenced` event records a *mention*, not a fix. Without a recency limit, one pull request merged years ago that happened to say "related to #123" would immunise that bounty against ever being flagged again -- and because cross-references accumulate over an issue's whole life, the oldest bounties would be the most immunised, which is exactly backwards.
+
+This is read-only: the sweep never comments, labels, or closes anything. It writes:
+
+- `data/contested-bounties.md`: a dashboard of currently contested issues
+- `data/contested_bounties.json`: the full per-issue sweep data, keyed by issue URL
+
+### Reading the report honestly
+
+Every issue record carries its own `checked` date, because the sweep does not always finish:
+
+- An issue **missing** from `items` has never been checked. That is not the same as clear.
+- An issue present with an **older `checked` date** was checked then, not now. Also not the same as clear.
+- A run that was cut short sets `partial: true`, and the dashboard says the rest of the board was not checked.
+
+When a run is cut short, findings for issues it did not reach are carried forward from the previous run rather than dropped, and shown with the date they were actually observed. Otherwise a single rate-limited morning would replace a report full of known traps with whatever handful of issues got through -- which reads as good news. Carried entries are discarded once their bounty leaves the board, so the report cannot accumulate ghosts.
+
+If a run produces nothing at all (no token, or every request fails), the previous report is left in place rather than overwritten with an empty one. A GitHub `403` is only treated as a rate limit when the response headers say so; a `403` from an organisation's third-party application restrictions, a SAML requirement, or a disabled repository is a single skipped issue, not a reason to abandon the rest of the sweep on every future run.
+
 ## Technical Implementation
 
 The bounty tracking is implemented in Python using the GitHub API. The main components are:
@@ -166,6 +193,7 @@ The system generates:
 - `data/recently-active.md`: most recently updated bounties
 - `data/stale-bounties.md`: old bounties with little recent activity
 - `data/starter-bounties.md`: smaller, easier-to-start bounties
+- `data/contested-bounties.md`: bounties with stalled, unmerged pull requests (see [Contested Bounty Detection](#contested-bounty-detection))
 - Language-specific Markdown files in the `data/by_language/` directory
 - Currency-specific Markdown files in the `data/by_currency/` directory
 - Organization-specific Markdown files in the `data/by_org/` directory
