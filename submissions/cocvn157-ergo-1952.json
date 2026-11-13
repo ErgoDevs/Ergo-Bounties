@@ -1,0 +1,18 @@
+{
+  "contributor": "cocvn157",
+  "wallet_address": "9fKN3mmwCKKVx2Z4rgJ7eVdm33n7yK7TeLXpntRqWzobbCBbYR2",
+  "contact_method": "https://github.com/cocvn157",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2920",
+  "work_title": "Fix OrderedTxPool index consistency across family weight updates and removals (#1952)",
+  "bounty_id": "ergoplatform/ergo#1952",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1952",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500,
+  "status": "in-progress",
+  "submission_date": "2026-11-08",
+  "expected_completion": "2026-12-31",
+  "description": "Fixes ergoplatform/ergo#1952: OrderedTxPool inconsistency. Upstream PR: https://github.com/ergoplatform/ergo/pull/2920",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
