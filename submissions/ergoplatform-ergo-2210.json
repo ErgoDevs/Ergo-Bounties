@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2875",
+  "work_title": "Fix missing tokens, box #0 UTXOs, segment binary search, and rollback in ExtraIndexer (#2210)",
+  "bounty_id": "ergoplatform/ergo#2210",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/2210",
+  "payment_currency": "ERG",
+  "bounty_value": 200,
+  "status": "in-progress",
+  "submission_date": "2026-10-31",
+  "expected_completion": "2026-12-31",
+  "description": "Fixed missing tokens and token UTXOs in ExtraIndexer/IndexedToken/Segment: included globalBoxIndex == 0L in retrieveUtxos, made Segment.modBox directional/idempotent without mutating unmatched binary-search probe segments, preserved segment counts in IndexedToken.addEmissionAmount, guarded unvalidated re-mints and duplicate intra-tx inputs, and properly rolled back tokens and their child box segments in ExtraIndexer.removeAfter, with regression tests in SegmentSpec, ExtraIndexerSpecification, and ExtraIndexerReorgTokensSpec (ergoplatform/ergo#2210). Upstream PR: https://github.com/ergoplatform/ergo/pull/2875.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
