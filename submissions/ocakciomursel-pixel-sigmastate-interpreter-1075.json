@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/sigmastate-interpreter/pull/1203",
+  "work_title": "Add stripErgoTreeHeader and ergoTreeEqualNoHeader ErgoScript functions (#1075)",
+  "bounty_id": "ergoplatform/sigmastate-interpreter#1075",
+  "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1075",
+  "payment_currency": "SigUSD",
+  "bounty_value": 200,
+  "status": "in-progress",
+  "submission_date": "2026-10-18",
+  "expected_completion": "2026-12-31",
+  "description": "Added stripErgoTreeHeader and ergoTreeEqualNoHeader frontend predefined functions in SigmaPredef, documented in LangSpec.md, and tested in BasicOpsSpecification in https://github.com/ergoplatform/sigmastate-interpreter/pull/1203.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
