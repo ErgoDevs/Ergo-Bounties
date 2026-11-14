@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/sigmastate-interpreter/pull/1202",
+  "work_title": "Add GoldInsuranceExampleSpecification example (#1181)",
+  "bounty_id": "ergoplatform/sigmastate-interpreter#1181",
+  "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/1181",
+  "payment_currency": "ERG",
+  "bounty_value": 200,
+  "status": "in-progress",
+  "submission_date": "2026-10-18",
+  "expected_completion": "2026-12-31",
+  "description": "Added GoldInsuranceExampleSpecification demonstrating the Physical or digital gold simple insurance contract on Ergo and incorporating all maintainer review improvements in https://github.com/ergoplatform/sigmastate-interpreter/pull/1202.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
