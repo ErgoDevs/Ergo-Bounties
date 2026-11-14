@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2755",
+  "work_title": "FullBlockProcessor.isLinkable needed?",
+  "bounty_id": "ergoplatform/ergo#1125",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1125",
+  "payment_currency": "ERG",
+  "bounty_value": 200,
+  "status": "in-progress",
+  "submission_date": "2026-10-12",
+  "expected_completion": "2026-12-31",
+  "description": "Removed redundant FullBlockProcessor.isLinkable check and lazily resolved toApply in processBetterChain with fallback to nonBestBlock when intermediate fork blocks are missing, plus property test in VerifyADHistorySpecification (https://github.com/ergoplatform/ergo/pull/2755).",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
