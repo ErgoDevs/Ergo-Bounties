@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2750",
+  "work_title": "Rest endpoints `/utils/*` accept GET parameters with oversized ErgoTree/Address",
+  "bounty_id": "ergoplatform/ergo#1868",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1868",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500,
+  "status": "in-progress",
+  "submission_date": "2026-10-12",
+  "expected_completion": "2026-12-31",
+  "description": "Added POST /utils/addressToRaw and POST /utils/rawToAddress endpoints, OpenAPI specs, and oversized (>2000 char) ErgoTree/Pay2SAddress tests in UtilsApiRouteSpec (https://github.com/ergoplatform/ergo/pull/2750).",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
