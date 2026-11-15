@@ -1,0 +1,18 @@
+{
+  "contributor": "ocakciomursel-pixel",
+  "wallet_address": "9ec1CrJPSGcpcNHupv4TnqapPqvJaw6NWC5x21KxVDAtQYTCChT",
+  "contact_method": "https://github.com/ocakciomursel-pixel",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2876",
+  "work_title": "Make ErgoNodeViewHolder and its callers responsive with end-to-end backpressure (#1588)",
+  "bounty_id": "ergoplatform/ergo#1588",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1588",
+  "payment_currency": "SigUSD",
+  "bounty_value": 1000,
+  "status": "in-progress",
+  "submission_date": "2026-10-31",
+  "expected_completion": "2026-12-31",
+  "description": "Made ErgoNodeViewHolder and its callers responsive with end-to-end backpressure across ErgoNodeViewHolder (ModifiersFromRemoteProcessed and LocallyGeneratedModifierProcessed replies), ErgoNodeViewSynchronizer (bounded MaxInFlightViewHolderBatches = 32, deferred MessageProcessed, download throttling), PeerSynchronizer, NetworkController, PeerConnectionHandler (per-peer inbound message/byte limits with TCP SuspendReading/ResumeReading), BlocksApiRoute (POST /blocks ask backpressure), and CandidateGenerator, with unit and property tests (ergoplatform/ergo#1588). Upstream PR: https://github.com/ergoplatform/ergo/pull/2876.",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
