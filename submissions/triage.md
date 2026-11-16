@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-11-15 15:58 UTC
+Generated: 2026-11-16 19:04 UTC
 
 ## Ready Review
 
@@ -19,6 +19,7 @@ None.
 
 ## Stale
 
+- [#153](https://github.com/ErgoDevs/Ergo-Bounties/pull/153) Reserve rosen-bridge/ui#8 (INA699) (stale-reservation)
 - [#91](https://github.com/ErgoDevs/Ergo-Bounties/pull/91) Re-file reservation: fleet-sdk/docs#8 milestones 1-3 (150 SigUSD) (stale-reservation)
 
 ## Invalid
