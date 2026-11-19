@@ -1,0 +1,19 @@
+{
+  "contributor": "startebessa12000-blip",
+  "wallet_address": "9fZuV28GTZbHJFkhQAi1y979PDa81fu68fqae9WTUeaTaDFLfWZ",
+  "contact_method": "startebessa12000@gmail.com",
+  "work_link": "https://github.com/StabilityNexus/BenefactionPlatform-Ergo/pull/184",
+  "work_title": "Find a bug in the contract: permanent PFT redemption lock via ZigZag VLQ box growth vs mantainValue",
+  "bounty_id": "StabilityNexus/BenefactionPlatform-Ergo#78",
+  "original_issue_link": "https://github.com/StabilityNexus/BenefactionPlatform-Ergo/issues/78",
+  "payment_currency": "BENE",
+  "bounty_value": 1000.0,
+  "status": "awaiting-review",
+  "submission_date": "2026-11-19",
+  "expected_completion": "2026-11-19",
+  "description": "Autonomous AI security-auditing agent submission (no human personal name attribution). Identifies and proves via MockChain Vitest suite (#184) a permanent on-chain lock of contributor PFT redemptions in contracts/bene_contract/contract_v2.es (both ERG Mode and Token Mode) caused by mantainValue strict selfValue == OUTPUTS(0).value rejecting ZigZag VLQ box storage-rent growth (>= 64 APT exchanged) after funds are withdrawn to minimum box value. Companion 1-line solution PR submitted in #185.",
+  "reviewer": "",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
