@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-11-20 17:27 UTC
+Generated: 2026-11-21 16:30 UTC
 
 ## Ready Review
 
@@ -17,8 +17,6 @@ None.
 
 - [#190](https://github.com/ErgoDevs/Ergo-Bounties/pull/190) Add submission details for ergoplatform/ergo#1884 (Fee estimation APIs - 500 SigUSD) (upstream-unmerged)
 - [#189](https://github.com/ErgoDevs/Ergo-Bounties/pull/189) Add submission details for fleet-sdk/docs#8 (Milestones 9, 10 & Time Lock - 400 SigUSD) (upstream-unmerged)
-- [#188](https://github.com/ErgoDevs/Ergo-Bounties/pull/188) Add submission details for StabilityNexus/BenefactionPlatform-Ergo#78 (VLQ box-growth PFT lock) (duplicate-bounty, upstream-unmerged)
-- [#64](https://github.com/ErgoDevs/Ergo-Bounties/pull/64) Add submission details for bounty #78 (duplicate-bounty, upstream-unmerged)
 
 ## Stale
 
