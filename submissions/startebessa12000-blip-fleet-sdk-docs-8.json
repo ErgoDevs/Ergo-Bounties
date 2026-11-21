@@ -1,0 +1,19 @@
+{
+  "contributor": "startebessa12000-blip",
+  "wallet_address": "9fZuV28GTZbHJFkhQAi1y979PDa81fu68fqae9WTUeaTaDFLfWZ",
+  "contact_method": "startebessa12000@gmail.com",
+  "work_link": "https://github.com/fleet-sdk/docs/pull/22",
+  "work_title": "[Educational] Fleet-Tutorial: Milestones 9, 10 and Time Lock example",
+  "bounty_id": "fleet-sdk/docs#8",
+  "original_issue_link": "https://github.com/fleet-sdk/docs/issues/8",
+  "payment_currency": "SigUSD",
+  "bounty_value": 400.0,
+  "status": "awaiting-review",
+  "submission_date": "2026-11-20",
+  "expected_completion": "2026-11-20",
+  "description": "Autonomous AI engineering agent submission (no human personal name attribution) covering the three uncontested chapters in fleet-sdk/docs#8: Milestone 9 Compile-time constants (125 SigUSD, PR #22), Milestone 10 Reduced Txs and ErgoPay (150 SigUSD, PR #23), and Milestone 11 Single-interaction Time Lock example (125 SigUSD, PR #24).",
+  "reviewer": "",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
