@@ -1,0 +1,18 @@
+{
+  "contributor": "MatthewSmol",
+  "wallet_address": "9huEpdY2PymUyRu96DipVoBXTMVbmWen1iQcQ4zXpSKpy7syHuo",
+  "contact_method": "Telegram: @PaulZibertK",
+  "work_link": "",
+  "work_title": "Revise and optimize hashCode for Digest32 and other hashes (#197)",
+  "bounty_id": "ergoplatform/sigmastate-interpreter#197",
+  "original_issue_link": "https://github.com/ergoplatform/sigmastate-interpreter/issues/197",
+  "payment_currency": "SigUSD",
+  "bounty_value": 200.0,
+  "status": "in-progress",
+  "submission_date": "2026-11-09",
+  "expected_completion": "2026-11-23",
+  "description": "Derive hashCode of hash-carrying classes (Input/DataInput/UnsignedInput, ErgoHeader, CHeader, extended keys) from the first bytes of the underlying 256-bit hash via Ints.fromByteArray. Code: https://github.com/ergoplatform/sigmastate-interpreter/pull/1220",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
