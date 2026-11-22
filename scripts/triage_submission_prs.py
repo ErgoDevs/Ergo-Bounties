@@ -17,6 +17,8 @@ from urllib.request import Request, urlopen
 
 
 VALID_STATUSES = {"in-progress", "awaiting-review", "reviewed", "paid"}
+ONGOING_PROGRAM_IDS = {"program-edu", "program-dev"}
+ONGOING_PROGRAMS_DOC_URL = "https://github.com/ErgoDevs/Ergo-Bounties/blob/main/docs/ongoing-programs.md"
 PLACEHOLDERS = {"", "YOUR_GITHUB_USERNAME", "YOUR_WALLET_ADDRESS", "YOUR_CONTACT_INFO"}
 MARKER = "<!-- ergo-bounties-submission-triage -->"
 LABELS = {
@@ -208,21 +210,34 @@ def validate_submission(
         "submission_date",
     ]
     status = str(data.get("status", "")).lower()
+    raw_bounty_id = normalize_bounty_id(str(data.get("bounty_id", "")).strip())
+    is_ongoing_program = raw_bounty_id in ONGOING_PROGRAM_IDS
     linked_merged: bool | None = None
-    reviewer = issue_author(gh, str(data.get("original_issue_link", "")).strip())
+    orig_link = str(data.get("original_issue_link", "")).strip()
+    reviewer = str(data.get("reviewer", "")).strip() or issue_author(gh, orig_link)
     expected_date: dt.date | None = None
 
     for key in required:
         value = data.get(key)
-        if key == "work_link" and status == "in-progress":
+        if key in {"work_link", "submission_date"} and status == "in-progress":
             continue
-        if str(value or "").strip() in PLACEHOLDERS:
+        rendered = "" if value is None else str(value).strip()
+        if rendered in PLACEHOLDERS:
             issues.append(f"`{key}` is missing or still a placeholder")
 
-    if "original_issue_link" in data and not github_issue_url(str(data.get("original_issue_link", ""))):
-        issues.append("`original_issue_link` must be a GitHub issue or PR URL")
+    if orig_link:
+        valid_orig = bool(github_issue_url(orig_link)) or (
+            is_ongoing_program and orig_link == ONGOING_PROGRAMS_DOC_URL
+        )
+        if not valid_orig:
+            issues.append("`original_issue_link` must be a GitHub issue or PR URL")
 
-    if not isinstance(data.get("bounty_value"), (int, float)) or data.get("bounty_value", 0) <= 0:
+    raw_val = data.get("bounty_value")
+    is_num = isinstance(raw_val, (int, float)) and not isinstance(raw_val, bool)
+    if is_ongoing_program:
+        if not is_num or raw_val < 0:
+            issues.append("`bounty_value` must be a non-negative number")
+    elif not is_num or raw_val <= 0:
         issues.append("`bounty_value` must be a positive number")
 
     if status not in VALID_STATUSES:
@@ -269,16 +284,20 @@ def validate_submission(
         if not str(data.get("payment_date", "")).strip():
             issues.append("`paid` submissions require `payment_date`")
 
-    if status == "reviewed" and not reviewer:
+    if status == "reviewed" and not reviewer and not is_ongoing_program:
         issues.append("reviewer could not be inferred from `original_issue_link`")
 
     if str(data.get("contributor", "")).strip().lower() != pr["user"]["login"].lower():
         issues.append(f"`contributor` does not match PR author `{pr['user']['login']}`")
 
-    bounty_id = normalize_bounty_id(str(data.get("bounty_id", "")).strip())
-    if not bounty_id:
-        bounty_id = normalize_bounty_id(str(data.get("original_issue_link", "")).strip())
-    duplicates = [n for n in bounty_claims.get(bounty_id, []) if n != pr["number"]]
+    bounty_id = raw_bounty_id
+    if not bounty_id and not is_ongoing_program:
+        bounty_id = normalize_bounty_id(orig_link)
+    duplicates = (
+        []
+        if is_ongoing_program
+        else [n for n in bounty_claims.get(bounty_id, []) if n != pr["number"]]
+    )
     if bounty_id and duplicates:
         issues.append(f"duplicate bounty claim also open in PR(s): {', '.join(f'#{n}' for n in duplicates)}")
 
@@ -316,7 +335,7 @@ def bounty_claims(submissions: dict[int, list[dict[str, Any]]]) -> dict[str, lis
             bounty_id = normalize_bounty_id(str(data.get("bounty_id", "")).strip())
             if not bounty_id:
                 bounty_id = normalize_bounty_id(str(data.get("original_issue_link", "")).strip())
-            if bounty_id:
+            if bounty_id and bounty_id not in ONGOING_PROGRAM_IDS:
                 claims.setdefault(bounty_id, []).append(pr_number)
     return claims
 

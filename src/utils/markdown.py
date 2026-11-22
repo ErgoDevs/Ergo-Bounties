@@ -242,6 +242,9 @@ def generate_standard_bounty_table(
         elif amount == "Ongoing": # Handle ongoing programs specifically
              # Link to details for ongoing programs
              reserve_button = "[Details](/docs/ongoing-programs.md)"
+        elif bounty.get("possibly_resolved"):
+            # Yellow warning badge when at least one merged PR references this open issue
+            reserve_button = f"[![Possibly Resolved](https://img.shields.io/badge/-Possibly%20Resolved-yellow?style=flat-square)]({claim_url})"
         else:
             # Green reserve badge/button
             reserve_button = f"[![Reserve](https://img.shields.io/badge/-Reserve-brightgreen?style=flat-square)]({claim_url})"
@@ -267,6 +270,39 @@ def generate_standard_bounty_table(
 
         content += f"| {' | '.join(row_parts)} |\n"
     return content
+
+
+def generate_possibly_resolved_notes(bounties: List[Dict[str, Any]]) -> str:
+    """
+    Generate an explanatory note and merged-PR reference table for ``possibly-resolved`` bounties.
+    """
+    intro = (
+        "> **Note:** Each open issue below is referenced by at least one already-merged upstream pull request. "
+        "Because fixes sometimes land on release branches without auto-closing the issue—or address only part of "
+        "the scope—entries are surfaced here for human review rather than removed automatically.\n\n"
+    )
+    if not bounties:
+        return intro + "*No open bounties currently have merged pull request references.*\n"
+
+    table = "## Merged PR References\n\n"
+    table += "| Bounty | Merged PR(s) |\n"
+    table += "|---|---|\n"
+    for bounty in bounties:
+        owner = bounty.get("owner", "")
+        repo_name = get_repo_name_from_input(bounty.get("repo", ""))
+        issue_num = bounty.get("issue_number", "")
+        bounty_label = f"{owner}/{repo_name}#{issue_num}"
+        bounty_link = _safe_markdown_link(bounty_label, bounty.get("url", ""))
+        merged_prs = bounty.get("merged_prs") or []
+        pr_links = []
+        for pr in merged_prs:
+            pr_num = pr.get("number")
+            pr_title = str(pr.get("title") or "").strip()
+            label = f"#{pr_num} ({pr_title})" if pr_title else f"#{pr_num}"
+            pr_links.append(_safe_markdown_link(label, pr.get("url", "")))
+        prs_cell = ", ".join(pr_links) if pr_links else "-"
+        table += f"| {bounty_link} | {prs_cell} |\n"
+    return intro + table
 
 def generate_ongoing_programs_table(ongoing_programs: List[Dict[str, Any]], link_prefix: str = "") -> str:
     """

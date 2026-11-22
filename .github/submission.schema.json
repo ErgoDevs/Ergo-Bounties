@@ -39,7 +39,7 @@
     },
     "original_issue_link": {
       "type": "string",
-      "pattern": "^$|^https://github\\.com/[^/]+/[^/]+/(issues|pull)/[0-9]+$"
+      "pattern": "^$|^https://github\\.com/[^/]+/[^/]+/(issues|pull)/[0-9]+$|^https://github\\.com/ErgoDevs/Ergo-Bounties/blob/main/docs/ongoing-programs\\.md$"
     },
     "payment_currency": {
       "type": "string",
@@ -47,7 +47,7 @@
     },
     "bounty_value": {
       "type": "number",
-      "exclusiveMinimum": 0
+      "minimum": 0
     },
     "status": {
       "type": "string",
@@ -76,6 +76,21 @@
     }
   },
   "allOf": [
+    {
+      "if": {
+        "not": {
+          "properties": {
+            "bounty_id": { "pattern": "^program-(edu|dev)$" }
+          },
+          "required": ["bounty_id"]
+        }
+      },
+      "then": {
+        "properties": {
+          "bounty_value": { "exclusiveMinimum": 0 }
+        }
+      }
+    },
     {
       "if": {
         "properties": { "status": { "const": "paid" } },

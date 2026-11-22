@@ -36,6 +36,7 @@ from ..utils.markdown import (
     generate_navigation_section,
     # generate_filter_section, # Not used currently
     generate_standard_bounty_table,
+    generate_possibly_resolved_notes,
     generate_ongoing_programs_table,
     update_readme_badges,
     update_partially_generated_file,
@@ -856,15 +857,23 @@ def generate_bounty_discovery_files(
 
     beginner = find_beginner_friendly_bounties(bounty_data)
     stale = [b for b in bounty_data if age_days(b) >= 180 and b.get("status", "").lower() == "open"]
+    possibly_resolved = [b for b in bounty_data if b.get("possibly_resolved")]
 
     views = [
-        ("new-bounties.md", "# New Bounties", bounty_data, "new"),
-        ("recently-active.md", "# Recently Active Bounties", bounty_data, "updated"),
-        ("stale-bounties.md", "# Stale Bounties", stale, "old"),
-        ("starter-bounties.md", "# Starter Bounties", beginner, "updated"),
+        ("new-bounties.md", "# New Bounties", bounty_data, "new", ""),
+        ("recently-active.md", "# Recently Active Bounties", bounty_data, "updated", ""),
+        ("stale-bounties.md", "# Stale Bounties", stale, "old", ""),
+        ("starter-bounties.md", "# Starter Bounties", beginner, "updated", ""),
+        (
+            "possibly-resolved.md",
+            "# Possibly Resolved Bounties",
+            possibly_resolved,
+            "value",
+            generate_possibly_resolved_notes(possibly_resolved),
+        ),
     ]
 
-    for filename, title, bounties, sort_by in views:
+    for filename, title, bounties, sort_by, extra_content in views:
         _generate_markdown_page(
             filename=str(Path(bounties_dir) / filename),
             title=title,
@@ -873,6 +882,7 @@ def generate_bounty_discovery_files(
             conversion_rates=conversion_rates,
             total_bounties=total_bounties,
             nav_relative_path="",
+            extra_content=extra_content,
             sort_by=sort_by
         )
 
