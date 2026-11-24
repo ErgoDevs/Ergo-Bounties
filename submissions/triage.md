@@ -1,6 +1,6 @@
 # Submission Triage
 
-Generated: 2026-11-23 20:44 UTC
+Generated: 2026-11-24 19:49 UTC
 
 ## Ready Review
 
@@ -20,6 +20,8 @@ None.
 
 ## Stale
 
+- [#181](https://github.com/ErgoDevs/Ergo-Bounties/pull/181) Reserve bounty ergoplatform/sigmastate-interpreter#197 (stale-reservation)
+- [#179](https://github.com/ErgoDevs/Ergo-Bounties/pull/179) Reserve bounty ergoplatform/ergo-wallet-app#186 (stale-reservation)
 - [#153](https://github.com/ErgoDevs/Ergo-Bounties/pull/153) Reserve rosen-bridge/ui#8 (INA699) (stale-reservation)
 
 ## Invalid
