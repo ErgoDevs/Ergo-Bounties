@@ -1,0 +1,17 @@
+{
+    "contributor":  "mamoun123121314",
+    "wallet_address":  "9hTcHpkQYmq8AETagsQ6RypRoGrXifC4g4dYECqfePLKFcGTLYc",
+    "contact_method":  "GitHub: mamoun123121314",
+    "work_link":  "https://github.com/mamoun123121314/ergo-public-api-guide/pull/3",
+    "work_title":  "Ergo address validation with public APIs",
+    "bounty_id":  "program-edu",
+    "original_issue_link":  "https://github.com/ErgoDevs/Ergo-Bounties/pull/191",
+    "payment_currency":  "ERG",
+    "bounty_value":  5,
+    "status":  "awaiting-review",
+    "submission_date":  "2026-11-26",
+    "description":  "Published a guide and standard-library Python validator that checks base58 format locally and confirms the address against the read-only public explorer API, with explicit handling of HTTP errors and API mismatches. Includes 3 unit tests. Modest value requested for reviewer determination.",
+    "review_notes":  "",
+    "payment_tx_id":  "",
+    "payment_date":  ""
+}
