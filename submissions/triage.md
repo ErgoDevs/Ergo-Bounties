@@ -1,9 +1,10 @@
 # Submission Triage
 
-Generated: 2026-11-25 18:55 UTC
+Generated: 2026-11-26 18:44 UTC
 
 ## Ready Review
 
+- [#192](https://github.com/ErgoDevs/Ergo-Bounties/pull/192) \[EDUCATIONAL\] Check an Ergo address with public APIs (ready-review)
 - [#76](https://github.com/ErgoDevs/Ergo-Bounties/pull/76) Create ergoplatform-ergo-1384.json (payment request, 1000 SigUSD) (ready-review)
 - [#55](https://github.com/ErgoDevs/Ergo-Bounties/pull/55) Create ergoplatform-ergo-1909.json (reservation, 200 SigUSD) (ready-review)
 - [#46](https://github.com/ErgoDevs/Ergo-Bounties/pull/46) Create ergoplatform-ergo-2184.json (payment request, 1 g GOLD) (ready-review)
