@@ -1,0 +1,17 @@
+{
+    "contributor":  "mamoun123121314",
+    "wallet_address":  "9hTcHpkQYmq8AETagsQ6RypRoGrXifC4g4dYECqfePLKFcGTLYc",
+    "contact_method":  "GitHub: mamoun123121314",
+    "work_link":  "https://github.com/mamoun123121314/ergo-public-api-guide/pull/2",
+    "work_title":  "ERG and nanoERG exact arithmetic guide",
+    "bounty_id":  "program-edu",
+    "original_issue_link":  "https://github.com/ErgoDevs/Ergo-Bounties/pull/191",
+    "payment_currency":  "ERG",
+    "bounty_value":  5,
+    "status":  "awaiting-review",
+    "submission_date":  "2026-11-26",
+    "description":  "Published a guide and standard-library Python helper for exact ERG/nanoERG conversion, canonical formatting and minimum-fee checks. Includes 4 unit tests covering one-nanoERG precision, round-trips, invalid inputs and fee boundaries. Modest value requested for reviewer determination.",
+    "review_notes":  "",
+    "payment_tx_id":  "",
+    "payment_date":  ""
+}
