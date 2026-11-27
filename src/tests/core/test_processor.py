@@ -187,3 +187,93 @@ def test_project_totals_merge_owner_case(processor):
     assert list(processor.project_totals) == ["stabilitynexus"]
     assert processor.project_totals["stabilitynexus"]["count"] == 2
     assert processor.project_totals["stabilitynexus"]["value"] == 100.0
+
+
+def test_pr_references_issue_matches_ergo_conventions_and_rejects_false_positives():
+    from src.api.github_client import _pr_references_issue
+
+    assert _pr_references_issue(
+        {"number": 1786, "title": "1753 - Unconfirmed Transactions", "body": ""},
+        "ergoplatform",
+        "ergo",
+        1753,
+    )
+    assert _pr_references_issue(
+        {"number": 1887, "title": "i1885 wallet timeout repro", "body": ""},
+        "ergoplatform",
+        "ergo",
+        1885,
+    )
+    assert _pr_references_issue(
+        {"number": 1871, "title": "I1868 utils endpoint with post requests", "body": ""},
+        "ergoplatform",
+        "ergo",
+        1868,
+    )
+    assert _pr_references_issue(
+        {"number": 2410, "title": "Fix fee floor", "body": "Closes #1884"},
+        "ergoplatform",
+        "ergo",
+        1884,
+    )
+    assert not _pr_references_issue(
+        {"number": 2500, "title": "Unrelated", "body": "See other-org/other-repo#1884 and #18840"},
+        "ergoplatform",
+        "ergo",
+        1884,
+    )
+
+
+def test_search_merged_prs_batches_queries_and_flags_possibly_resolved(processor, mock_github_client):
+    client = GitHubClient(token="dummy")
+    with patch.object(client, "_make_json_request") as mock_req:
+        mock_req.side_effect = [
+            ({"items": []}, None),
+            (
+                {
+                    "items": [
+                        {
+                            "number": 1786,
+                            "title": "1753 - Unconfirmed Transactions",
+                            "body": "",
+                            "html_url": "https://github.com/ergoplatform/ergo/pull/1786",
+                        }
+                    ]
+                },
+                None,
+            ),
+        ]
+        res = client.search_merged_prs_for_issues(
+            "ergoplatform", "ergo", [1753, 1, 2, 3, 4, 5, 6]
+        )
+
+    assert mock_req.call_count == 2
+    assert res == {
+        1753: [
+            {
+                "number": 1786,
+                "title": "1753 - Unconfirmed Transactions",
+                "url": "https://github.com/ergoplatform/ergo/pull/1786",
+            }
+        ]
+    }
+
+    mock_github_client.get_repository_issues.return_value = [
+        {
+            "number": 1753,
+            "title": "Wrapping unconfirmed transactions",
+            "state": "open",
+            "labels": [{"name": "B-1000 SigUSD"}],
+            "html_url": "https://github.com/ergoplatform/ergo/issues/1753",
+            "body": "",
+            "user": {"login": "kushti"},
+        }
+    ]
+    mock_github_client.search_merged_prs_for_issues.return_value = res
+
+    processor.process_repositories([{"owner": "ergoplatform", "repo": "ergo"}])
+
+    assert len(processor.bounty_data) == 1
+    assert processor.possibly_resolved_count == 1
+    assert processor.bounty_data[0]["possibly_resolved"] is True
+    assert processor.bounty_data[0]["merged_prs"][0]["number"] == 1786

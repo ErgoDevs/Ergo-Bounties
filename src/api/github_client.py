@@ -13,12 +13,55 @@ Primary interactions:
 """
 
 import logging
+import re
+import urllib.parse
 from typing import List, Dict, Any, Optional, Tuple
+
+import requests
 
 from src.api.base_client import BaseClient
 
 # Configure logging
 logger = logging.getLogger(__name__)
+
+
+def _pr_references_issue(pr: Dict[str, Any], owner: str, repo: str, issue_number: int) -> bool:
+    """
+    Check whether a merged PR genuinely references ``owner/repo#issue_number``.
+
+    Handles common Ergo repository conventions:
+    - ``#1884`` or ``Closes #1884`` in title/body (ignoring ``other/repo#1884``)
+    - ``owner/repo#1884`` or ``https://github.com/owner/repo/issues/1884`` in title/body
+    - ``1753 - ...``, ``1588 ...``, ``i1885``, ``I1868`` in the PR title
+    """
+    if pr.get("number") == issue_number:
+        return False
+
+    num = re.escape(str(issue_number))
+    repo_slug = f"{re.escape(owner)}/{re.escape(repo)}"
+    title = str(pr.get("title") or "")
+    body = str(pr.get("body") or "")
+    combined = f"{title}\n{body}"
+
+    # Explicit repo-qualified reference or full GitHub issue URL
+    qualified_re = re.compile(
+        rf"(?:https?://github\.com/{repo_slug}/issues/{num}|(?<![A-Za-z0-9_.-]){repo_slug}#{num})(?!\d)",
+        re.IGNORECASE,
+    )
+    if qualified_re.search(combined):
+        return True
+
+    # Unqualified #1234 (must not be preceded by owner/repo, word char, or slash)
+    unqualified_hash_re = re.compile(rf"(?<![A-Za-z0-9_/.-])#{num}(?!\d)")
+    if unqualified_hash_re.search(combined):
+        return True
+
+    # Title-only shorthand common in Ergo repos: "1753 - ...", "i1885 ...", "I1868 ..."
+    title_shorthand_re = re.compile(rf"(?<![A-Za-z0-9_#/.-])[iI]?{num}(?!\d)")
+    if title_shorthand_re.search(title):
+        return True
+
+    return False
 
 
 class GitHubClient(BaseClient):
@@ -140,3 +183,57 @@ class GitHubClient(BaseClient):
         """
         initial_url = f"/repos/{owner}/{repo}/issues?state={state}&per_page=100"
         return self._fetch_paginated_data(initial_url, item_type=f"{state} issues")
+
+    def search_merged_prs_for_issues(
+        self, owner: str, repo: str, issue_numbers: List[int]
+    ) -> Dict[int, List[Dict[str, Any]]]:
+        """
+        Search merged pull requests in ``owner/repo`` that reference any of ``issue_numbers``.
+
+        Batches up to 6 issue numbers per GitHub Search API query (at most 5 ``OR`` operators,
+        within GitHub's search syntax limit) and post-filters results with boundary-aware matching
+        so open bounties with already-merged work can be surfaced as ``possibly-resolved``.
+        """
+        valid_numbers = sorted({int(n) for n in issue_numbers if isinstance(n, int) and n > 0})
+        if not valid_numbers:
+            return {}
+
+        matches: Dict[int, Dict[int, Dict[str, Any]]] = {}
+        batch_size = 6  # <= 5 OR operators per GitHub Search API query
+
+        for idx in range(0, len(valid_numbers), batch_size):
+            batch = valid_numbers[idx : idx + batch_size]
+            terms = " OR ".join(str(n) for n in batch)
+            query = f"repo:{owner}/{repo} is:pr is:merged ({terms})" if len(batch) > 1 else f"repo:{owner}/{repo} is:pr is:merged {terms}"
+            url = f"/search/issues?per_page=100&q={urllib.parse.quote(query)}"
+
+            try:
+                data, _ = self._make_json_request(url)
+            except requests.exceptions.RequestException as exc:
+                logger.warning("Merged PR search failed for %s/%s (%s): %s", owner, repo, batch, exc)
+                continue
+
+            if not isinstance(data, dict):
+                continue
+
+            items = data.get("items")
+            if not isinstance(items, list):
+                continue
+
+            for item in items:
+                pr_number = item.get("number")
+                pr_url = item.get("html_url")
+                if not isinstance(pr_number, int) or not pr_url:
+                    continue
+                for issue_num in batch:
+                    if _pr_references_issue(item, owner, repo, issue_num):
+                        matches.setdefault(issue_num, {})[pr_number] = {
+                            "number": pr_number,
+                            "title": str(item.get("title") or ""),
+                            "url": str(pr_url),
+                        }
+
+        return {
+            issue_num: [prs_by_num[k] for k in sorted(prs_by_num)]
+            for issue_num, prs_by_num in matches.items()
+        }

@@ -292,3 +292,46 @@ def test_update_readme_badges_updates_encoded_plus_counts(tmp_path, monkeypatch)
     assert "Open%20Bounties-108%2B-4CAF50" in content
     assert "Total%20Value-111,126.69%20ERG-2196F3" in content
     assert "High%20Value-38%2B%20Over%201000%20ERG-FFC107" in content
+
+
+def test_possibly_resolved_badge_and_discovery_page(tmp_path, mock_conversion_rates):
+    from src.generators.main import generate_bounty_discovery_files
+    from src.utils.markdown import generate_possibly_resolved_notes
+
+    bounties = [
+        {
+            "owner": "ergoplatform",
+            "repo": "ergo",
+            "title": "Wrapping unconfirmed transactions",
+            "url": "https://github.com/ergoplatform/ergo/issues/1753",
+            "amount": "1000",
+            "currency": "SigUSD",
+            "primary_lang": "Scala",
+            "issue_number": 1753,
+            "creator": "kushti",
+            "status": "open",
+            "created_at": "2022-06-24T00:00:00Z",
+            "updated_at": "2026-08-02T00:00:00Z",
+            "comments": 3,
+            "possibly_resolved": True,
+            "merged_prs": [
+                {
+                    "number": 1786,
+                    "title": "1753 - Unconfirmed Transactions",
+                    "url": "https://github.com/ergoplatform/ergo/pull/1786",
+                }
+            ],
+        }
+    ]
+
+    table = generate_standard_bounty_table(bounties, mock_conversion_rates)
+    assert "Possibly%20Resolved-yellow" in table
+
+    notes = generate_possibly_resolved_notes(bounties)
+    assert "[ergoplatform/ergo#1753](https://github.com/ergoplatform/ergo/issues/1753)" in notes
+    assert "[#1786 (1753 - Unconfirmed Transactions)](https://github.com/ergoplatform/ergo/pull/1786)" in notes
+
+    generate_bounty_discovery_files(bounties, mock_conversion_rates, 1, str(tmp_path))
+    pr_page = (tmp_path / "possibly-resolved.md").read_text(encoding="utf-8")
+    assert "# Possibly Resolved Bounties" in pr_page
+    assert "https://github.com/ergoplatform/ergo/pull/1786" in pr_page

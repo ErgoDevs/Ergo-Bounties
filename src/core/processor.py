@@ -82,6 +82,7 @@ class BountyProcessor:
         self.bounty_data = []
         self.project_totals = {}
         self.reserved_count = 0
+        self.possibly_resolved_count = 0
         self.reserved_bounty_ids = self._get_reserved_bounty_ids()
 
     def _get_reserved_bounty_ids(self) -> Set[str]:
@@ -146,10 +147,33 @@ class BountyProcessor:
             # Get issues
             issues = self.github_client.get_repository_issues(owner, repo_name)
 
+            start_idx = len(self.bounty_data)
             # Process each issue
             for issue in issues:
                 self._process_issue(issue, owner, repo_name, primary_lang, secondary_lang)
+
+            repo_bounties = self.bounty_data[start_idx:]
+            issue_bounties = [
+                b for b in repo_bounties
+                if isinstance(b.get("issue_number"), int) and "/pull/" not in str(b.get("url", ""))
+            ]
+            search_fn = getattr(self.github_client, "search_merged_prs_for_issues", None)
+            if issue_bounties and callable(search_fn):
+                merged_map = search_fn(
+                    owner,
+                    repo_name,
+                    [b["issue_number"] for b in issue_bounties],
+                )
+                if isinstance(merged_map, dict):
+                    for bounty in issue_bounties:
+                        merged_prs = merged_map.get(bounty["issue_number"], [])
+                        if merged_prs:
+                            bounty["merged_prs"] = merged_prs
+                            bounty["possibly_resolved"] = True
+                            self.possibly_resolved_count += 1
+
         logger.info(f"Reserved bounties: {self.reserved_count}")
+        logger.info(f"Possibly resolved bounties: {self.possibly_resolved_count}")
 
     def process_organizations(self, orgs_to_query: List[Dict[str, str]], repos_to_query: List[Dict[str, str]]) -> List[Dict[str, str]]:
         """
