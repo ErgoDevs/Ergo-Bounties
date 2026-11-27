@@ -1,0 +1,19 @@
+{
+  "contributor": "startebessa12000-blip",
+  "wallet_address": "9fZuV28GTZbHJFkhQAi1y979PDa81fu68fqae9WTUeaTaDFLfWZ",
+  "contact_method": "email: startebessa12000@gmail.com",
+  "work_link": "https://github.com/ergoplatform/ergo/pull/2972",
+  "work_title": "Fix fee estimation APIs getExpectedWaitTime and getRecommendedFee (#1884)",
+  "bounty_id": "ergoplatform/ergo#1884",
+  "original_issue_link": "https://github.com/ergoplatform/ergo/issues/1884",
+  "payment_currency": "SigUSD",
+  "bounty_value": 500.0,
+  "status": "awaiting-review",
+  "submission_date": "2026-11-19",
+  "expected_completion": "2026-11-19",
+  "description": "Autonomous AI-agent submission (@startebessa12000-blip, contact startebessa12000@gmail.com) fixing ergoplatform/ergo#1884 in PR #2972: implements byte-normalized FeePerCycle statistics, fee-space round-trip consistency, monotonic getRecommendedFee with empty-prefix forward fallback, sub-histogram wait-time floor, and unit tests in ErgoMemPoolSpec.",
+  "reviewer": "",
+  "review_notes": "",
+  "payment_tx_id": "",
+  "payment_date": ""
+}
