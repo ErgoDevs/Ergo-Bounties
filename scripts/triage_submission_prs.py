@@ -10,8 +10,9 @@ import json
 import os
 import re
 import sys
+import time
 from typing import Any
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
@@ -131,18 +132,63 @@ def normalize_bounty_id(value: str) -> str:
     return raw.lower()
 
 
-def read_submission(gh: GitHub, path: str, sha: str, raw_url: str = "") -> tuple[dict[str, Any] | None, str | None]:
-    try:
-        if raw_url:
-            req = Request(raw_url, headers={"User-Agent": "Ergo-Bounties-submission-triage"})
+def _raw_submission(raw_url: str, token: str) -> str:
+    transient_statuses = {408, 429, 500, 502, 503, 504}
+    last_error: Exception | None = None
+    for attempt in range(3):
+        try:
+            req = Request(
+                raw_url,
+                headers={
+                    "Authorization": f"Bearer {token}",
+                    "User-Agent": "Ergo-Bounties-submission-triage",
+                },
+            )
             with urlopen(req, timeout=30) as response:
-                raw = response.read().decode()
-        else:
-            content = gh.request("GET", f"/repos/{gh.repo}/contents/{path}?ref={sha}")
+                return response.read().decode()
+        except HTTPError as exc:
+            last_error = exc
+            if exc.code not in transient_statuses:
+                break
+        except (URLError, TimeoutError) as exc:
+            last_error = exc
+        if attempt < 2:
+            time.sleep(1 << attempt)
+    raise last_error or RuntimeError("raw download failed")
+
+
+def read_submission(
+    gh: GitHub,
+    path: str,
+    sha: str,
+    raw_url: str = "",
+    head_repo: str = "",
+) -> tuple[dict[str, Any] | None, str | None]:
+    raw: str
+    if raw_url:
+        try:
+            raw = _raw_submission(raw_url, gh.token)
+        except Exception as raw_error:  # noqa: BLE001 - fall back to authenticated API
+            try:
+                repo = head_repo or gh.repo
+                content = gh.request("GET", f"/repos/{repo}/contents/{path}?ref={sha}")
+                raw = base64.b64decode(content["content"]).decode()
+            except Exception as api_error:  # noqa: BLE001 - user-facing infrastructure error
+                return None, f"cannot download submission: raw URL: {raw_error}; Contents API: {api_error}"
+    else:
+        try:
+            repo = head_repo or gh.repo
+            content = gh.request("GET", f"/repos/{repo}/contents/{path}?ref={sha}")
             raw = base64.b64decode(content["content"]).decode()
-        return json.loads(raw), None
-    except Exception as exc:  # noqa: BLE001 - user-facing validation error
+        except Exception as api_error:  # noqa: BLE001 - user-facing infrastructure error
+            return None, f"cannot download submission: Contents API: {api_error}"
+    try:
+        parsed = json.loads(raw)
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
         return None, f"cannot parse JSON: {exc}"
+    if not isinstance(parsed, dict):
+        return None, "cannot parse JSON: top-level value must be an object"
+    return parsed, None
 
 
 def github_issue_url(value: str) -> tuple[str, str, int] | None:
@@ -302,7 +348,10 @@ def submission_data_by_pr(
         for item in files_by_pr.get(pr["number"], []):
             path = item["filename"]
             if path.startswith("submissions/") and path.endswith(".json"):
-                data, error = read_submission(gh, path, pr["head"]["sha"], item.get("raw_url", ""))
+                head_repo = (pr.get("head", {}).get("repo") or {}).get("full_name", "")
+                data, error = read_submission(
+                    gh, path, pr["head"]["sha"], item.get("raw_url", ""), head_repo
+                )
                 entries.append({"path": path, "data": data, "error": error})
         out[pr["number"]] = entries
     return out
@@ -354,7 +403,8 @@ def triage_pr(
         path, data, error = entry["path"], entry.get("data"), entry.get("error")
         if error:
             issues.append(f"{path}: {error}")
-            labels.update({"invalid-json", "invalid-submission"})
+            if error.startswith("cannot parse JSON:"):
+                labels.update({"invalid-json", "invalid-submission"})
         elif isinstance(data, dict):
             new_issues, new_labels, bounty_id, _linked_merged, reviewer, expected_date = validate_submission(
                 gh, pr, path, data, claims
