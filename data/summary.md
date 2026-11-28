@@ -1,5 +1,5 @@
 <!-- GENERATED FILE - DO NOT EDIT DIRECTLY -->
-<!-- Generated on: 2026-11-27 06:15:00 -->
+<!-- Generated on: 2026-11-28 05:54:32 -->
 
 # Summary of Bounties
 
@@ -11,15 +11,15 @@
 
 | Project | Count | Value |
 |----------|-------|-------|
-| [ergoplatform](/data/by_org/ergoplatform.md) | 76 | 85,763.57 ERG |
+| [ergoplatform](/data/by_org/ergoplatform.md) | 76 | 85,764.00 ERG |
 | [StabilityNexus](/data/by_org/stabilitynexus.md) | 10 | 3,387.80 ERG |
 | [DevDAO](/data/by_org/devdao.md) | 1 | 3,000.00 ERG |
 | [fleet-sdk](/data/by_org/fleet-sdk.md) | 3 | 2,725.54 ERG |
 | [input-output-hk](/data/by_org/input-output-hk.md) | 1 | 1,693.90 ERG |
-| [BetterMoneyLabs](/data/by_org/bettermoneylabs.md) | 9 | 155.12 ERG |
+| [BetterMoneyLabs](/data/by_org/bettermoneylabs.md) | 9 | 157.27 ERG |
 | [rosen-bridge](/data/by_org/rosen-bridge.md) | 4 | 61.07 ERG |
 | [EF_DAO_LLC](/data/by_org/ef_dao_llc.md) | 2 | 0.00 ERG |
-| **Total** | **106** | **96,787.00 ERG** |
+| **Total** | **106** | **96,789.59 ERG** |
 
 ## Currencies
 
@@ -31,7 +31,7 @@ Open bounties are updated daily with values shown in ERG equivalent. Some bounti
 | [SigUSD ($1)](/data/by_currency/sigusd.md) | 47 | 82916.35 |
 | [ERG](/data/by_currency/erg.md) | 29 | 10250.00 |
 | [BENE ($1)](/data/by_currency/bene.md) | 3 | 3387.80 |
-| [Gold (per gram)](/data/by_currency/gold.md) | 5 | 99.97 |
+| [Gold (per gram)](/data/by_currency/gold.md) | 5 | 102.55 |
 | [GORT (Governance Token)](/data/by_currency/gort.md) | 5 | 71.81 |
 
 [View all currencies →](/data/by_currency/)
